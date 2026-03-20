@@ -40,3 +40,17 @@ export type { ElevationToken } from "./tokens";
 
 export { ContainerWidth } from "./tokens";
 export type { ContainerWidthToken } from "./tokens";
+
+// Compositions
+export { Navbar, HeroSection } from "./compositions";
+export type {
+  NavbarProps,
+  NavLink,
+  NavCta,
+  NavbarLogo,
+  HeroSectionProps,
+  HeroBadge,
+  HeroCta,
+  HeroImage,
+  HeroGradient,
+} from "./compositions";

@@ -38,6 +38,10 @@ export const Spacing = {
   XXHuge: "4rem",
   /** 80px */
   XXXHuge: "5rem",
+  /** 56px */
+  Size3_5: "3.5rem",
+  /** 112px */
+  Size7: "7rem",
   /** 128px */
   Size8: "8rem",
   /** 256px */
@@ -65,6 +69,10 @@ export const BackgroundColor = {
   Default: "#ffffff",
   Subtle: "#f3f4f6",
   Neutral: "#e5e7eb",
+  Dark: "#1f2937",
+  DarkHover: "#374151",
+  DarkActive: "#111827",
+  Accent: "#4f46e5",
   Brand: "#15803d",
   BrandBold: "#166534",
   Success: "#bbf7d0",
@@ -84,6 +92,8 @@ export const FontSize = {
   XLarge: "1.5rem",
   XXLarge: "1.875rem",
   XXXLarge: "2.25rem",
+  /** 3rem / 48px */
+  Huge: "3rem",
 } as const;
 
 export type FontSizeToken = (typeof FontSize)[keyof typeof FontSize];
@@ -93,6 +103,7 @@ export const FontWeight = {
   Medium: 500,
   Semibold: 600,
   Bold: 700,
+  ExtraBold: 800,
 } as const;
 
 export type FontWeightToken = (typeof FontWeight)[keyof typeof FontWeight];
