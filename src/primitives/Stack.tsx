@@ -1,5 +1,7 @@
 import React, { forwardRef } from "react";
 import type { SpaceToken } from "../tokens";
+import { useResponsiveValue } from "../hooks/useResponsive";
+import type { Responsive } from "../hooks/useResponsive";
 
 type StackElement = "div" | "span" | "ul" | "ol" | "section" | "nav";
 type AlignInline = "start" | "center" | "end" | "stretch";
@@ -8,8 +10,8 @@ type Grow = "hug" | "fill";
 
 export interface StackProps extends React.HTMLAttributes<HTMLElement> {
   as?: StackElement;
-  /** Gap between children (vertical) */
-  space?: SpaceToken;
+  /** Responsive gap between children (vertical) */
+  space?: Responsive<SpaceToken>;
   /** Align children along the cross axis (horizontal) */
   alignInline?: AlignInline;
   /** Align children along the main axis (vertical) */
@@ -30,21 +32,11 @@ const alignMap = {
   stretch: "stretch",
 };
 
-/**
- * Stack — lays out children **vertically** with consistent spacing.
- *
- * ```tsx
- * <Stack space={Spacing.Large}>
- *   <Card />
- *   <Card />
- * </Stack>
- * ```
- */
 export const Stack = forwardRef<HTMLElement, StackProps>(
   (
     {
       as: Component = "div",
-      space,
+      space: spaceProp,
       alignInline,
       alignBlock,
       spread,
@@ -57,10 +49,12 @@ export const Stack = forwardRef<HTMLElement, StackProps>(
     },
     ref
   ) => {
+    const space = useResponsiveValue(spaceProp ?? ("0" as SpaceToken));
+
     const computedStyle: React.CSSProperties = {
       display: "flex",
       flexDirection: "column",
-      ...(space && { gap: space }),
+      gap: space,
       ...(alignInline && { alignItems: alignMap[alignInline] }),
       ...(alignBlock && !spread && { justifyContent: alignMap[alignBlock] }),
       ...(spread && { justifyContent: spread }),

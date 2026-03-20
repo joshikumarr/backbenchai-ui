@@ -1,5 +1,7 @@
 import React, { forwardRef, Fragment } from "react";
 import type { SpaceToken, BorderRadiusToken, ElevationToken } from "../tokens";
+import { useResponsiveValue } from "../hooks/useResponsive";
+import type { Responsive } from "../hooks/useResponsive";
 
 type InlineElement = "div" | "span" | "ul" | "ol" | "nav";
 type AlignInline = "start" | "center" | "end" | "stretch";
@@ -8,8 +10,8 @@ type Grow = "hug" | "fill";
 
 export interface InlineProps extends React.HTMLAttributes<HTMLElement> {
   as?: InlineElement;
-  /** Gap between children (horizontal) */
-  space?: SpaceToken;
+  /** Responsive gap between children (horizontal) */
+  space?: Responsive<SpaceToken>;
   /** Gap between rows when wrapping */
   rowSpace?: SpaceToken;
   /** Align children on the cross axis (vertical) */
@@ -54,7 +56,7 @@ export const Inline = forwardRef<HTMLElement, InlineProps>(
   (
     {
       as: Component = "div",
-      space,
+      space: spaceProp,
       rowSpace,
       alignBlock,
       alignInline,
@@ -73,11 +75,13 @@ export const Inline = forwardRef<HTMLElement, InlineProps>(
     },
     ref
   ) => {
+    const space = useResponsiveValue(spaceProp ?? ("0" as SpaceToken));
+
     const computedStyle: React.CSSProperties = {
       display: "flex",
       flexDirection: "row",
-      ...(space && { columnGap: space }),
-      ...(rowSpace ? { rowGap: rowSpace } : space ? { rowGap: space } : {}),
+      columnGap: space,
+      rowGap: rowSpace ?? space,
       ...(alignBlock && { alignItems: alignMap[alignBlock] }),
       ...(alignInline && !spread && { justifyContent: alignMap[alignInline] }),
       ...(spread && { justifyContent: spread }),

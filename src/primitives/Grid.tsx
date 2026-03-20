@@ -1,13 +1,16 @@
 import React, { forwardRef } from "react";
 import type { SpaceToken, BorderRadiusToken, ElevationToken } from "../tokens";
+import { useResponsiveValue } from "../hooks/useResponsive";
+import type { Responsive } from "../hooks/useResponsive";
 
 type GridElement = "div" | "section" | "main" | "ul" | "ol";
 
 export interface GridProps extends React.HTMLAttributes<HTMLElement> {
   as?: GridElement;
-  /** Number of equal columns, or array of fr proportions e.g. [3, 2] → "3fr 2fr" */
-  columns?: number | number[];
-  gap?: SpaceToken;
+  /** Responsive columns: number, fr array, or { mobile, tablet?, desktop? } */
+  columns?: Responsive<number | number[]>;
+  /** Responsive gap */
+  gap?: Responsive<SpaceToken>;
   rowGap?: SpaceToken;
   marginBlockStart?: SpaceToken;
   marginBlockEnd?: SpaceToken;
@@ -27,8 +30,8 @@ export const Grid = forwardRef<HTMLElement, GridProps>(
   (
     {
       as: Component = "div",
-      columns,
-      gap,
+      columns: columnsProp,
+      gap: gapProp,
       rowGap,
       marginBlockStart,
       marginBlockEnd,
@@ -41,12 +44,13 @@ export const Grid = forwardRef<HTMLElement, GridProps>(
     },
     ref
   ) => {
+    const columns = useResponsiveValue(columnsProp ?? 1);
+    const gap = useResponsiveValue(gapProp ?? ("0" as SpaceToken));
+
     const computedStyle: React.CSSProperties = {
       display: "grid",
-      ...(columns !== undefined && {
-        gridTemplateColumns: resolveColumns(columns),
-      }),
-      ...(gap && { gap }),
+      gridTemplateColumns: resolveColumns(columns),
+      gap,
       ...(rowGap && { rowGap }),
       ...(marginBlockStart && { marginBlockStart }),
       ...(marginBlockEnd && { marginBlockEnd }),
