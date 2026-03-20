@@ -4,6 +4,7 @@ import type {
   BackgroundColorToken,
   BorderRadiusToken,
   BorderColorToken,
+  BorderWidthToken,
   ElevationToken,
   ContainerWidthToken,
 } from "../tokens";
@@ -37,7 +38,8 @@ export interface BoxProps extends React.HTMLAttributes<HTMLElement> {
   backgroundColor?: BackgroundColorToken;
   borderRadius?: BorderRadiusToken;
   borderColor?: BorderColorToken;
-  borderSide?: "top" | "all";
+  borderSide?: "top" | "bottom" | "left" | "right" | "all";
+  borderWidth?: BorderWidthToken;
   overflow?: "hidden" | "auto" | "scroll" | "visible";
   elevation?: ElevationToken;
   maxWidth?: ContainerWidthToken;
@@ -62,6 +64,7 @@ export const Box = forwardRef<HTMLElement, BoxProps>(
       borderRadius,
       borderColor,
       borderSide,
+      borderWidth = "1px",
       overflow,
       elevation,
       maxWidth,
@@ -72,8 +75,29 @@ export const Box = forwardRef<HTMLElement, BoxProps>(
     ref
   ) => {
     const borderValue = borderColor
-      ? `1px solid ${borderColor}`
+      ? `${borderWidth} solid ${borderColor}`
       : undefined;
+
+    const borderStyles: React.CSSProperties = {};
+    if (borderValue && borderSide) {
+      switch (borderSide) {
+        case "top":
+          borderStyles.borderTop = borderValue;
+          break;
+        case "bottom":
+          borderStyles.borderBottom = borderValue;
+          break;
+        case "left":
+          borderStyles.borderLeft = borderValue;
+          break;
+        case "right":
+          borderStyles.borderRight = borderValue;
+          break;
+        case "all":
+          borderStyles.border = borderValue;
+          break;
+      }
+    }
 
     const computedStyle: React.CSSProperties = {
       ...(padding && { padding }),
@@ -88,8 +112,7 @@ export const Box = forwardRef<HTMLElement, BoxProps>(
       ...(marginBlockEnd && { marginBlockEnd }),
       ...(backgroundColor && { backgroundColor }),
       ...(borderRadius && { borderRadius }),
-      ...(borderValue && borderSide === "top" && { borderTop: borderValue }),
-      ...(borderValue && borderSide === "all" && { border: borderValue }),
+      ...borderStyles,
       ...(overflow && { overflow }),
       ...(elevation && { boxShadow: elevation }),
       ...(maxWidth && { maxWidth, marginInline: "auto" }),

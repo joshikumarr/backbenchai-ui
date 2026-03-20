@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import type { TextColorToken, FontSizeToken, FontWeightToken } from "../tokens";
+import type { TextColorToken, FontSizeToken, FontWeightToken, FontFamilyToken, LetterSpacingToken } from "../tokens";
 
 type AllowedElements =
   | "span"
@@ -21,6 +21,8 @@ export interface TextProps extends React.HTMLAttributes<HTMLElement> {
   size?: FontSizeToken;
   weight?: FontWeightToken;
   color?: TextColorToken;
+  fontFamily?: FontFamilyToken;
+  letterSpacing?: LetterSpacingToken;
   align?: React.CSSProperties["textAlign"];
   textTransform?: React.CSSProperties["textTransform"];
   lineHeight?: number | string;
@@ -35,6 +37,8 @@ export const Text = forwardRef<HTMLElement, TextProps>(
       size,
       weight,
       color,
+      fontFamily,
+      letterSpacing,
       align,
       textTransform,
       lineHeight,
@@ -49,6 +53,8 @@ export const Text = forwardRef<HTMLElement, TextProps>(
       ...(size && { fontSize: size }),
       ...(weight && { fontWeight: weight }),
       ...(color && { color }),
+      ...(fontFamily && { fontFamily }),
+      ...(letterSpacing && { letterSpacing }),
       ...(align && { textAlign: align }),
       ...(textTransform && { textTransform }),
       ...(lineHeight !== undefined && { lineHeight }),

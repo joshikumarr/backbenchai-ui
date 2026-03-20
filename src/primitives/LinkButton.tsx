@@ -1,13 +1,10 @@
 import React, { forwardRef } from "react";
-import type { SpaceToken, TextColorToken, BackgroundColorToken, BorderRadiusToken, GradientToken, FontFamilyToken } from "../tokens";
+import type { SpaceToken, TextColorToken, BackgroundColorToken, BorderRadiusToken } from "../tokens";
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface LinkButtonProps
+  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   backgroundColor?: BackgroundColorToken;
-  /** CSS gradient string — overrides backgroundColor when set */
-  gradient?: GradientToken;
   color?: TextColorToken;
-  fontFamily?: FontFamilyToken;
   padding?: SpaceToken;
   paddingBlock?: SpaceToken;
   paddingInline?: SpaceToken;
@@ -15,13 +12,11 @@ export interface ButtonProps
   children?: React.ReactNode;
 }
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+export const LinkButton = forwardRef<HTMLAnchorElement, LinkButtonProps>(
   (
     {
       backgroundColor,
-      gradient,
       color,
-      fontFamily,
       padding,
       paddingBlock,
       paddingInline,
@@ -33,15 +28,14 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const computedStyle: React.CSSProperties = {
-      border: "none",
+      display: "inline-flex",
+      alignItems: "center",
+      justifyContent: "center",
+      textDecoration: "none",
       cursor: "pointer",
-      ...(gradient
-        ? { background: gradient }
-        : backgroundColor
-        ? { backgroundColor }
-        : {}),
+      border: "none",
+      ...(backgroundColor && { backgroundColor }),
       ...(color && { color }),
-      ...(fontFamily && { fontFamily }),
       ...(padding && { padding }),
       ...(paddingBlock && { paddingBlock }),
       ...(paddingInline && { paddingInline }),
@@ -50,11 +44,11 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     };
 
     return (
-      <button ref={ref} style={computedStyle} {...rest}>
+      <a ref={ref} style={computedStyle} {...rest}>
         {children}
-      </button>
+      </a>
     );
   }
 );
 
-Button.displayName = "Button";
+LinkButton.displayName = "LinkButton";

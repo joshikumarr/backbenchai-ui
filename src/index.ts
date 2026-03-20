@@ -1,3 +1,6 @@
+// Base styles — injected at runtime via <style> tag, no separate CSS import needed
+import "./injectStyles";
+
 // Primitives
 export {
   Box,
@@ -9,6 +12,17 @@ export {
   Image,
   Button,
   TextInput,
+  TextArea,
+  Icon,
+  Badge,
+  Toggle,
+  LinkButton,
+  IconButton,
+  Avatar,
+  Spinner,
+  Select,
+  Checkbox,
+  Divider,
 } from "./primitives";
 export type {
   BoxProps,
@@ -20,6 +34,24 @@ export type {
   ImageProps,
   ButtonProps,
   TextInputProps,
+  TextAreaProps,
+  IconProps,
+  BadgeProps,
+  BadgeVariant,
+  ToggleProps,
+  LinkButtonProps,
+  IconButtonProps,
+  AvatarProps,
+  AvatarSize,
+  AvatarAppearance,
+  AvatarStatus,
+  SpinnerProps,
+  SpinnerSize,
+  SelectProps,
+  SelectOption,
+  SelectOptionGroup,
+  CheckboxProps,
+  DividerProps,
 } from "./primitives";
 
 // Tokens
@@ -29,20 +61,63 @@ export type { SpaceToken } from "./tokens";
 export { TextColor, BackgroundColor } from "./tokens";
 export type { TextColorToken, BackgroundColorToken } from "./tokens";
 
-export { FontSize, FontWeight } from "./tokens";
-export type { FontSizeToken, FontWeightToken } from "./tokens";
+export { FontFamily, FontSize, FontWeight, LetterSpacing } from "./tokens";
+export type {
+  FontFamilyToken,
+  FontSizeToken,
+  FontWeightToken,
+  LetterSpacingToken,
+} from "./tokens";
 
-export { BorderRadius, BorderColor } from "./tokens";
-export type { BorderRadiusToken, BorderColorToken } from "./tokens";
+export { BorderRadius, BorderColor, BorderWidth } from "./tokens";
+export type {
+  BorderRadiusToken,
+  BorderColorToken,
+  BorderWidthToken,
+} from "./tokens";
+
+export { AccentColor } from "./tokens";
+export type { AccentColorToken } from "./tokens";
 
 export { Elevation } from "./tokens";
 export type { ElevationToken } from "./tokens";
 
+export { Gradient } from "./tokens";
+export type { GradientToken } from "./tokens";
+
 export { ContainerWidth } from "./tokens";
 export type { ContainerWidthToken } from "./tokens";
 
+export { ZIndex } from "./tokens";
+export type { ZIndexToken } from "./tokens";
+
+export { IconSize } from "./tokens";
+export type { IconSizeToken } from "./tokens";
+
 // Compositions
-export { Navbar, HeroSection } from "./compositions";
+export {
+  Navbar,
+  HeroSection,
+  Card,
+  TextField,
+  Banner,
+  Menu,
+  Tabs,
+  Header,
+  Modal,
+  DropdownMenu,
+  DropdownCheckboxMenu,
+  SelectField,
+  Toast,
+  Sidebar,
+  Panel,
+  Aside,
+  Layout,
+  Calendar,
+  EmptyState,
+  Table,
+  InlineEdit,
+} from "./compositions";
 export type {
   NavbarProps,
   NavLink,
@@ -53,4 +128,34 @@ export type {
   HeroCta,
   HeroImage,
   HeroGradient,
+  CardProps,
+  TextFieldProps,
+  BannerProps,
+  MenuProps,
+  MenuSection,
+  MenuItem,
+  TabsProps,
+  Tab,
+  HeaderProps,
+  Breadcrumb,
+  ModalProps,
+  DropdownMenuProps,
+  DropdownCheckboxMenuProps,
+  CheckboxGroup,
+  CheckboxItem,
+  SelectFieldProps,
+  ToastProps,
+  SidebarProps,
+  SidebarSection,
+  SidebarItem,
+  PanelProps,
+  AsideProps,
+  LayoutProps,
+  CalendarProps,
+  EmptyStateProps,
+  TableProps,
+  TableHeadCell,
+  TableRow,
+  SortOrder,
+  InlineEditProps,
 } from "./compositions";

@@ -1,0 +1,126 @@
+/**
+ * @backbench/ui — NestOS Design System Base Styles
+ *
+ * Import in your app entry:
+ *   import "@backbench/ui/styles.css";
+ *
+ * This provides:
+ *   1. SF Pro font loading (system font stack fallback)
+ *   2. CSS reset (modern minimal)
+ *   3. NestOS theme defaults (surface background, on-surface text)
+ *   4. Spinner keyframe animation
+ *   5. Focus-visible ring for accessibility
+ *   6. Smooth scrolling & antialiasing
+ */
+
+/* ── SF Pro Font Stack ───────────────────────────────────────────────
+   SF Pro is Apple's system font. On macOS/iOS it's available natively.
+   On other platforms, the fallback chain provides similar sans-serif.
+   To use SF Pro on Windows/Linux, self-host the .woff2 files:
+     @font-face { font-family: 'SF Pro Display'; src: url(...); }
+   ─────────────────────────────────────────────────────────────────── */
+
+:root {
+  /* ── Theme tokens as CSS custom properties (optional, for consumer CSS use) ── */
+  --bbui-font-display: 'SF Pro Display', 'SF Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --bbui-font-body: 'SF Pro Text', 'SF Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  --bbui-color-surface: #faf8ff;
+  --bbui-color-on-surface: #131b2e;
+  --bbui-color-primary: #006e2f;
+  --bbui-color-primary-container: #22c55e;
+
+  --bbui-radius-default: 1rem;
+  --bbui-radius-full: 9999px;
+
+  --bbui-shadow-ambient: 0 40px 60px -15px rgba(19, 27, 46, 0.04);
+}
+
+/* ── Modern CSS Reset ────────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--bbui-font-body);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--bbui-color-on-surface);
+  background-color: var(--bbui-color-surface);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--bbui-font-display);
+  line-height: 1.2;
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+/* ── Focus-Visible Ring ──────────────────────────────────────────── */
+
+:focus-visible {
+  outline: 2px solid var(--bbui-color-primary);
+  outline-offset: 2px;
+}
+
+/* Suppress focus ring for mouse/touch interactions */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ── Scrollbar Styling (Webkit) ──────────────────────────────────── */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(19, 27, 46, 0.15);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(19, 27, 46, 0.25);
+}
+
+/* ── Transitions ─────────────────────────────────────────────────── */
+
+button, a, input, select, textarea {
+  transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease, box-shadow 150ms ease, opacity 150ms ease;
+}
+
+/* ── Selection Color ─────────────────────────────────────────────── */
+
+::selection {
+  background: rgba(34, 197, 94, 0.2);
+  color: var(--bbui-color-on-surface);
+}
