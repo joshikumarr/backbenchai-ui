@@ -73,3 +73,6 @@ export type { ToastProps } from "./Toast";
 
 export { MobileNav } from "./MobileNav";
 export type { MobileNavProps, MobileNavItem } from "./MobileNav";
+
+export { ProgressTracker } from "./ProgressTracker";
+export type { ProgressTrackerProps, Stage, Stages, StageStatus } from "./ProgressTracker";

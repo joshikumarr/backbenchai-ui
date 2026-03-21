@@ -50,6 +50,12 @@ export interface SelectFieldProps {
   inputBorderRadius?: BorderRadiusToken;
   /** Select padding (default: Spacing.MediumLarge) */
   inputPadding?: SpaceToken;
+  /** Label text-transform */
+  labelTextTransform?: React.CSSProperties["textTransform"];
+  /** Label letter-spacing */
+  labelLetterSpacing?: string;
+  /** Which sides get a border (default: "all") */
+  inputBorderSide?: "all" | "bottom";
 }
 
 export const SelectField = forwardRef<HTMLSelectElement, SelectFieldProps>(
@@ -62,9 +68,12 @@ export const SelectField = forwardRef<HTMLSelectElement, SelectFieldProps>(
       labelColor = TextColor.Default,
       labelSize = FontSize.XSmall,
       labelWeight = FontWeight.Medium,
+      labelTextTransform,
+      labelLetterSpacing,
       inputBackground = BackgroundColor.Subtle,
       inputBorderColor,
       inputBorderRadius = BorderRadius.XXLarge,
+      inputBorderSide = "all",
       inputPadding = Spacing.MediumLarge,
       name,
       value,
@@ -83,6 +92,43 @@ export const SelectField = forwardRef<HTMLSelectElement, SelectFieldProps>(
     const helperId = `${id}-helper`;
     const errorId = `${id}-error`;
     const hasError = !!errorText;
+    const borderVal = hasError ? BorderColor.Error : inputBorderColor;
+    const isBottomBorder = inputBorderSide === "bottom";
+
+    const selectEl = (
+      <Select
+        ref={ref}
+        id={id}
+        name={name}
+        value={value}
+        defaultValue={defaultValue}
+        placeholder={placeholder}
+        options={options}
+        disabled={disabled}
+        required={required}
+        onChange={onChange}
+        onBlur={onBlur}
+        backgroundColor={isBottomBorder ? "transparent" : inputBackground}
+        borderColor={isBottomBorder ? undefined : borderVal}
+        borderRadius={isBottomBorder ? undefined : inputBorderRadius}
+        padding={inputPadding}
+        fontSize={FontSize.XSmall}
+        color={TextColor.Default}
+        style={{ width: "100%" }}
+        aria-describedby={hasError ? errorId : helperText ? helperId : undefined}
+        aria-invalid={hasError || undefined}
+      />
+    );
+
+    const wrappedSelect = isBottomBorder ? (
+      <div style={{
+        width: "100%",
+        backgroundColor: inputBackground,
+        borderBottom: `2px solid ${borderVal}`,
+      }}>
+        {selectEl}
+      </div>
+    ) : selectEl;
 
     return (
       <Stack space={Spacing.XSmall}>
@@ -93,32 +139,14 @@ export const SelectField = forwardRef<HTMLSelectElement, SelectFieldProps>(
               fontSize: labelSize,
               fontWeight: labelWeight,
               color: labelColor,
+              textTransform: labelTextTransform,
+              letterSpacing: labelLetterSpacing,
             }}
           >
             {label}
           </label>
         )}
-        <Select
-          ref={ref}
-          id={id}
-          name={name}
-          value={value}
-          defaultValue={defaultValue}
-          placeholder={placeholder}
-          options={options}
-          disabled={disabled}
-          required={required}
-          onChange={onChange}
-          onBlur={onBlur}
-          backgroundColor={inputBackground}
-          borderColor={hasError ? BorderColor.Error : inputBorderColor}
-          borderRadius={inputBorderRadius}
-          padding={inputPadding}
-          fontSize={FontSize.XSmall}
-          color={TextColor.Default}
-          aria-describedby={hasError ? errorId : helperText ? helperId : undefined}
-          aria-invalid={hasError || undefined}
-        />
+        {wrappedSelect}
         {hasError && (
           <Text as="span" size={FontSize.XXSmall} color={TextColor.Error} id={errorId}>
             {errorText}

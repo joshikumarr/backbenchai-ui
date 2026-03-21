@@ -53,6 +53,16 @@ export interface TextFieldProps {
   inputBorderRadius?: BorderRadiusToken;
   /** Input padding (default: Spacing.Medium) */
   inputPadding?: SpaceToken;
+  /** Label text-transform */
+  labelTextTransform?: React.CSSProperties["textTransform"];
+  /** Label letter-spacing */
+  labelLetterSpacing?: string;
+  /** Which sides get a border (default: "all") */
+  inputBorderSide?: "all" | "bottom";
+  /** Element rendered before the input */
+  startAdornment?: React.ReactNode;
+  /** Element rendered after the input */
+  endAdornment?: React.ReactNode;
 }
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
@@ -65,10 +75,15 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       labelColor = TextColor.Default,
       labelSize = FontSize.XSmall,
       labelWeight = FontWeight.Medium,
+      labelTextTransform,
+      labelLetterSpacing,
       inputBackground = BackgroundColor.Default,
       inputBorderColor = BorderColor.Input,
       inputBorderRadius = BorderRadius.Medium,
+      inputBorderSide = "all",
       inputPadding = Spacing.Medium,
+      startAdornment,
+      endAdornment,
       name,
       type,
       placeholder,
@@ -90,6 +105,56 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     const helperId = `${id}-helper`;
     const errorId = `${id}-error`;
     const hasError = !!errorText;
+    const borderVal = hasError ? BorderColor.Error : inputBorderColor;
+    const isBottomBorder = inputBorderSide === "bottom";
+
+    const needsWrapper = isBottomBorder || !!(startAdornment || endAdornment);
+
+    const inputEl = (
+      <TextInput
+        ref={ref}
+        id={id}
+        name={name}
+        type={type}
+        placeholder={placeholder}
+        value={value}
+        defaultValue={defaultValue}
+        disabled={disabled}
+        readOnly={readOnly}
+        required={required}
+        autoFocus={autoFocus}
+        autoComplete={autoComplete}
+        onChange={onChange}
+        onBlur={onBlur}
+        onFocus={onFocus}
+        backgroundColor={needsWrapper ? "transparent" : inputBackground}
+        borderColor={needsWrapper ? undefined : borderVal}
+        borderRadius={needsWrapper ? undefined : inputBorderRadius}
+        padding={inputPadding}
+        style={{
+          width: "100%",
+          ...(needsWrapper ? { flex: "1 1 auto", minWidth: 0 } : {}),
+        }}
+        aria-describedby={hasError ? errorId : helperText ? helperId : undefined}
+        aria-invalid={hasError || undefined}
+      />
+    );
+
+    const wrappedInput = needsWrapper ? (
+      <div style={{
+        display: "flex",
+        alignItems: "center",
+        width: "100%",
+        backgroundColor: inputBackground,
+        ...(isBottomBorder
+          ? { borderBottom: `2px solid ${borderVal}` }
+          : { border: `1px solid ${borderVal}`, borderRadius: inputBorderRadius }),
+      }}>
+        {startAdornment}
+        {inputEl}
+        {endAdornment}
+      </div>
+    ) : inputEl;
 
     return (
       <Stack space={Spacing.XSmall}>
@@ -100,36 +165,14 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
               fontSize: labelSize,
               fontWeight: labelWeight,
               color: labelColor,
+              textTransform: labelTextTransform,
+              letterSpacing: labelLetterSpacing,
             }}
           >
             {label}
           </label>
         )}
-        <TextInput
-          ref={ref}
-          id={id}
-          name={name}
-          type={type}
-          placeholder={placeholder}
-          value={value}
-          defaultValue={defaultValue}
-          disabled={disabled}
-          readOnly={readOnly}
-          required={required}
-          autoFocus={autoFocus}
-          autoComplete={autoComplete}
-          onChange={onChange}
-          onBlur={onBlur}
-          onFocus={onFocus}
-          backgroundColor={inputBackground}
-          borderColor={hasError ? BorderColor.Error : inputBorderColor}
-          borderRadius={inputBorderRadius}
-          padding={inputPadding}
-          aria-describedby={
-            hasError ? errorId : helperText ? helperId : undefined
-          }
-          aria-invalid={hasError || undefined}
-        />
+        {wrappedInput}
         {hasError && (
           <Text as="span" size={FontSize.XXSmall} color={TextColor.Error} id={errorId}>
             {errorText}

@@ -91,12 +91,15 @@ export const Sidebar = forwardRef<HTMLElement, SidebarProps>(
         backgroundColor={BackgroundColor.Default}
         style={{
           width: collapsed ? collapsedWidth : width,
-          minHeight: "100%",
+          height: "100vh",
+          position: "sticky",
+          top: 0,
           borderRight: `1px solid ${borderColor}`,
           display: "flex",
           flexDirection: "column",
           transition: "width 200ms ease",
           overflow: "hidden",
+          flexShrink: 0,
         }}
       >
         {header && (

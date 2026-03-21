@@ -57,3 +57,6 @@ export type { CheckboxProps } from "./Checkbox";
 
 export { Divider } from "./Divider";
 export type { DividerProps } from "./Divider";
+
+export { Stepper } from "./Stepper";
+export type { StepperProps } from "./Stepper";

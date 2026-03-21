@@ -2,21 +2,32 @@ const STYLE_ID = "bbui-base-styles";
 
 const css = `
 :root, [data-theme="light"] {
-  --bbui-font-display: 'SF Pro Display', 'SF Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  --bbui-font-body: 'SF Pro Text', 'SF Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  /* ── Fonts ── */
+  --bbui-font-display: 'Manrope', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+  --bbui-font-body: 'Inter', 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif;
 
-  --bbui-color-surface: #faf8ff;
+  /* ── Text colors ── */
   --bbui-color-on-surface: #131b2e;
   --bbui-color-subtle: #575e70;
   --bbui-color-subtlest: #6d7b6c;
   --bbui-color-disabled: #bccbb9;
   --bbui-color-inverse: #ffffff;
+  --bbui-color-on-brand: #ffffff;
   --bbui-color-primary: #006e2f;
   --bbui-color-primary-container: #22c55e;
   --bbui-color-on-primary-container: #004b1e;
   --bbui-color-error: #ba1a1a;
+  --bbui-color-error-container: #93000a;
   --bbui-color-warning: #92400e;
+  --bbui-color-info: #1e40af;
+  --bbui-color-on-surface-variant: #3d4a3d;
+  --bbui-color-surface: #faf8ff;
+  --bbui-color-on-success: #004b1e;
+  --bbui-color-on-error: #93000a;
+  --bbui-color-on-warning: #92400e;
+  --bbui-color-on-info: #1e40af;
 
+  /* ── Backgrounds ── */
   --bbui-bg-default: #ffffff;
   --bbui-bg-surface: #faf8ff;
   --bbui-bg-subtle: #f2f3ff;
@@ -25,15 +36,56 @@ const css = `
   --bbui-bg-neutral-bolder: #dae2fd;
   --bbui-bg-sidebar: #f8fafc;
   --bbui-bg-dark: #131b2e;
+  --bbui-bg-dark-hover: #283044;
+  --bbui-bg-dark-active: #111827;
+  --bbui-bg-accent: #4f46e5;
+  --bbui-bg-brand: #006e2f;
+  --bbui-bg-brand-bold: #004b1e;
+  --bbui-bg-primary-container: #22c55e;
+  --bbui-bg-secondary-container: #d9dff5;
+  --bbui-bg-warning: #fef3c7;
+  --bbui-bg-warning-bold: #f59e0b;
+  --bbui-bg-error: #ffdad6;
+  --bbui-bg-error-bold: #ba1a1a;
+  --bbui-bg-info: #dbeafe;
+  --bbui-bg-info-bold: #3b82f6;
   --bbui-bg-overlay: rgba(0,0,0,0.5);
 
+  /* ── Tint backgrounds ── */
+  --bbui-bg-primary-tint: rgba(0,110,47,0.1);
+  --bbui-bg-error-tint: rgba(186,26,26,0.1);
+  --bbui-bg-secondary-tint: rgba(87,94,112,0.1);
+  --bbui-bg-warning-tint: rgba(251,146,60,0.1);
+  --bbui-bg-info-tint: rgba(59,130,246,0.1);
+  --bbui-bg-accent-tint: rgba(192,132,252,0.1);
+
+  /* ── Borders ── */
   --bbui-border-default: #eaedff;
   --bbui-border-input: #e2e7ff;
   --bbui-border-outline: #bccbb9;
+  --bbui-border-warning: #fbbf24;
+  --bbui-border-error: #fca5a5;
+  --bbui-border-info: #93c5fd;
+  --bbui-border-success: #86efac;
 
-  --bbui-shadow-ambient: 0 40px 60px -15px rgba(19, 27, 46, 0.04);
+  /* ── Accent / status stripes ── */
+  --bbui-accent-occupied: #22c55e;
+  --bbui-accent-vacant: #cbd5e1;
+  --bbui-accent-maintenance: #fb923c;
+  --bbui-accent-reserved: #3b82f6;
+  --bbui-accent-cleaning: #c084fc;
+
+  /* ── Shadows ── */
+  --bbui-shadow-ambient: 0 40px 60px -15px rgba(19,27,46,0.04);
   --bbui-shadow-raised: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.06);
+  --bbui-shadow-dropdown: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -2px rgba(0,0,0,.1);
+  --bbui-shadow-overlay: 0 20px 25px -5px rgba(0,0,0,.1), 0 8px 10px -6px rgba(0,0,0,.1);
+  --bbui-shadow-card-hover: 0 20px 40px -15px rgba(0,110,47,0.08);
 
+  /* ── Gradient ── */
+  --bbui-gradient-brand: linear-gradient(135deg, #22c55e 0%, #006e2f 100%);
+
+  /* ── Scrollbar ── */
   --bbui-scrollbar-thumb: rgba(19, 27, 46, 0.15);
   --bbui-scrollbar-thumb-hover: rgba(19, 27, 46, 0.25);
   --bbui-selection-bg: rgba(34, 197, 94, 0.2);
@@ -41,78 +93,165 @@ const css = `
   color-scheme: light;
 }
 
+/* ── Dark theme: "Emerald Monolith" ── */
 [data-theme="dark"] {
-  --bbui-color-surface: #0f1729;
-  --bbui-color-on-surface: #e2e7ff;
-  --bbui-color-subtle: #a0a7b8;
-  --bbui-color-subtlest: #6d7b8d;
-  --bbui-color-disabled: #3d4a5c;
-  --bbui-color-inverse: #0f1729;
-  --bbui-color-primary: #4ae176;
-  --bbui-color-primary-container: #006e2f;
-  --bbui-color-on-primary-container: #6bff8f;
+  /* ── Text colors ── */
+  --bbui-color-on-surface: #e5e2e1;
+  --bbui-color-subtle: #bdcabc;
+  --bbui-color-subtlest: #879487;
+  --bbui-color-disabled: rgba(229, 226, 225, 0.4);
+  --bbui-color-inverse: #131313;
+  --bbui-color-on-brand: #ffffff;
+  --bbui-color-primary: #6ee591;
+  --bbui-color-primary-container: #50c878;
+  --bbui-color-on-primary-container: #005025;
   --bbui-color-error: #ffb4ab;
-  --bbui-color-warning: #fbbf24;
+  --bbui-color-error-container: #ffdad6;
+  --bbui-color-warning: #ffbeb5;
+  --bbui-color-info: #66dd8b;
+  --bbui-color-on-surface-variant: #bdcabc;
+  --bbui-color-surface: #131313;
+  --bbui-color-on-success: #005025;
+  --bbui-color-on-error: #ffdad6;
+  --bbui-color-on-warning: #ffdad5;
+  --bbui-color-on-info: #005025;
 
-  --bbui-bg-default: #1a2332;
-  --bbui-bg-surface: #0f1729;
-  --bbui-bg-subtle: #1e293b;
-  --bbui-bg-neutral: #283044;
-  --bbui-bg-neutral-bold: #334155;
-  --bbui-bg-neutral-bolder: #3d4f67;
-  --bbui-bg-sidebar: #111827;
-  --bbui-bg-dark: #e2e7ff;
+  /* ── Backgrounds: surface hierarchy (smoked glass layers) ── */
+  --bbui-bg-default: #1c1b1b;              /* surface-container-low */
+  --bbui-bg-surface: #131313;              /* the void */
+  --bbui-bg-subtle: #2a2a2a;              /* surface-container-high */
+  --bbui-bg-neutral: #353534;             /* surface-container-highest */
+  --bbui-bg-neutral-bold: #353534;
+  --bbui-bg-neutral-bolder: #3a3939;      /* surface-bright */
+  --bbui-bg-sidebar: #1c1b1b;
+  --bbui-bg-dark: #353534;
+  --bbui-bg-dark-hover: #3a3939;
+  --bbui-bg-dark-active: #2a2a2a;
+  --bbui-bg-accent: #4f46e5;
+  --bbui-bg-brand: #006e2f;
+  --bbui-bg-brand-bold: #005025;
+  --bbui-bg-primary-container: #50c878;
+  --bbui-bg-secondary-container: #40493f;
+  --bbui-bg-warning: rgba(255,190,181,0.15);
+  --bbui-bg-warning-bold: #fb923c;
+  --bbui-bg-error: rgba(255,180,171,0.15);
+  --bbui-bg-error-bold: #ff9587;
+  --bbui-bg-info: rgba(110,229,145,0.15);
+  --bbui-bg-info-bold: #66dd8b;
   --bbui-bg-overlay: rgba(0,0,0,0.7);
 
-  --bbui-border-default: #283044;
-  --bbui-border-input: #334155;
-  --bbui-border-outline: #475569;
+  /* ── Tint backgrounds (10% alpha, using dark-safe colors) ── */
+  --bbui-bg-primary-tint: rgba(110, 229, 145, 0.1);
+  --bbui-bg-error-tint: rgba(255, 180, 171, 0.1);
+  --bbui-bg-secondary-tint: rgba(192, 201, 188, 0.1);
+  --bbui-bg-warning-tint: rgba(255, 190, 181, 0.1);
+  --bbui-bg-info-tint: rgba(102, 221, 139, 0.1);
+  --bbui-bg-accent-tint: rgba(192, 132, 252, 0.1);
 
-  --bbui-shadow-ambient: 0 40px 60px -15px rgba(0, 0, 0, 0.3);
-  --bbui-shadow-raised: 0 1px 3px rgba(0,0,0,.4), 0 1px 2px rgba(0,0,0,.3);
+  /* ── Borders: ghost borders only (No-Line Rule) ── */
+  --bbui-border-default: rgba(62, 74, 63, 0.15);
+  --bbui-border-input: #3e4a3f;
+  --bbui-border-outline: rgba(62, 74, 63, 0.15);
+  --bbui-border-warning: rgba(255, 190, 181, 0.3);
+  --bbui-border-error: rgba(255, 180, 171, 0.3);
+  --bbui-border-info: rgba(102, 221, 139, 0.3);
+  --bbui-border-success: rgba(110, 229, 145, 0.3);
 
-  --bbui-scrollbar-thumb: rgba(255, 255, 255, 0.15);
-  --bbui-scrollbar-thumb-hover: rgba(255, 255, 255, 0.25);
-  --bbui-selection-bg: rgba(74, 225, 118, 0.2);
+  /* ── Accent / status stripes (same hues, work on dark) ── */
+  --bbui-accent-occupied: #6ee591;
+  --bbui-accent-vacant: #879487;
+  --bbui-accent-maintenance: #fb923c;
+  --bbui-accent-reserved: #66dd8b;
+  --bbui-accent-cleaning: #c084fc;
+
+  /* ── Shadows: tonal layering, suppress most shadows ── */
+  --bbui-shadow-ambient: none;
+  --bbui-shadow-raised: none;
+  --bbui-shadow-dropdown: 0 4px 12px rgba(0,0,0,0.5);
+  --bbui-shadow-overlay: 0 20px 40px rgba(0,0,0,0.6);
+  --bbui-shadow-card-hover: none;
+
+  /* ── Gradient: luminescent emerald ── */
+  --bbui-gradient-brand: linear-gradient(135deg, #6ee591 0%, #50c878 100%);
+
+  /* ── Scrollbar ── */
+  --bbui-scrollbar-thumb: #3e4a3f;
+  --bbui-scrollbar-thumb-hover: #879487;
+  --bbui-selection-bg: rgba(110, 229, 145, 0.3);
 
   color-scheme: dark;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bbui-color-surface: #0f1729;
-    --bbui-color-on-surface: #e2e7ff;
-    --bbui-color-subtle: #a0a7b8;
-    --bbui-color-subtlest: #6d7b8d;
-    --bbui-color-disabled: #3d4a5c;
-    --bbui-color-inverse: #0f1729;
-    --bbui-color-primary: #4ae176;
-    --bbui-color-primary-container: #006e2f;
-    --bbui-color-on-primary-container: #6bff8f;
+    /* Inherit dark theme vars when no explicit data-theme is set */
+    --bbui-color-on-surface: #e5e2e1;
+    --bbui-color-subtle: #bdcabc;
+    --bbui-color-subtlest: #879487;
+    --bbui-color-disabled: rgba(229, 226, 225, 0.4);
+    --bbui-color-inverse: #131313;
+  --bbui-color-on-brand: #ffffff;
+    --bbui-color-primary: #6ee591;
+    --bbui-color-primary-container: #50c878;
+    --bbui-color-on-primary-container: #005025;
     --bbui-color-error: #ffb4ab;
-    --bbui-color-warning: #fbbf24;
-
-    --bbui-bg-default: #1a2332;
-    --bbui-bg-surface: #0f1729;
-    --bbui-bg-subtle: #1e293b;
-    --bbui-bg-neutral: #283044;
-    --bbui-bg-neutral-bold: #334155;
-    --bbui-bg-neutral-bolder: #3d4f67;
-    --bbui-bg-sidebar: #111827;
-    --bbui-bg-dark: #e2e7ff;
+    --bbui-color-error-container: #ffdad6;
+    --bbui-color-warning: #ffbeb5;
+    --bbui-color-info: #66dd8b;
+    --bbui-color-on-surface-variant: #bdcabc;
+    --bbui-color-surface: #131313;
+    --bbui-color-on-success: #005025;
+    --bbui-color-on-error: #ffdad6;
+    --bbui-color-on-warning: #ffdad5;
+    --bbui-color-on-info: #005025;
+    --bbui-bg-default: #1c1b1b;
+    --bbui-bg-surface: #131313;
+    --bbui-bg-subtle: #2a2a2a;
+    --bbui-bg-neutral: #353534;
+    --bbui-bg-neutral-bold: #353534;
+    --bbui-bg-neutral-bolder: #3a3939;
+    --bbui-bg-sidebar: #1c1b1b;
+    --bbui-bg-dark: #353534;
+    --bbui-bg-dark-hover: #3a3939;
+    --bbui-bg-dark-active: #2a2a2a;
+    --bbui-bg-brand: #006e2f;
+    --bbui-bg-brand-bold: #005025;
+    --bbui-bg-primary-container: #50c878;
+    --bbui-bg-secondary-container: #40493f;
+    --bbui-bg-warning: rgba(255,190,181,0.15);
+    --bbui-bg-warning-bold: #fb923c;
+    --bbui-bg-error: rgba(255,180,171,0.15);
+    --bbui-bg-error-bold: #ff9587;
+    --bbui-bg-info: rgba(110,229,145,0.15);
+    --bbui-bg-info-bold: #66dd8b;
     --bbui-bg-overlay: rgba(0,0,0,0.7);
-
-    --bbui-border-default: #283044;
-    --bbui-border-input: #334155;
-    --bbui-border-outline: #475569;
-
-    --bbui-shadow-ambient: 0 40px 60px -15px rgba(0, 0, 0, 0.3);
-    --bbui-shadow-raised: 0 1px 3px rgba(0,0,0,.4), 0 1px 2px rgba(0,0,0,.3);
-
-    --bbui-scrollbar-thumb: rgba(255, 255, 255, 0.15);
-    --bbui-scrollbar-thumb-hover: rgba(255, 255, 255, 0.25);
-    --bbui-selection-bg: rgba(74, 225, 118, 0.2);
-
+    --bbui-bg-primary-tint: rgba(110, 229, 145, 0.1);
+    --bbui-bg-error-tint: rgba(255, 180, 171, 0.1);
+    --bbui-bg-secondary-tint: rgba(192, 201, 188, 0.1);
+    --bbui-bg-warning-tint: rgba(255, 190, 181, 0.1);
+    --bbui-bg-info-tint: rgba(102, 221, 139, 0.1);
+    --bbui-bg-accent-tint: rgba(192, 132, 252, 0.1);
+    --bbui-border-default: rgba(62, 74, 63, 0.15);
+    --bbui-border-input: #3e4a3f;
+    --bbui-border-outline: rgba(62, 74, 63, 0.15);
+    --bbui-border-warning: rgba(255, 190, 181, 0.3);
+    --bbui-border-error: rgba(255, 180, 171, 0.3);
+    --bbui-border-info: rgba(102, 221, 139, 0.3);
+    --bbui-border-success: rgba(110, 229, 145, 0.3);
+    --bbui-accent-occupied: #6ee591;
+    --bbui-accent-vacant: #879487;
+    --bbui-accent-maintenance: #fb923c;
+    --bbui-accent-reserved: #66dd8b;
+    --bbui-accent-cleaning: #c084fc;
+    --bbui-shadow-ambient: none;
+    --bbui-shadow-raised: none;
+    --bbui-shadow-dropdown: 0 4px 12px rgba(0,0,0,0.5);
+    --bbui-shadow-overlay: 0 20px 40px rgba(0,0,0,0.6);
+    --bbui-shadow-card-hover: none;
+    --bbui-gradient-brand: linear-gradient(135deg, #6ee591 0%, #50c878 100%);
+    --bbui-scrollbar-thumb: #3e4a3f;
+    --bbui-scrollbar-thumb-hover: #879487;
+    --bbui-selection-bg: rgba(110, 229, 145, 0.3);
     color-scheme: dark;
   }
 }
@@ -124,7 +263,7 @@ body {
   font-size: 1rem;
   line-height: 1.5;
   color: var(--bbui-color-on-surface);
-  background-color: var(--bbui-color-surface);
+  background-color: var(--bbui-bg-surface);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -139,7 +278,7 @@ a { color: inherit; }
 ::-webkit-scrollbar-thumb { background: var(--bbui-scrollbar-thumb); border-radius: 9999px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--bbui-scrollbar-thumb-hover); }
 button, a, input, select, textarea {
-  transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease, box-shadow 150ms ease, opacity 150ms ease;
+  transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease, box-shadow 200ms ease, opacity 200ms ease;
 }
 ::selection { background: var(--bbui-selection-bg); color: var(--bbui-color-on-surface); }
 `;

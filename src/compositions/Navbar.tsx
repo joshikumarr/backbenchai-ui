@@ -216,12 +216,12 @@ export const Navbar = forwardRef<HTMLElement, NavbarProps>(
     // Desktop layout
     if (!isMobile) {
       return (
-        <Box as="header" ref={ref}>
+        <Box as="header" ref={ref} style={{ width: "100%" }}>
           <Box
             as="nav"
-            maxWidth="1280px"
             paddingInline={paddingInline}
             paddingBlock={paddingBlock}
+            style={{ width: "100%" }}
           >
             <Inline alignBlock="center" spread="space-between">
               <Box>{logoElement}</Box>

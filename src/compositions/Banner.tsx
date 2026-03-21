@@ -29,22 +29,22 @@ const variantMap: Record<
   { bg: BackgroundColorToken; text: TextColorToken; border: BorderColorToken }
 > = {
   info: {
-    bg: BackgroundColor.Info,
+    bg: BackgroundColor.InfoTint,
     text: TextColor.Info,
     border: BorderColor.Info,
   },
   success: {
-    bg: BackgroundColor.Success,
+    bg: BackgroundColor.PrimaryTint,
     text: TextColor.Success,
     border: BorderColor.Success,
   },
   warning: {
-    bg: BackgroundColor.Warning,
+    bg: BackgroundColor.WarningTint,
     text: TextColor.Warning,
     border: BorderColor.Warning,
   },
   error: {
-    bg: BackgroundColor.Error,
+    bg: BackgroundColor.ErrorTint,
     text: TextColor.Error,
     border: BorderColor.Error,
   },

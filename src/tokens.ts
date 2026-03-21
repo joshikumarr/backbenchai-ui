@@ -1,11 +1,9 @@
 /**
- * Design tokens — NestOS Material Design 3 theme.
+ * Design tokens — theme-aware via CSS custom properties.
  *
- * All values are direct CSS strings/numbers.
- * Based on the NestOS portal design system:
- *   Primary: #006e2f (green)
- *   Surface: #faf8ff (blue-white)
- *   Fonts: Manrope (headlines), Inter (body)
+ * Every color/shadow/gradient token outputs a `var(--bbui-...)` reference.
+ * Light/dark values are defined in injectStyles.ts.
+ * Spacing, typography, border-radius, and sizing remain static.
  */
 
 // ── Spacing ──────────────────────────────────────────────────────────
@@ -51,104 +49,72 @@ export const Spacing = {
 
 export type SpaceToken = (typeof Spacing)[keyof typeof Spacing];
 
-// ── Colors ───────────────────────────────────────────────────────────
+// ── Text Colors (CSS var-backed) ─────────────────────────────────────
 
 export const TextColor = {
-  /** #131b2e — on-surface (main text) */
-  Default: "#131b2e",
-  /** #575e70 — secondary */
-  Subtle: "#575e70",
-  /** #6d7b6c — outline */
-  Subtlest: "#6d7b6c",
-  /** #bccbb9 — outline-variant */
-  Disabled: "#bccbb9",
-  /** #ffffff — on-primary / inverse */
-  Inverse: "#ffffff",
-  /** #006e2f — primary */
-  Brand: "#006e2f",
-  /** #004b1e — on-primary-container */
-  Selected: "#004b1e",
-  /** #006e2f — primary (matches brand in NestOS green theme) */
-  Success: "#006e2f",
-  /** #92400e */
-  Warning: "#92400e",
-  /** #ba1a1a — M3 error */
-  Error: "#ba1a1a",
-  /** #93000a — on-error-container */
-  ErrorContainer: "#93000a",
-  /** #1e40af */
-  Info: "#1e40af",
-  /** #006e2f — primary (links match brand) */
-  Link: "#006e2f",
-  /** #3d4a3d — on-surface-variant */
-  OnSurfaceVariant: "#3d4a3d",
+  Default: "var(--bbui-color-on-surface)",
+  Subtle: "var(--bbui-color-subtle)",
+  Subtlest: "var(--bbui-color-subtlest)",
+  Disabled: "var(--bbui-color-disabled)",
+  Inverse: "var(--bbui-color-inverse)",
+  /** Always white — for text on brand/gradient/colored surfaces */
+  OnBrand: "var(--bbui-color-on-brand)",
+  Brand: "var(--bbui-color-primary)",
+  Selected: "var(--bbui-color-on-primary-container)",
+  Success: "var(--bbui-color-primary)",
+  Warning: "var(--bbui-color-warning)",
+  Error: "var(--bbui-color-error)",
+  ErrorContainer: "var(--bbui-color-error-container)",
+  Info: "var(--bbui-color-info)",
+  Link: "var(--bbui-color-primary)",
+  OnSurfaceVariant: "var(--bbui-color-on-surface-variant)",
+  /** Text on success/green containers */
+  OnSuccess: "var(--bbui-color-on-success)",
+  /** Text on error containers */
+  OnError: "var(--bbui-color-on-error)",
+  /** Text on warning containers */
+  OnWarning: "var(--bbui-color-on-warning)",
+  /** Text on info containers */
+  OnInfo: "var(--bbui-color-on-info)",
 } as const;
 
 export type TextColorToken = (typeof TextColor)[keyof typeof TextColor];
 
+// ── Background Colors (CSS var-backed) ───────────────────────────────
+
 export const BackgroundColor = {
   Transparent: "transparent",
-  /** #ffffff — surface-container-lowest (cards, inputs) */
-  Default: "#ffffff",
-  /** #faf8ff — surface (page background) */
-  Surface: "#faf8ff",
-  /** #f2f3ff — surface-container-low (tinted inputs, backgrounds) */
-  Subtle: "#f2f3ff",
-  /** #eaedff — surface-container */
-  Neutral: "#eaedff",
-  /** #e2e7ff — surface-container-high (chips, pills) */
-  NeutralBold: "#e2e7ff",
-  /** #dae2fd — surface-container-highest */
-  NeutralBolder: "#dae2fd",
-  /** #f8fafc — sidebar background (slate-50) */
-  SidebarBg: "#f8fafc",
-  /** #131b2e — on-surface (dark backgrounds) */
-  Dark: "#131b2e",
-  /** #283044 — inverse-surface */
-  DarkHover: "#283044",
-  /** #111827 */
-  DarkActive: "#111827",
-  /** #4f46e5 — accent (indigo) */
-  Accent: "#4f46e5",
-  /** #006e2f — primary */
-  Brand: "#006e2f",
-  /** #004b1e — on-primary-container */
-  BrandBold: "#004b1e",
-  /** #22c55e — primary-container (bright green) */
-  PrimaryContainer: "#22c55e",
-  /** #d9dff5 — secondary-container */
-  SecondaryContainer: "#d9dff5",
-  /** #22c55e — primary-container */
-  Success: "#22c55e",
-  /** #006e2f — primary */
-  SuccessBold: "#006e2f",
-  /** #fef3c7 */
-  Warning: "#fef3c7",
-  /** #f59e0b */
-  WarningBold: "#f59e0b",
-  /** #ffdad6 — error-container */
-  Error: "#ffdad6",
-  /** #ba1a1a — M3 error */
-  ErrorBold: "#ba1a1a",
-  /** #dbeafe */
-  Info: "#dbeafe",
-  /** #3b82f6 */
-  InfoBold: "#3b82f6",
-  /** rgba(0,0,0,0.5) */
-  Overlay: "rgba(0,0,0,0.5)",
-  // ── Tint variants (10% alpha for Badge/status backgrounds) ──
-  /** rgba(0,110,47,0.1) — primary at 10% */
-  PrimaryTint: "rgba(0,110,47,0.1)",
-  /** rgba(186,26,26,0.1) — error at 10% */
-  ErrorTint: "rgba(186,26,26,0.1)",
-  /** rgba(87,94,112,0.1) — secondary at 10% */
-  SecondaryTint: "rgba(87,94,112,0.1)",
-  /** rgba(251,146,60,0.1) — orange at 10% */
-  WarningTint: "rgba(251,146,60,0.1)",
-  /** rgba(59,130,246,0.1) — blue at 10% */
-  InfoTint: "rgba(59,130,246,0.1)",
-  /** rgba(192,132,252,0.1) — purple at 10% */
-  AccentTint: "rgba(192,132,252,0.1)",
+  Default: "var(--bbui-bg-default)",
+  Surface: "var(--bbui-bg-surface)",
+  Subtle: "var(--bbui-bg-subtle)",
+  Neutral: "var(--bbui-bg-neutral)",
+  NeutralBold: "var(--bbui-bg-neutral-bold)",
+  NeutralBolder: "var(--bbui-bg-neutral-bolder)",
+  SidebarBg: "var(--bbui-bg-sidebar)",
+  Dark: "var(--bbui-bg-dark)",
+  DarkHover: "var(--bbui-bg-dark-hover)",
+  DarkActive: "var(--bbui-bg-dark-active)",
+  Accent: "var(--bbui-bg-accent)",
+  Brand: "var(--bbui-bg-brand)",
+  BrandBold: "var(--bbui-bg-brand-bold)",
+  PrimaryContainer: "var(--bbui-bg-primary-container)",
+  SecondaryContainer: "var(--bbui-bg-secondary-container)",
+  Success: "var(--bbui-bg-primary-container)",
+  SuccessBold: "var(--bbui-bg-brand)",
+  Warning: "var(--bbui-bg-warning)",
+  WarningBold: "var(--bbui-bg-warning-bold)",
+  Error: "var(--bbui-bg-error)",
+  ErrorBold: "var(--bbui-bg-error-bold)",
+  Info: "var(--bbui-bg-info)",
+  InfoBold: "var(--bbui-bg-info-bold)",
+  Overlay: "var(--bbui-bg-overlay)",
+  // Tint variants
+  PrimaryTint: "var(--bbui-bg-primary-tint)",
+  ErrorTint: "var(--bbui-bg-error-tint)",
+  SecondaryTint: "var(--bbui-bg-secondary-tint)",
+  WarningTint: "var(--bbui-bg-warning-tint)",
+  InfoTint: "var(--bbui-bg-info-tint)",
+  AccentTint: "var(--bbui-bg-accent-tint)",
 } as const;
 
 export type BackgroundColorToken =
@@ -157,16 +123,14 @@ export type BackgroundColorToken =
 // ── Typography ───────────────────────────────────────────────────────
 
 export const FontFamily = {
-  /** SF Pro Display — headlines, display text */
-  Display: "'SF Pro Display', 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif",
-  /** SF Pro Text — body text, labels, UI */
-  Body: "'SF Pro Text', 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif",
+  Display: "var(--bbui-font-display)",
+  Body: "var(--bbui-font-body)",
 } as const;
 
 export type FontFamilyToken = (typeof FontFamily)[keyof typeof FontFamily];
 
 export const FontSize = {
-  /** 0.625rem / 10px — micro labels */
+  /** 0.625rem / 10px */
   Micro: "0.625rem",
   /** 0.75rem / 12px */
   XXSmall: "0.75rem",
@@ -196,7 +160,7 @@ export const FontWeight = {
   Semibold: 600,
   Bold: 700,
   ExtraBold: 800,
-  /** 900 — used for large display numbers */
+  /** 900 — large display numbers */
   Black: 900,
 } as const;
 
@@ -219,23 +183,14 @@ export type LetterSpacingToken =
 
 export const BorderRadius = {
   None: "0",
-  /** 4px */
   Small: "0.25rem",
-  /** 6px */
   Medium: "0.375rem",
-  /** 8px */
   Large: "0.5rem",
-  /** 12px */
   XLarge: "0.75rem",
-  /** 16px — default card radius in NestOS */
   XXLarge: "1rem",
-  /** 24px */
   XXXLarge: "1.5rem",
-  /** 32px — large containers, sidebar */
   Huge: "2rem",
-  /** 48px */
   XHuge: "3rem",
-  /** 9999px — pills, circles */
   Full: "9999px",
 } as const;
 
@@ -243,58 +198,39 @@ export type BorderRadiusToken =
   (typeof BorderRadius)[keyof typeof BorderRadius];
 
 export const BorderColor = {
-  /** #eaedff — surface-container */
-  Default: "#eaedff",
-  /** #e2e7ff — surface-container-high */
-  Input: "#e2e7ff",
-  /** #fbbf24 */
-  Warning: "#fbbf24",
-  /** #fca5a5 */
-  Error: "#fca5a5",
-  /** #93c5fd */
-  Info: "#93c5fd",
-  /** #86efac */
-  Success: "#86efac",
-  /** #006e2f — primary (focus rings) */
-  Focus: "#006e2f",
-  /** #bccbb9 — outline-variant */
-  Outline: "#bccbb9",
+  Default: "var(--bbui-border-default)",
+  Input: "var(--bbui-border-input)",
+  Warning: "var(--bbui-border-warning)",
+  Error: "var(--bbui-border-error)",
+  Info: "var(--bbui-border-info)",
+  Success: "var(--bbui-border-success)",
+  Focus: "var(--bbui-color-primary)",
+  Outline: "var(--bbui-border-outline)",
 } as const;
 
 export type BorderColorToken =
   (typeof BorderColor)[keyof typeof BorderColor];
 
 export const BorderWidth = {
-  /** 1px — default borders */
   Thin: "1px",
-  /** 2px — medium emphasis */
   Medium: "2px",
-  /** 4px — accent borders */
   Thick: "4px",
-  /** 8px — status stripe on cards */
   XThick: "8px",
 } as const;
 
 export type BorderWidthToken =
   (typeof BorderWidth)[keyof typeof BorderWidth];
 
-// ── Accent / Status stripe colors (for Card top borders) ────────────
+// ── Accent / Status stripe colors ────────────────────────────────────
 
 export const AccentColor = {
-  /** #22c55e — occupied / active */
-  Occupied: "#22c55e",
-  /** #cbd5e1 — vacant (slate-300) */
-  Vacant: "#cbd5e1",
-  /** #fb923c — maintenance (orange-400) */
-  Maintenance: "#fb923c",
-  /** #3b82f6 — reserved (blue-500) */
-  Reserved: "#3b82f6",
-  /** #c084fc — cleaning (purple-400) */
-  Cleaning: "#c084fc",
-  /** #006e2f — primary */
-  Primary: "#006e2f",
-  /** #ba1a1a — error */
-  Error: "#ba1a1a",
+  Occupied: "var(--bbui-accent-occupied)",
+  Vacant: "var(--bbui-accent-vacant)",
+  Maintenance: "var(--bbui-accent-maintenance)",
+  Reserved: "var(--bbui-accent-reserved)",
+  Cleaning: "var(--bbui-accent-cleaning)",
+  Primary: "var(--bbui-color-primary)",
+  Error: "var(--bbui-color-error)",
 } as const;
 
 export type AccentColorToken =
@@ -304,16 +240,11 @@ export type AccentColorToken =
 
 export const Elevation = {
   None: "none",
-  /** Subtle card shadow */
-  Raised: "0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.06)",
-  /** NestOS ambient — wide, soft, barely-visible */
-  Ambient: "0 40px 60px -15px rgba(19,27,46,0.04)",
-  /** Dropdown menus */
-  Dropdown: "0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -2px rgba(0,0,0,.1)",
-  /** Modals, overlays */
-  Overlay: "0 20px 25px -5px rgba(0,0,0,.1), 0 8px 10px -6px rgba(0,0,0,.1)",
-  /** Card hover — green-tinted */
-  CardHover: "0 20px 40px -15px rgba(0,110,47,0.08)",
+  Raised: "var(--bbui-shadow-raised)",
+  Ambient: "var(--bbui-shadow-ambient)",
+  Dropdown: "var(--bbui-shadow-dropdown)",
+  Overlay: "var(--bbui-shadow-overlay)",
+  CardHover: "var(--bbui-shadow-card-hover)",
 } as const;
 
 export type ElevationToken = (typeof Elevation)[keyof typeof Elevation];
@@ -321,8 +252,7 @@ export type ElevationToken = (typeof Elevation)[keyof typeof Elevation];
 // ── Gradient ─────────────────────────────────────────────────────────
 
 export const Gradient = {
-  /** Primary CTA gradient: bright green → dark green */
-  Brand: "linear-gradient(135deg, #22c55e 0%, #006e2f 100%)",
+  Brand: "var(--bbui-gradient-brand)",
 } as const;
 
 export type GradientToken = (typeof Gradient)[keyof typeof Gradient];
@@ -334,14 +264,13 @@ export const ContainerWidth = {
   Medium: "768px",
   Large: "1024px",
   XLarge: "1280px",
-  /** 1600px — wide content areas */
   XXLarge: "1600px",
 } as const;
 
 export type ContainerWidthToken =
   (typeof ContainerWidth)[keyof typeof ContainerWidth];
 
-// ── Z-Index ─────────────────────────────────────────────────────────
+// ── Z-Index ──────────────────────────────────────────────────────────
 
 export const ZIndex = {
   Dropdown: 100,
@@ -353,14 +282,13 @@ export const ZIndex = {
 
 export type ZIndexToken = (typeof ZIndex)[keyof typeof ZIndex];
 
-// ── Icon Size ───────────────────────────────────────────────────────
+// ── Icon Size ────────────────────────────────────────────────────────
 
 export const IconSize = {
   Small: "1rem",
   Medium: "1.25rem",
   Large: "1.5rem",
   XLarge: "2rem",
-  /** 2.5rem — large display icons */
   XXLarge: "2.5rem",
 } as const;
 

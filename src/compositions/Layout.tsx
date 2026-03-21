@@ -37,23 +37,10 @@ export const Layout = forwardRef<HTMLElement, LayoutProps>(
           display: "flex",
         }}
       >
-        {/* Sidebar: full viewport height, sticky */}
-        {!isMobile && sideNav && (
-          <Box
-            as="aside"
-            style={{
-              position: "sticky",
-              top: 0,
-              height: "100vh",
-              flexShrink: 0,
-              zIndex: 10,
-            }}
-          >
-            {sideNav}
-          </Box>
-        )}
+        {/* Sidebar renders itself as sticky full-height */}
+        {!isMobile && sideNav}
 
-        {/* Right side: navbar stacked above content */}
+        {/* Right column: navbar on top, content below */}
         <Box
           style={{
             flex: "1 1 auto",
