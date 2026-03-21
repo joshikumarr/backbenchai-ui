@@ -1,7 +1,5 @@
 import React, { forwardRef } from "react";
 import { Box } from "../primitives/Box";
-import { Stack } from "../primitives/Stack";
-import { Inline } from "../primitives/Inline";
 import { useBreakpoint } from "../hooks/useBreakpoint";
 import type { BackgroundColorToken } from "../tokens";
 import { BackgroundColor, Spacing } from "../tokens";
@@ -31,29 +29,55 @@ export const Layout = forwardRef<HTMLElement, LayoutProps>(
     const isMobile = bp === "mobile";
 
     return (
-      <Stack
+      <Box
         ref={ref}
         style={{
           minHeight: "100vh",
           backgroundColor,
+          display: "flex",
         }}
       >
-        {topNav}
-        <Inline grow="fill" style={{ flex: "1 1 auto" }}>
-          {!isMobile && sideNav}
+        {/* Sidebar: full viewport height, sticky */}
+        {!isMobile && sideNav && (
+          <Box
+            as="aside"
+            style={{
+              position: "sticky",
+              top: 0,
+              height: "100vh",
+              flexShrink: 0,
+              zIndex: 10,
+            }}
+          >
+            {sideNav}
+          </Box>
+        )}
+
+        {/* Right side: navbar stacked above content */}
+        <Box
+          style={{
+            flex: "1 1 auto",
+            display: "flex",
+            flexDirection: "column",
+            minWidth: 0,
+          }}
+        >
+          {topNav}
           <Box
             as="main"
             style={{
               flex: "1 1 auto",
               overflow: "auto",
-              paddingBlockEnd: isMobile && mobileNav ? Spacing.XXHuge : undefined,
+              paddingBlockEnd:
+                isMobile && mobileNav ? Spacing.XXHuge : undefined,
             }}
           >
             {children}
           </Box>
-        </Inline>
+        </Box>
+
         {isMobile && mobileNav}
-      </Stack>
+      </Box>
     );
   }
 );

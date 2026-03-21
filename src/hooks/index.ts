@@ -5,3 +5,6 @@ export { useMediaQuery } from "./useMediaQuery";
 
 export { resolveResponsive, useResponsiveValue } from "./useResponsive";
 export type { Responsive } from "./useResponsive";
+
+export { useTheme } from "./useTheme";
+export type { Theme } from "./useTheme";

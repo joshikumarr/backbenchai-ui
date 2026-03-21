@@ -171,3 +171,6 @@ export { useMediaQuery } from "./hooks";
 
 export { useResponsiveValue } from "./hooks";
 export type { Responsive } from "./hooks";
+
+export { useTheme } from "./hooks";
+export type { Theme } from "./hooks";
