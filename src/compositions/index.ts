@@ -76,3 +76,6 @@ export type { MobileNavProps, MobileNavItem } from "./MobileNav";
 
 export { ProgressTracker } from "./ProgressTracker";
 export type { ProgressTrackerProps, Stage, Stages, StageStatus } from "./ProgressTracker";
+
+export { GlassCard } from "./GlassCard";
+export type { GlassCardProps, GlassCardAction, GlassCardMedia } from "./GlassCard";

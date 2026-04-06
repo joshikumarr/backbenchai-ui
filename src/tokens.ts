@@ -208,8 +208,7 @@ export const BorderColor = {
   Outline: "var(--bbui-border-outline)",
 } as const;
 
-export type BorderColorToken =
-  (typeof BorderColor)[keyof typeof BorderColor];
+export type BorderColorToken = (typeof BorderColor)[keyof typeof BorderColor];
 
 export const BorderWidth = {
   Thin: "1px",
@@ -218,8 +217,7 @@ export const BorderWidth = {
   XThick: "8px",
 } as const;
 
-export type BorderWidthToken =
-  (typeof BorderWidth)[keyof typeof BorderWidth];
+export type BorderWidthToken = (typeof BorderWidth)[keyof typeof BorderWidth];
 
 // ── Accent / Status stripe colors ────────────────────────────────────
 
@@ -233,8 +231,7 @@ export const AccentColor = {
   Error: "var(--bbui-color-error)",
 } as const;
 
-export type AccentColorToken =
-  (typeof AccentColor)[keyof typeof AccentColor];
+export type AccentColorToken = (typeof AccentColor)[keyof typeof AccentColor];
 
 // ── Elevation ────────────────────────────────────────────────────────
 

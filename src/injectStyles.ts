@@ -59,6 +59,18 @@ const css = `
   --bbui-bg-info-tint: rgba(59,130,246,0.1);
   --bbui-bg-accent-tint: rgba(192,132,252,0.1);
 
+  /* ── Interactive / selection states ── */
+  --bbui-bg-selected: rgba(0,110,47,0.1);
+  --bbui-bg-selected-bold: rgba(0,110,47,0.2);
+  --bbui-border-selected: rgba(0,110,47,0.4);
+  --bbui-color-selected: #006e2f;
+  --bbui-bg-card-neutral: rgba(0,0,0,0.02);
+  --bbui-border-card-neutral: rgba(0,0,0,0.06);
+  --bbui-bg-progress-track: rgba(0,0,0,0.06);
+  --bbui-color-chart-stroke: rgba(0,0,0,0.08);
+  --bbui-color-chart-fill: rgba(0,110,47,0.15);
+  --bbui-color-chart-line: rgba(0,110,47,0.6);
+
   /* ── Borders ── */
   --bbui-border-default: #eaedff;
   --bbui-border-input: #e2e7ff;

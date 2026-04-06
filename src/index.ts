@@ -121,6 +121,7 @@ export {
   EmptyState,
   Table,
   InlineEdit,
+  GlassCard,
 } from "./compositions";
 export type {
   NavbarProps,
@@ -168,6 +169,9 @@ export type {
   TableRow,
   SortOrder,
   InlineEditProps,
+  GlassCardProps,
+  GlassCardAction,
+  GlassCardMedia,
 } from "./compositions";
 
 // Hooks
