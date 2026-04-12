@@ -15,7 +15,10 @@
     "./styles.css": "./dist/style.css"
   },
   "files": [
-    "dist"
+    "dist",
+    "src",
+    "tsconfig.json",
+    "vite.config.ts"
   ],
   "scripts": {
     "prepare": "npm run build",
