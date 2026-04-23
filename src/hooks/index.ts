@@ -8,3 +8,9 @@ export type { Responsive } from "./useResponsive";
 
 export { useTheme } from "./useTheme";
 export type { Theme } from "./useTheme";
+
+export { useSSEStream, parseSSEStream, streamSSE } from "./useSSEStream";
+export type {
+  UseSSEStreamOptions,
+  UseSSEStreamResult,
+} from "./useSSEStream";

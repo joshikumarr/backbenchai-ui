@@ -290,3 +290,113 @@ export const IconSize = {
 } as const;
 
 export type IconSizeToken = (typeof IconSize)[keyof typeof IconSize];
+
+// ── TOAR domain tokens ───────────────────────────────────────────────
+// These bind directly to backend `bloom_level`, `score`, `result`, and
+// `direction` field values from /api/toar/* endpoints. Verbatim names
+// from cuepilot-agent → tokens here. Density-safe (color only, no rem).
+
+/**
+ * Bloom-level color scale. Maps the backend `bloom_level` enum
+ * (`NOT_ASSESSED` → `MASTERS`) to a 6-step accent palette. Used by
+ * MasteryBar, MasteryGrid, ConceptVerdict cards, and the Gap Map.
+ */
+export const BloomColor = {
+  NotAssessed: "var(--bbui-bloom-not-assessed)",
+  Aware: "var(--bbui-bloom-aware)",
+  Understands: "var(--bbui-bloom-understands)",
+  Applies: "var(--bbui-bloom-applies)",
+  Analyzes: "var(--bbui-bloom-analyzes)",
+  Masters: "var(--bbui-bloom-masters)",
+} as const;
+
+export type BloomColorToken = (typeof BloomColor)[keyof typeof BloomColor];
+
+/** Backend `bloom_level` enum — verbatim from toar_models.py. */
+export const BloomLevel = {
+  NotAssessed: "NOT_ASSESSED",
+  Aware: "AWARE",
+  Understands: "UNDERSTANDS",
+  Applies: "APPLIES",
+  Analyzes: "ANALYZES",
+  Masters: "MASTERS",
+} as const;
+
+export type BloomLevelValue = (typeof BloomLevel)[keyof typeof BloomLevel];
+
+/** Map a backend `bloom_level` value to its color token. */
+export function bloomColorFor(level: BloomLevelValue | string): BloomColorToken {
+  switch (level) {
+    case BloomLevel.Masters:
+      return BloomColor.Masters;
+    case BloomLevel.Analyzes:
+      return BloomColor.Analyzes;
+    case BloomLevel.Applies:
+      return BloomColor.Applies;
+    case BloomLevel.Understands:
+      return BloomColor.Understands;
+    case BloomLevel.Aware:
+      return BloomColor.Aware;
+    default:
+      return BloomColor.NotAssessed;
+  }
+}
+
+/**
+ * Map a 0–100 mastery/readiness `score` to its bloom band — same
+ * thresholds the backend uses (NOT_ASSESSED 0–19, AWARE 20–39,
+ * UNDERSTANDS 40–59, APPLIES 60–79, ANALYZES 80–89, MASTERS 90–100).
+ */
+export function bloomLevelForScore(score: number): BloomLevelValue {
+  if (score >= 90) return BloomLevel.Masters;
+  if (score >= 80) return BloomLevel.Analyzes;
+  if (score >= 60) return BloomLevel.Applies;
+  if (score >= 40) return BloomLevel.Understands;
+  if (score >= 20) return BloomLevel.Aware;
+  return BloomLevel.NotAssessed;
+}
+
+/** Convenience: 0–100 score → color token in one call. */
+export function scoreColor(score: number): BloomColorToken {
+  return bloomColorFor(bloomLevelForScore(score));
+}
+
+/**
+ * Evaluation result color map — bound to backend
+ * `evaluation_complete.result` enum. Used by EvaluationStream
+ * result chips and SessionSummary tallies.
+ */
+export const EvaluationResultColor = {
+  correct: BloomColor.Masters,
+  partial: BloomColor.Applies,
+  incorrect: "var(--bbui-color-error)",
+  skipped: "var(--bbui-color-subtlest)",
+} as const;
+
+export type EvaluationResultValue = keyof typeof EvaluationResultColor;
+
+/**
+ * Mastery delta direction — bound to backend `mastery_update.direction`
+ * and `ConceptDelta.direction`. Used by MasteryBar arrow flash.
+ */
+export const DirectionColor = {
+  up: BloomColor.Masters,
+  down: "var(--bbui-color-error)",
+  unchanged: "var(--bbui-color-subtlest)",
+} as const;
+
+export type DirectionValue = keyof typeof DirectionColor;
+
+/**
+ * Persona accent ring colors — Nova / Maya / Jordan from the live
+ * copilot persona system. Allocated as fixed hue slots so any new
+ * persona simply maps to one of the four slots.
+ */
+export const PersonaAccent = {
+  Nova: "var(--bbui-persona-nova)",
+  Maya: "var(--bbui-persona-maya)",
+  Jordan: "var(--bbui-persona-jordan)",
+  Custom: "var(--bbui-persona-custom)",
+} as const;
+
+export type PersonaAccentToken = (typeof PersonaAccent)[keyof typeof PersonaAccent];

@@ -81,6 +81,24 @@ export type {
 export { AccentColor } from "./tokens";
 export type { AccentColorToken } from "./tokens";
 
+export {
+  BloomColor,
+  BloomLevel,
+  bloomColorFor,
+  bloomLevelForScore,
+  scoreColor,
+  EvaluationResultColor,
+  DirectionColor,
+  PersonaAccent,
+} from "./tokens";
+export type {
+  BloomColorToken,
+  BloomLevelValue,
+  EvaluationResultValue,
+  DirectionValue,
+  PersonaAccentToken,
+} from "./tokens";
+
 export { Elevation } from "./tokens";
 export type { ElevationToken } from "./tokens";
 
@@ -95,6 +113,10 @@ export type { ZIndexToken } from "./tokens";
 
 export { IconSize } from "./tokens";
 export type { IconSizeToken } from "./tokens";
+
+// Contexts
+export { PageSizeProvider, usePageSize } from "./contexts";
+export type { PageSize, PageSizeProviderProps } from "./contexts";
 
 // Compositions
 export {
@@ -122,6 +144,7 @@ export {
   Table,
   InlineEdit,
   GlassCard,
+  PageSizeControl,
 } from "./compositions";
 export type {
   NavbarProps,
@@ -172,6 +195,7 @@ export type {
   GlassCardProps,
   GlassCardAction,
   GlassCardMedia,
+  PageSizeControlProps,
 } from "./compositions";
 
 // Hooks
@@ -185,3 +209,6 @@ export type { Responsive } from "./hooks";
 
 export { useTheme } from "./hooks";
 export type { Theme } from "./hooks";
+
+export { useSSEStream, parseSSEStream, streamSSE } from "./hooks";
+export type { UseSSEStreamOptions, UseSSEStreamResult } from "./hooks";

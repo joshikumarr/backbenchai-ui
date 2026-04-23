@@ -87,6 +87,20 @@ const css = `
   --bbui-accent-reserved: #3b82f6;
   --bbui-accent-cleaning: #c084fc;
 
+  /* ── TOAR: Bloom-level scale (light) ── */
+  --bbui-bloom-not-assessed: #94a3b8;     /* slate-400 */
+  --bbui-bloom-aware:        #ef4444;     /* red-500 */
+  --bbui-bloom-understands:  #f97316;     /* orange-500 */
+  --bbui-bloom-applies:      #eab308;     /* yellow-500 */
+  --bbui-bloom-analyzes:     #22c55e;     /* green-500 */
+  --bbui-bloom-masters:      #15803d;     /* green-700 */
+
+  /* ── TOAR: Persona accents (light) ── */
+  --bbui-persona-nova:   #6366f1;         /* indigo-500 */
+  --bbui-persona-maya:   #ec4899;         /* pink-500 */
+  --bbui-persona-jordan: #14b8a6;         /* teal-500 */
+  --bbui-persona-custom: #c084fc;         /* purple-400 */
+
   /* ── Shadows ── */
   --bbui-shadow-ambient: 0 40px 60px -15px rgba(19,27,46,0.04);
   --bbui-shadow-raised: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.06);
@@ -176,6 +190,20 @@ const css = `
   --bbui-accent-reserved: #66dd8b;
   --bbui-accent-cleaning: #c084fc;
 
+  /* ── TOAR: Bloom-level scale (dark — slightly lifted for contrast) ── */
+  --bbui-bloom-not-assessed: #64748b;     /* slate-500 */
+  --bbui-bloom-aware:        #fb7185;     /* rose-400 */
+  --bbui-bloom-understands:  #fb923c;     /* orange-400 */
+  --bbui-bloom-applies:      #facc15;     /* yellow-400 */
+  --bbui-bloom-analyzes:     #4ade80;     /* green-400 */
+  --bbui-bloom-masters:      #6ee591;     /* emerald glow (matches dark brand) */
+
+  /* ── TOAR: Persona accents (dark — lifted) ── */
+  --bbui-persona-nova:   #818cf8;         /* indigo-400 */
+  --bbui-persona-maya:   #f472b6;         /* pink-400 */
+  --bbui-persona-jordan: #2dd4bf;         /* teal-400 */
+  --bbui-persona-custom: #d8b4fe;         /* purple-300 */
+
   /* ── Shadows: tonal layering, suppress most shadows ── */
   --bbui-shadow-ambient: none;
   --bbui-shadow-raised: none;
@@ -255,6 +283,16 @@ const css = `
     --bbui-accent-maintenance: #fb923c;
     --bbui-accent-reserved: #66dd8b;
     --bbui-accent-cleaning: #c084fc;
+    --bbui-bloom-not-assessed: #64748b;
+    --bbui-bloom-aware: #fb7185;
+    --bbui-bloom-understands: #fb923c;
+    --bbui-bloom-applies: #facc15;
+    --bbui-bloom-analyzes: #4ade80;
+    --bbui-bloom-masters: #6ee591;
+    --bbui-persona-nova: #818cf8;
+    --bbui-persona-maya: #f472b6;
+    --bbui-persona-jordan: #2dd4bf;
+    --bbui-persona-custom: #d8b4fe;
     --bbui-shadow-ambient: none;
     --bbui-shadow-raised: none;
     --bbui-shadow-dropdown: 0 4px 12px rgba(0,0,0,0.5);
@@ -270,6 +308,21 @@ const css = `
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; }
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+/* ── Page size (density) ──
+   All spacing/font tokens are rem-based, so animating the root font-size
+   reflows every dimension off it for free. The curve is the standard
+   "decelerate" easing — feels like the layout is settling, not snapping. */
+html {
+  font-size: 16px;
+  transition: font-size 320ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+html[data-page-size="small"]  { font-size: 14px; }
+html[data-page-size="medium"] { font-size: 16px; }
+html[data-page-size="large"]  { font-size: 18px; }
+@media (prefers-reduced-motion: reduce) {
+  html { transition: none; }
+}
 body {
   font-family: var(--bbui-font-body);
   font-size: 1rem;
@@ -295,9 +348,14 @@ button, a, input, select, textarea {
 ::selection { background: var(--bbui-selection-bg); color: var(--bbui-color-on-surface); }
 `;
 
-if (typeof document !== "undefined" && !document.getElementById(STYLE_ID)) {
-  const style = document.createElement("style");
-  style.id = STYLE_ID;
-  style.textContent = css;
-  document.head.appendChild(style);
+if (typeof document !== "undefined") {
+  const existing = document.getElementById(STYLE_ID);
+  if (existing) {
+    existing.textContent = css;
+  } else {
+    const style = document.createElement("style");
+    style.id = STYLE_ID;
+    style.textContent = css;
+    document.head.appendChild(style);
+  }
 }
