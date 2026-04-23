@@ -1219,6 +1219,7 @@ const sr = X(
           src: r,
           alt: t ?? "",
           onError: () => g(!0),
+          referrerPolicy: "no-referrer",
           style: { width: "100%", height: "100%", objectFit: "cover" }
         }
       ) : /* @__PURE__ */ e(
