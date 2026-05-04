@@ -764,6 +764,15 @@ export declare const LetterSpacing: {
 
 export declare type LetterSpacingToken = (typeof LetterSpacing)[keyof typeof LetterSpacing];
 
+export declare const LikertScale: default_2.ForwardRefExoticComponent<LikertScaleProps & default_2.RefAttributes<HTMLDivElement>>;
+
+export declare interface LikertScaleProps {
+    value?: number;
+    onChange: (value: number) => void;
+    /** Labels for each option (length defines option count, default 5) */
+    labels?: string[];
+}
+
 export declare const LinkButton: default_2.ForwardRefExoticComponent<LinkButtonProps & default_2.RefAttributes<HTMLAnchorElement>>;
 
 export declare interface LinkButtonProps extends default_2.AnchorHTMLAttributes<HTMLAnchorElement> {
@@ -976,6 +985,24 @@ export declare type Responsive<T> = T | {
     tablet?: T;
     desktop?: T;
 };
+
+export declare interface RevealStepItem {
+    id?: string;
+    icon: default_2.ReactNode;
+    label: string;
+    description?: string;
+    meta?: default_2.ReactNode;
+}
+
+export declare const RevealSteps: default_2.ForwardRefExoticComponent<RevealStepsProps & default_2.RefAttributes<HTMLDivElement>>;
+
+export declare interface RevealStepsProps {
+    items: RevealStepItem[];
+    onComplete?: () => void;
+    finishedLabel?: default_2.ReactNode;
+    /** Scroll-area max height (default 16rem) */
+    maxHeight?: string;
+}
 
 /** Convenience: 0–100 score → color token in one call. */
 export declare function scoreColor(score: number): BloomColorToken;

@@ -145,6 +145,8 @@ export {
   InlineEdit,
   GlassCard,
   PageSizeControl,
+  RevealSteps,
+  LikertScale,
 } from "./compositions";
 export type {
   NavbarProps,
@@ -196,6 +198,9 @@ export type {
   GlassCardAction,
   GlassCardMedia,
   PageSizeControlProps,
+  RevealStepsProps,
+  RevealStepItem,
+  LikertScaleProps,
 } from "./compositions";
 
 // Hooks

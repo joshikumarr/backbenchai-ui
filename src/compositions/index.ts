@@ -82,3 +82,9 @@ export type { GlassCardProps, GlassCardAction, GlassCardMedia } from "./GlassCar
 
 export { PageSizeControl } from "./PageSizeControl";
 export type { PageSizeControlProps } from "./PageSizeControl";
+
+export { RevealSteps } from "./RevealSteps";
+export type { RevealStepsProps, RevealStepItem } from "./RevealSteps";
+
+export { LikertScale } from "./LikertScale";
+export type { LikertScaleProps } from "./LikertScale";
