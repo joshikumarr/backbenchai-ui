@@ -1,6 +1,7 @@
 import { default as default_2 } from 'react';
 import { ForwardRefExoticComponent } from 'react';
 import { JSX as JSX_2 } from 'react/jsx-runtime';
+import { ReactNode } from 'react';
 import { RefAttributes } from 'react';
 
 export declare const AccentColor: {
@@ -215,18 +216,31 @@ export declare type BorderWidthToken = (typeof BorderWidth)[keyof typeof BorderW
 
 export declare const Box: default_2.ForwardRefExoticComponent<BoxProps & default_2.RefAttributes<HTMLElement>>;
 
+/**
+ * Padding and margin props on Box accept either a single SpaceToken (applied
+ * at every breakpoint) or a Responsive<SpaceToken> object that varies the
+ * value across mobile / tablet / desktop:
+ *
+ * ```tsx
+ * <Box padding={Spacing.Large} />                           // always Large
+ * <Box padding={{ mobile: Spacing.Medium, desktop: Spacing.XLarge }} />
+ * ```
+ *
+ * Resolution happens at render via useResponsiveValue, which subscribes to
+ * window.resize. SSR-safe (defaults to "desktop" when window is undefined).
+ */
 export declare interface BoxProps extends default_2.HTMLAttributes<HTMLElement> {
     as?: AllowedElements;
-    padding?: SpaceToken;
-    paddingBlock?: SpaceToken;
-    paddingBlockStart?: SpaceToken;
-    paddingBlockEnd?: SpaceToken;
-    paddingInline?: SpaceToken;
-    paddingInlineStart?: SpaceToken;
-    paddingInlineEnd?: SpaceToken;
-    marginBlock?: SpaceToken;
-    marginBlockStart?: SpaceToken;
-    marginBlockEnd?: SpaceToken;
+    padding?: Responsive<SpaceToken>;
+    paddingBlock?: Responsive<SpaceToken>;
+    paddingBlockStart?: Responsive<SpaceToken>;
+    paddingBlockEnd?: Responsive<SpaceToken>;
+    paddingInline?: Responsive<SpaceToken>;
+    paddingInlineStart?: Responsive<SpaceToken>;
+    paddingInlineEnd?: Responsive<SpaceToken>;
+    marginBlock?: Responsive<SpaceToken>;
+    marginBlockStart?: Responsive<SpaceToken>;
+    marginBlockEnd?: Responsive<SpaceToken>;
     backgroundColor?: BackgroundColorToken;
     borderRadius?: BorderRadiusToken;
     borderColor?: BorderColorToken;
@@ -635,6 +649,27 @@ export declare interface HeroSectionProps {
     breakpoint?: number;
 }
 
+/**
+ * Hide — inverse of Show. Renders children EXCEPT when the rule matches.
+ *
+ * ```tsx
+ * <Hide on="mobile"><DesktopOnlyTooltip /></Hide>
+ * <Hide above="tablet"><MobileOnlyDrawer /></Hide>
+ * <Hide below="desktop"><FullWidthHero /></Hide>
+ * ```
+ */
+export declare function Hide({ on, above, below, children }: HideProps): JSX_2.Element | null;
+
+export declare interface HideProps {
+    /** Hide children when the current breakpoint is one of these. */
+    on?: BreakpointName | BreakpointName[];
+    /** Hide children when viewport is at or above this breakpoint. */
+    above?: BreakpointName;
+    /** Hide children when viewport is below this breakpoint. */
+    below?: BreakpointName;
+    children: ReactNode;
+}
+
 export declare const Icon: default_2.ForwardRefExoticComponent<IconProps & default_2.RefAttributes<HTMLSpanElement>>;
 
 export declare const IconButton: default_2.ForwardRefExoticComponent<IconButtonProps & default_2.RefAttributes<HTMLButtonElement>>;
@@ -833,7 +868,30 @@ export declare interface ModalProps {
     title?: string;
     children?: default_2.ReactNode;
     footer?: default_2.ReactNode;
+    /**
+     * Modal width. Accepts a ModalSize token or any CSS length string
+     * (e.g. "640px", "70%"). Default ModalSize.Medium (512px). The inner
+     * `width: 100%` keeps narrow viewports from overflowing regardless of
+     * the size chosen.
+     */
+    size?: ModalSizeToken | string;
 }
+
+/**
+ * Modal width tokens — six sizes from XSmall (confirm dialogs) to Full
+ * (near-fullscreen overlays). Default is Medium. Accepts any CSS length
+ * if a custom size is needed.
+ */
+export declare const ModalSize: {
+    readonly XSmall: "320px";
+    readonly Small: "416px";
+    readonly Medium: "512px";
+    readonly Large: "704px";
+    readonly XLarge: "960px";
+    readonly Full: "min(96vw, 1440px)";
+};
+
+export declare type ModalSizeToken = (typeof ModalSize)[keyof typeof ModalSize];
 
 export declare const Navbar: default_2.ForwardRefExoticComponent<NavbarProps & default_2.RefAttributes<HTMLElement>>;
 
@@ -1069,6 +1127,41 @@ export declare interface SelectProps extends Omit<default_2.SelectHTMLAttributes
     paddingInline?: SpaceToken;
     fontSize?: FontSizeToken;
     color?: TextColorToken;
+}
+
+/**
+ * Show — conditional render based on the current breakpoint.
+ *
+ * ```tsx
+ * <Show on="mobile"><MobileNav /></Show>
+ * <Show on={["tablet", "desktop"]}><DesktopHeader /></Show>
+ * <Show above="tablet"><SideRail /></Show>
+ * <Show below="desktop"><MobileBanner /></Show>
+ * ```
+ *
+ * Renders nothing on the server and on the initial client render until
+ * useBreakpoint resolves. For above-the-fold content where flicker matters,
+ * prefer CSS media queries.
+ */
+export declare function Show({ on, above, below, children }: ShowProps): JSX_2.Element | null;
+
+export declare interface ShowProps {
+    /**
+     * Render children only when the current breakpoint is one of these.
+     * Mutually exclusive with `above` / `below`.
+     */
+    on?: BreakpointName | BreakpointName[];
+    /**
+     * Render children only when the viewport is at or above this breakpoint.
+     * `above="tablet"` means: tablet OR desktop.
+     */
+    above?: BreakpointName;
+    /**
+     * Render children only when the viewport is below this breakpoint.
+     * `below="desktop"` means: mobile OR tablet.
+     */
+    below?: BreakpointName;
+    children: ReactNode;
 }
 
 export declare const Sidebar: default_2.ForwardRefExoticComponent<SidebarProps & default_2.RefAttributes<HTMLElement>>;

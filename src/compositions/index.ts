@@ -28,8 +28,8 @@ export type { TabsProps, Tab } from "./Tabs";
 export { Header } from "./Header";
 export type { HeaderProps, Breadcrumb } from "./Header";
 
-export { Modal } from "./Modal";
-export type { ModalProps } from "./Modal";
+export { Modal, ModalSize } from "./Modal";
+export type { ModalProps, ModalSizeToken } from "./Modal";
 
 export { DropdownMenu } from "./DropdownMenu";
 export type { DropdownMenuProps } from "./DropdownMenu";

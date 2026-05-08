@@ -17,12 +17,35 @@ import {
   ZIndex,
 } from "../tokens";
 
+/**
+ * Modal width tokens — six sizes from XSmall (confirm dialogs) to Full
+ * (near-fullscreen overlays). Default is Medium. Accepts any CSS length
+ * if a custom size is needed.
+ */
+export const ModalSize = {
+  XSmall: "320px",
+  Small: "416px",
+  Medium: "512px",
+  Large: "704px",
+  XLarge: "960px",
+  Full: "min(96vw, 1440px)",
+} as const;
+
+export type ModalSizeToken = (typeof ModalSize)[keyof typeof ModalSize];
+
 export interface ModalProps {
   open: boolean;
   onClose: () => void;
   title?: string;
   children?: React.ReactNode;
   footer?: React.ReactNode;
+  /**
+   * Modal width. Accepts a ModalSize token or any CSS length string
+   * (e.g. "640px", "70%"). Default ModalSize.Medium (512px). The inner
+   * `width: 100%` keeps narrow viewports from overflowing regardless of
+   * the size chosen.
+   */
+  size?: ModalSizeToken | string;
 }
 
 const CloseIcon = () => (
@@ -41,7 +64,7 @@ const CloseIcon = () => (
 );
 
 export const Modal = forwardRef<HTMLDivElement, ModalProps>(
-  ({ open, onClose, title, children, footer }, ref) => {
+  ({ open, onClose, title, children, footer, size = ModalSize.Medium }, ref) => {
     const handleKeyDown = useCallback(
       (e: KeyboardEvent) => {
         if (e.key === "Escape") onClose();
@@ -87,7 +110,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
           overflow="hidden"
           style={{
             width: "100%",
-            maxWidth: "32rem",
+            maxWidth: size,
             maxHeight: "85vh",
             display: "flex",
             flexDirection: "column",

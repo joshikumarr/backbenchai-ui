@@ -1,6 +1,12 @@
 export { Box } from "./Box";
 export type { BoxProps } from "./Box";
 
+export { Show } from "./Show";
+export type { ShowProps } from "./Show";
+
+export { Hide } from "./Hide";
+export type { HideProps } from "./Hide";
+
 export { Stack } from "./Stack";
 export type { StackProps } from "./Stack";
 

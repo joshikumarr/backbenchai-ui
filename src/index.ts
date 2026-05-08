@@ -24,6 +24,8 @@ export {
   Checkbox,
   Divider,
   Stepper,
+  Show,
+  Hide,
 } from "./primitives";
 export type {
   BoxProps,
@@ -54,6 +56,8 @@ export type {
   CheckboxProps,
   DividerProps,
   StepperProps,
+  ShowProps,
+  HideProps,
 } from "./primitives";
 
 // Tokens
@@ -129,6 +133,7 @@ export {
   Tabs,
   Header,
   Modal,
+  ModalSize,
   DropdownMenu,
   DropdownCheckboxMenu,
   SelectField,
@@ -169,6 +174,7 @@ export type {
   HeaderProps,
   Breadcrumb,
   ModalProps,
+  ModalSizeToken,
   DropdownMenuProps,
   DropdownCheckboxMenuProps,
   CheckboxGroup,
