@@ -1,42 +1,37 @@
 /**
- * @backbench/ui — NestOS Design System Base Styles
+ * @backbench/ui — Base styles
  *
- * Import in your app entry:
+ * Import in your app entry once:
  *   import "@backbench/ui/styles.css";
  *
- * This provides:
- *   1. SF Pro font loading (system font stack fallback)
- *   2. CSS reset (modern minimal)
- *   3. NestOS theme defaults (surface background, on-surface text)
- *   4. Spinner keyframe animation
- *   5. Focus-visible ring for accessibility
- *   6. Smooth scrolling & antialiasing
+ * Contents:
+ *   1. CSS reset (modern, minimal)
+ *   2. html sizing + scroll behavior, density curve via [data-page-size]
+ *   3. body / heading hookups to --bbui-* tokens (font, color, surface)
+ *   4. img / svg / form-control defaults
+ *   5. :focus-visible accessibility ring
+ *   6. Webkit scrollbar styling (token-driven)
+ *   7. Selection color (token-driven)
+ *
+ * What this file does NOT contain:
+ *   - Any --bbui-* token *values*. Tokens are defined by the consuming app
+ *     in its own CSS (typically src/index.css), with both :root (light) and
+ *     [data-theme="dark"] (dark) blocks. The library only references tokens
+ *     here; it does not set them.
+ *
+ *   - Tailwind directives or utility classes.
+ *
+ * Required tokens (consuming app must define):
+ *   --bbui-font-display, --bbui-font-body
+ *   --bbui-color-on-surface, --bbui-color-primary
+ *   --bbui-bg-surface
+ *   --bbui-scrollbar-thumb, --bbui-scrollbar-thumb-hover
+ *   --bbui-selection-bg
+ *   (...plus the full --bbui-color-* / --bbui-bg-* / --bbui-border-* set
+ *   consumed by individual primitives — see README for the canonical list.)
  */
 
-/* ── SF Pro Font Stack ───────────────────────────────────────────────
-   SF Pro is Apple's system font. On macOS/iOS it's available natively.
-   On other platforms, the fallback chain provides similar sans-serif.
-   To use SF Pro on Windows/Linux, self-host the .woff2 files:
-     @font-face { font-family: 'SF Pro Display'; src: url(...); }
-   ─────────────────────────────────────────────────────────────────── */
-
-:root {
-  /* ── Theme tokens as CSS custom properties (optional, for consumer CSS use) ── */
-  --bbui-font-display: 'SF Pro Display', 'SF Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  --bbui-font-body: 'SF Pro Text', 'SF Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-
-  --bbui-color-surface: #faf8ff;
-  --bbui-color-on-surface: #131b2e;
-  --bbui-color-primary: #006e2f;
-  --bbui-color-primary-container: #22c55e;
-
-  --bbui-radius-default: 1rem;
-  --bbui-radius-full: 9999px;
-
-  --bbui-shadow-ambient: 0 40px 60px -15px rgba(19, 27, 46, 0.04);
-}
-
-/* ── Modern CSS Reset ────────────────────────────────────────────── */
+/* ── Reset ────────────────────────────────────────────────────────── */
 
 *,
 *::before,
@@ -52,12 +47,27 @@ html {
   scroll-behavior: smooth;
 }
 
+/* ── Page density ──
+   All bbui spacing/font tokens are rem-based, so animating root font-size
+   reflows every dimension off it. Curve is a "decelerate" easing — feels
+   like the layout settles, not snaps. Toggle via html[data-page-size]. */
+html {
+  font-size: 16px;
+  transition: font-size 320ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+html[data-page-size="small"]  { font-size: 14px; }
+html[data-page-size="medium"] { font-size: 16px; }
+html[data-page-size="large"]  { font-size: 18px; }
+@media (prefers-reduced-motion: reduce) {
+  html { transition: none; }
+}
+
 body {
   font-family: var(--bbui-font-body);
   font-size: 1rem;
   line-height: 1.5;
   color: var(--bbui-color-on-surface);
-  background-color: var(--bbui-color-surface);
+  background-color: var(--bbui-bg-surface);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -80,19 +90,18 @@ a {
   color: inherit;
 }
 
-/* ── Focus-Visible Ring ──────────────────────────────────────────── */
+/* ── Focus-visible ring ──────────────────────────────────────────── */
 
 :focus-visible {
   outline: 2px solid var(--bbui-color-primary);
   outline-offset: 2px;
 }
 
-/* Suppress focus ring for mouse/touch interactions */
 :focus:not(:focus-visible) {
   outline: none;
 }
 
-/* ── Scrollbar Styling (Webkit) ──────────────────────────────────── */
+/* ── Scrollbar (Webkit) ──────────────────────────────────────────── */
 
 ::-webkit-scrollbar {
   width: 6px;
@@ -104,23 +113,28 @@ a {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(19, 27, 46, 0.15);
+  background: var(--bbui-scrollbar-thumb);
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(19, 27, 46, 0.25);
+  background: var(--bbui-scrollbar-thumb-hover);
 }
 
-/* ── Transitions ─────────────────────────────────────────────────── */
+/* ── Interactive transitions ─────────────────────────────────────── */
 
 button, a, input, select, textarea {
-  transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease, box-shadow 150ms ease, opacity 150ms ease;
+  transition:
+    background-color 200ms ease,
+    color 200ms ease,
+    border-color 200ms ease,
+    box-shadow 200ms ease,
+    opacity 200ms ease;
 }
 
-/* ── Selection Color ─────────────────────────────────────────────── */
+/* ── Selection ───────────────────────────────────────────────────── */
 
 ::selection {
-  background: rgba(34, 197, 94, 0.2);
+  background: var(--bbui-selection-bg);
   color: var(--bbui-color-on-surface);
 }

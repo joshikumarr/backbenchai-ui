@@ -1,6 +1,3 @@
-// Base styles — injected at runtime via <style> tag, no separate CSS import needed
-import "./injectStyles";
-
 // Primitives
 export {
   Box,
