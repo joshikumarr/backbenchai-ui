@@ -339,6 +339,51 @@ export declare interface CheckboxProps extends Omit<default_2.InputHTMLAttribute
     size?: "small" | "medium" | "large";
 }
 
+/**
+ * Selectable pill. Lighter and tighter than `<Button borderRadius={Full}>` —
+ * use for multi-select chip rows, category filters, and tag pickers. Renders
+ * as a `<button>` with `aria-pressed` reflecting `selected`.
+ *
+ * Example:
+ *   <Chip selected={isOn} onClick={toggle}>PG</Chip>
+ *   <Chip appearance="outlined" showCheckWhenSelected ...>Pet-friendly</Chip>
+ *   <Chip icon={<Icon name="restaurant" />}>Food</Chip>
+ */
+export declare const Chip: default_2.ForwardRefExoticComponent<ChipProps & default_2.RefAttributes<HTMLButtonElement>>;
+
+/**
+ * Visual treatment.
+ *   filled    — solid Subtle background when unselected, Brand when selected.
+ *   outlined  — transparent + Outline border when unselected, Brand when selected.
+ */
+export declare type ChipAppearance = "filled" | "outlined";
+
+/**
+ * Padding density.
+ *   compact     — XSmall block, Medium inline. Default. Hugs the label.
+ *   comfortable — Small block, MediumLarge inline. Roomier; close to the
+ *                 pre-Chip Button-as-chip dimensions.
+ */
+export declare type ChipDensity = "compact" | "comfortable";
+
+export declare interface ChipProps extends Omit<default_2.ButtonHTMLAttributes<HTMLButtonElement>, "color"> {
+    /** Whether the chip is in the selected/active state. */
+    selected?: boolean;
+    /** Visual treatment. Default: "filled". */
+    appearance?: ChipAppearance;
+    /** Padding density. Default: "compact". */
+    density?: ChipDensity;
+    /** Label font weight. Default: FontWeight.Medium. */
+    fontWeight?: FontWeightToken;
+    /** Label font size. Default: FontSize.XSmall. */
+    fontSize?: FontSizeToken;
+    /** Optional leading node (icon, avatar, etc.) rendered before the label. */
+    icon?: default_2.ReactNode;
+    /** When true, renders a Material check icon before the label while selected. */
+    showCheckWhenSelected?: boolean;
+    children?: default_2.ReactNode;
+}
+
 export declare const ContainerWidth: {
     readonly Small: "640px";
     readonly Medium: "768px";

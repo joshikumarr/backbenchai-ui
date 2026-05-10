@@ -37,6 +37,9 @@ export type { IconProps } from "./Icon";
 export { Badge } from "./Badge";
 export type { BadgeProps, BadgeVariant } from "./Badge";
 
+export { Chip } from "./Chip";
+export type { ChipProps, ChipAppearance, ChipDensity } from "./Chip";
+
 export { Toggle } from "./Toggle";
 export type { ToggleProps } from "./Toggle";
 
