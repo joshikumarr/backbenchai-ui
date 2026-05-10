@@ -1,8 +1,6 @@
 import { default as default_2 } from 'react';
-import { ForwardRefExoticComponent } from 'react';
 import { JSX as JSX_2 } from 'react/jsx-runtime';
 import { ReactNode } from 'react';
-import { RefAttributes } from 'react';
 
 export declare const AccentColor: {
     readonly Occupied: "var(--bbui-accent-occupied)";
@@ -192,14 +190,14 @@ export declare type BorderColorToken = (typeof BorderColor)[keyof typeof BorderC
 
 export declare const BorderRadius: {
     readonly None: "0";
-    readonly Small: "0.25rem";
-    readonly Medium: "0.375rem";
-    readonly Large: "0.5rem";
-    readonly XLarge: "0.75rem";
-    readonly XXLarge: "1rem";
-    readonly XXXLarge: "1.5rem";
-    readonly Huge: "2rem";
-    readonly XHuge: "3rem";
+    readonly Small: "4px";
+    readonly Medium: "6px";
+    readonly Large: "8px";
+    readonly XLarge: "12px";
+    readonly XXLarge: "16px";
+    readonly XXXLarge: "24px";
+    readonly Huge: "32px";
+    readonly XHuge: "48px";
     readonly Full: "9999px";
 };
 
@@ -304,7 +302,7 @@ export declare interface CardProps {
     padding?: SpaceToken;
     /** Card background (default: BackgroundColor.Default) */
     backgroundColor?: BackgroundColorToken;
-    /** Corner radius (default: BorderRadius.XXLarge / 1rem) */
+    /** Corner radius (default: BorderRadius.XXLarge / 16px) */
     borderRadius?: BorderRadiusToken;
     /** Border color (default: BorderColor.Default) */
     borderColor?: BorderColorToken;
@@ -360,9 +358,8 @@ export declare type ChipAppearance = "filled" | "outlined";
 
 /**
  * Padding density.
- *   compact     — XSmall block, Medium inline. Default. Hugs the label.
- *   comfortable — Small block, MediumLarge inline. Roomier; close to the
- *                 pre-Chip Button-as-chip dimensions.
+ *   compact     — XXSmall block, Small inline. Default. Hugs the label tight.
+ *   comfortable — XSmall block, Medium inline. Roomier; for hero/nav rows.
  */
 export declare type ChipDensity = "compact" | "comfortable";
 
@@ -482,26 +479,16 @@ export declare const FontFamily: {
 export declare type FontFamilyToken = (typeof FontFamily)[keyof typeof FontFamily];
 
 export declare const FontSize: {
-    /** 0.625rem / 10px */
-    readonly Micro: "0.625rem";
-    /** 0.75rem / 12px */
-    readonly XXSmall: "0.75rem";
-    /** 0.875rem / 14px */
-    readonly XSmall: "0.875rem";
-    /** 1rem / 16px */
-    readonly Small: "1rem";
-    /** 1.125rem / 18px */
-    readonly Medium: "1.125rem";
-    /** 1.25rem / 20px */
-    readonly Large: "1.25rem";
-    /** 1.5rem / 24px */
-    readonly XLarge: "1.5rem";
-    /** 1.875rem / 30px */
-    readonly XXLarge: "1.875rem";
-    /** 2.25rem / 36px */
-    readonly XXXLarge: "2.25rem";
-    /** 3rem / 48px */
-    readonly Huge: "3rem";
+    readonly Micro: "10px";
+    readonly XXSmall: "12px";
+    readonly XSmall: "14px";
+    readonly Small: "16px";
+    readonly Medium: "18px";
+    readonly Large: "20px";
+    readonly XLarge: "24px";
+    readonly XXLarge: "30px";
+    readonly XXXLarge: "36px";
+    readonly Huge: "48px";
 };
 
 export declare type FontSizeToken = (typeof FontSize)[keyof typeof FontSize];
@@ -663,9 +650,9 @@ export declare interface HeroSectionProps {
     image?: HeroImage;
     /** Custom content below subtitle, above actions */
     children?: default_2.ReactNode;
-    /** Title font size on narrow screens (default: FontSize.XXXLarge / 2.25rem) */
+    /** Title font size on narrow screens (default: FontSize.XXXLarge / 36px) */
     titleSize?: FontSizeToken;
-    /** Title font size on wide screens (default: FontSize.Huge / 3rem) */
+    /** Title font size on wide screens (default: FontSize.Huge / 48px) */
     titleSizeLarge?: FontSizeToken;
     titleWeight?: FontWeightToken;
     titleColor?: TextColorToken;
@@ -679,7 +666,7 @@ export declare interface HeroSectionProps {
     secondaryCtaWeight?: FontWeightToken;
     /** Gap between CTA buttons (default: Spacing.MediumLarge) */
     ctaGap?: SpaceToken;
-    /** Vertical padding for the section (default: Spacing.Size7 / 7rem) */
+    /** Vertical padding for the section (default: Spacing.Size7 / 112px) */
     paddingBlock?: SpaceToken;
     /** Horizontal padding (default: Spacing.XXXLarge) */
     paddingInline?: SpaceToken;
@@ -736,11 +723,11 @@ export declare interface IconProps extends default_2.HTMLAttributes<HTMLSpanElem
 }
 
 export declare const IconSize: {
-    readonly Small: "1rem";
-    readonly Medium: "1.25rem";
-    readonly Large: "1.5rem";
-    readonly XLarge: "2rem";
-    readonly XXLarge: "2.5rem";
+    readonly Small: "16px";
+    readonly Medium: "20px";
+    readonly Large: "24px";
+    readonly XLarge: "32px";
+    readonly XXLarge: "40px";
 };
 
 export declare type IconSizeToken = (typeof IconSize)[keyof typeof IconSize];
@@ -990,42 +977,6 @@ export declare interface NavLink {
     path: string;
 }
 
-/**
- * Three discrete density modes. Each maps to a base `font-size` on `<html>`.
- * Because every spacing/font token in the lib is rem-based, swapping the root
- * font-size rescales the entire UI — sidebar, header, content, gauge — at once.
- */
-export declare type PageSize = "small" | "medium" | "large";
-
-declare interface PageSizeContextValue {
-    pageSize: PageSize;
-    setPageSize: (size: PageSize) => void;
-}
-
-/**
- * Three-button density switcher. Reads/writes the active page size from
- * `PageSizeProvider`, which sets `data-page-size` on `<html>` and rescales
- * every rem-based token globally (sidebar, header, content — everything).
- */
-export declare const PageSizeControl: ForwardRefExoticComponent<PageSizeControlProps & RefAttributes<HTMLDivElement>>;
-
-export declare interface PageSizeControlProps {
-    /** Optional eyebrow label rendered above the buttons */
-    label?: string;
-    /** Compact (icon-only style) layout — hides label and tightens padding */
-    compact?: boolean;
-}
-
-export declare function PageSizeProvider({ defaultSize, persist, children, }: PageSizeProviderProps): JSX_2.Element;
-
-export declare interface PageSizeProviderProps {
-    /** Initial size before user interaction (default: "medium") */
-    defaultSize?: PageSize;
-    /** Persist selection to localStorage (default: true) */
-    persist?: boolean;
-    children: default_2.ReactNode;
-}
-
 export declare const Panel: default_2.ForwardRefExoticComponent<PanelProps & default_2.RefAttributes<HTMLDivElement>>;
 
 export declare interface PanelProps {
@@ -1103,7 +1054,7 @@ export declare interface RevealStepsProps {
     items: RevealStepItem[];
     onComplete?: () => void;
     finishedLabel?: default_2.ReactNode;
-    /** Scroll-area max height (default 16rem) */
+    /** Scroll-area max height (default 256px) */
     maxHeight?: string;
 }
 
@@ -1227,9 +1178,9 @@ export declare interface SidebarProps {
     footer?: default_2.ReactNode;
     collapsed?: boolean;
     onToggleCollapse?: () => void;
-    /** Sidebar width when expanded (default: "16rem") */
+    /** Sidebar width when expanded (default: "256px") */
     width?: string;
-    /** Sidebar width when collapsed (default: "4rem") */
+    /** Sidebar width when collapsed (default: "64px") */
     collapsedWidth?: string;
     /** Active item text color (default: TextColor.Brand) */
     activeColor?: TextColorToken;
@@ -1256,42 +1207,25 @@ export declare type SpaceToken = (typeof Spacing)[keyof typeof Spacing];
  * Spacing, typography, border-radius, and sizing remain static.
  */
 export declare const Spacing: {
-    /** 0px */
     readonly None: "0";
-    /** 2px */
-    readonly XXSmall: "0.125rem";
-    /** 4px */
-    readonly XSmall: "0.25rem";
-    /** 6px */
-    readonly Small: "0.375rem";
-    /** 8px — base unit */
-    readonly Medium: "0.5rem";
-    /** 12px */
-    readonly MediumLarge: "0.75rem";
-    /** 16px */
-    readonly Large: "1rem";
-    /** 20px */
-    readonly XLarge: "1.25rem";
-    /** 24px */
-    readonly XXLarge: "1.5rem";
-    /** 32px */
-    readonly XXXLarge: "2rem";
-    /** 40px */
-    readonly Huge: "2.5rem";
-    /** 48px */
-    readonly XHuge: "3rem";
-    /** 64px */
-    readonly XXHuge: "4rem";
-    /** 80px */
-    readonly XXXHuge: "5rem";
-    /** 56px */
-    readonly Size3_5: "3.5rem";
-    /** 112px */
-    readonly Size7: "7rem";
-    /** 128px */
-    readonly Size8: "8rem";
-    /** 256px */
-    readonly Size16: "16rem";
+    readonly XXSmall: "2px";
+    readonly XSmall: "4px";
+    readonly Small: "6px";
+    /** Base unit. */
+    readonly Medium: "8px";
+    readonly MediumLarge: "12px";
+    readonly Large: "16px";
+    readonly XLarge: "20px";
+    readonly XXLarge: "24px";
+    readonly XXXLarge: "32px";
+    readonly Huge: "40px";
+    readonly XHuge: "48px";
+    readonly XXHuge: "64px";
+    readonly XXXHuge: "80px";
+    readonly Size3_5: "56px";
+    readonly Size7: "112px";
+    readonly Size8: "128px";
+    readonly Size16: "256px";
 };
 
 export declare const Spinner: default_2.ForwardRefExoticComponent<SpinnerProps & default_2.RefAttributes<HTMLSpanElement>>;
@@ -1594,8 +1528,6 @@ export declare function useBreakpoint(): BreakpointName;
  * ```
  */
 export declare function useMediaQuery(query: string): boolean;
-
-export declare function usePageSize(): PageSizeContextValue;
 
 /**
  * Hook that resolves a Responsive<T> value based on the current window width.

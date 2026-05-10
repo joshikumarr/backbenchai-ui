@@ -23,7 +23,7 @@ export interface RevealStepsProps {
   items: RevealStepItem[];
   onComplete?: () => void;
   finishedLabel?: React.ReactNode;
-  /** Scroll-area max height (default 16rem) */
+  /** Scroll-area max height (default 256px) */
   maxHeight?: string;
 }
 
@@ -34,11 +34,11 @@ const KEYFRAMES = `
 }
 `;
 
-const ICON_TILE = "2.25rem";
-const ICON_HALF = "1.125rem";
+const ICON_TILE = "36px";
+const ICON_HALF = "18px";
 
 export const RevealSteps = forwardRef<HTMLDivElement, RevealStepsProps>(
-  ({ items, onComplete, finishedLabel, maxHeight = "16rem" }, ref) => {
+  ({ items, onComplete, finishedLabel, maxHeight = "256px" }, ref) => {
     const [revealed, setRevealed] = useState<Set<number>>(() => new Set());
     const completedRef = useRef(false);
     const scrollRef = useRef<HTMLDivElement>(null);
@@ -144,7 +144,7 @@ function ScrollHint() {
 
 // ── Styles ───────────────────────────────────────────────────────────
 
-const FADE_MASK = "linear-gradient(to bottom, black 0%, black calc(100% - 2rem), transparent 100%)";
+const FADE_MASK = "linear-gradient(to bottom, black 0%, black calc(100% - 32px), transparent 100%)";
 
 const scrollAreaStyle = (maxHeight: string, allRevealed: boolean): React.CSSProperties => ({
   maxHeight,
@@ -217,7 +217,7 @@ const footerStyle: React.CSSProperties = {
   marginTop: Spacing.Large,
   display: "flex",
   justifyContent: "center",
-  minHeight: "1.25rem",
+  minHeight: "20px",
 };
 
 const hintStyle: React.CSSProperties = {

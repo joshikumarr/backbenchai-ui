@@ -35,7 +35,7 @@ export interface DropdownCheckboxMenuProps {
 }
 
 const CheckIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" style={{ width: "0.875rem", height: "0.875rem" }}>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" style={{ width: "14px", height: "14px" }}>
     <path fillRule="evenodd" d="M12.416 3.376a.75.75 0 01.208 1.04l-5 7.5a.75.75 0 01-1.154.114l-3-3a.75.75 0 011.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 011.04-.207z" clipRule="evenodd" />
   </svg>
 );
@@ -97,7 +97,7 @@ export const DropdownCheckboxMenu = forwardRef<HTMLDivElement, DropdownCheckboxM
               top: "100%",
               left: 0,
               marginTop: Spacing.XSmall,
-              minWidth: "14rem",
+              minWidth: "224px",
               zIndex: ZIndex.Dropdown,
             }}
           >
@@ -139,8 +139,8 @@ export const DropdownCheckboxMenu = forwardRef<HTMLDivElement, DropdownCheckboxM
                       >
                         <Box
                           style={{
-                            width: "1rem",
-                            height: "1rem",
+                            width: "16px",
+                            height: "16px",
                             borderRadius: BorderRadius.Small,
                             border: isChecked
                               ? "none"

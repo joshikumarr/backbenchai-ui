@@ -61,9 +61,9 @@ const SortIcon = ({ order }: { order?: SortOrder }) => (
     viewBox="0 0 16 16"
     fill="currentColor"
     style={{
-      width: "0.75rem",
-      height: "0.75rem",
-      marginInlineStart: "0.25rem",
+      width: "12px",
+      height: "12px",
+      marginInlineStart: "4px",
       opacity: order ? 1 : 0.3,
     }}
   >

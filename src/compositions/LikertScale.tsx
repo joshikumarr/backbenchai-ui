@@ -73,7 +73,7 @@ const tileStyle = (isSelected: boolean, isHover: boolean): React.CSSProperties =
   const border = isSelected || isHover ? brand : "rgba(255,255,255,0.08)";
   return {
     width: "100%",
-    height: "3rem",
+    height: "48px",
     padding: `0 ${Spacing.MediumLarge}`,
     borderRadius: BorderRadius.Large,
     border: `1px solid ${border}`,

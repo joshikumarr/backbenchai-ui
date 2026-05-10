@@ -31,7 +31,7 @@ export const EmptyState = forwardRef<HTMLElement, EmptyStateProps>(
         style={{
           paddingBlock: Spacing.XXHuge,
           paddingInline: Spacing.XXXLarge,
-          maxWidth: "28rem",
+          maxWidth: "448px",
           marginInline: "auto",
           textAlign: "center",
         }}

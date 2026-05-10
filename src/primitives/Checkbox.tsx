@@ -9,9 +9,9 @@ export interface CheckboxProps
 }
 
 const sizeMap = {
-  small: { box: "1rem", font: FontSize.XXSmall, gap: Spacing.XSmall },
-  medium: { box: "1.25rem", font: FontSize.XSmall, gap: Spacing.Medium },
-  large: { box: "1.5rem", font: FontSize.Small, gap: Spacing.Medium },
+  small: { box: "16px", font: FontSize.XXSmall, gap: Spacing.XSmall },
+  medium: { box: "20px", font: FontSize.XSmall, gap: Spacing.Medium },
+  large: { box: "24px", font: FontSize.Small, gap: Spacing.Medium },
 };
 
 const CheckIcon = ({ size }: { size: string }) => (

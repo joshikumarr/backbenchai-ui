@@ -80,9 +80,6 @@ export type { ProgressTrackerProps, Stage, Stages, StageStatus } from "./Progres
 export { GlassCard } from "./GlassCard";
 export type { GlassCardProps, GlassCardAction, GlassCardMedia } from "./GlassCard";
 
-export { PageSizeControl } from "./PageSizeControl";
-export type { PageSizeControlProps } from "./PageSizeControl";
-
 export { RevealSteps } from "./RevealSteps";
 export type { RevealStepsProps, RevealStepItem } from "./RevealSteps";
 

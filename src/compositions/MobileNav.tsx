@@ -76,7 +76,7 @@ export const MobileNav = forwardRef<HTMLElement, MobileNavProps>(
                   color: isActive ? TextColor.Brand : TextColor.Disabled,
                 }}
               >
-                <Box style={{ width: "1.5rem", height: "1.5rem", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <Box style={{ width: "24px", height: "24px", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   {item.icon}
                 </Box>
                 <Text

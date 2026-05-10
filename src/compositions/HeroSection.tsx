@@ -69,9 +69,9 @@ export interface HeroSectionProps {
   children?: React.ReactNode;
 
   // Typography
-  /** Title font size on narrow screens (default: FontSize.XXXLarge / 2.25rem) */
+  /** Title font size on narrow screens (default: FontSize.XXXLarge / 36px) */
   titleSize?: FontSizeToken;
-  /** Title font size on wide screens (default: FontSize.Huge / 3rem) */
+  /** Title font size on wide screens (default: FontSize.Huge / 48px) */
   titleSizeLarge?: FontSizeToken;
   titleWeight?: FontWeightToken;
   titleColor?: TextColorToken;
@@ -89,7 +89,7 @@ export interface HeroSectionProps {
   ctaGap?: SpaceToken;
 
   // Layout
-  /** Vertical padding for the section (default: Spacing.Size7 / 7rem) */
+  /** Vertical padding for the section (default: Spacing.Size7 / 112px) */
   paddingBlock?: SpaceToken;
   /** Horizontal padding (default: Spacing.XXXLarge) */
   paddingInline?: SpaceToken;
@@ -110,7 +110,7 @@ const ChevronIcon = () => (
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 20 20"
     fill="currentColor"
-    style={{ width: "1.25rem", height: "1.25rem" }}
+    style={{ width: "20px", height: "20px" }}
   >
     <path
       fillRule="evenodd"
@@ -146,7 +146,7 @@ export const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
       paddingInline = Spacing.XXXLarge,
       contentGap = Spacing.XHuge,
       textGap = Spacing.XLarge,
-      textMaxWidth = "36rem",
+      textMaxWidth = "576px",
       gradient,
       breakpoint = 768,
     },
@@ -283,7 +283,7 @@ export const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
           <Image
             src={image.src}
             alt={image.alt ?? ""}
-            style={{ maxWidth: image.maxWidth ?? "36rem" }}
+            style={{ maxWidth: image.maxWidth ?? "576px" }}
           />
         </Box>
       ) : null;

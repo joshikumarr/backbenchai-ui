@@ -23,7 +23,7 @@ export interface CardProps {
   padding?: SpaceToken;
   /** Card background (default: BackgroundColor.Default) */
   backgroundColor?: BackgroundColorToken;
-  /** Corner radius (default: BorderRadius.XXLarge / 1rem) */
+  /** Corner radius (default: BorderRadius.XXLarge / 16px) */
   borderRadius?: BorderRadiusToken;
   /** Border color (default: BorderColor.Default) */
   borderColor?: BorderColorToken;

@@ -119,10 +119,6 @@ export type { ZIndexToken } from "./tokens";
 export { IconSize } from "./tokens";
 export type { IconSizeToken } from "./tokens";
 
-// Contexts
-export { PageSizeProvider, usePageSize } from "./contexts";
-export type { PageSize, PageSizeProviderProps } from "./contexts";
-
 // Compositions
 export {
   Navbar,
@@ -150,7 +146,6 @@ export {
   Table,
   InlineEdit,
   GlassCard,
-  PageSizeControl,
   RevealSteps,
   LikertScale,
 } from "./compositions";
@@ -204,7 +199,6 @@ export type {
   GlassCardProps,
   GlassCardAction,
   GlassCardMedia,
-  PageSizeControlProps,
   RevealStepsProps,
   RevealStepItem,
   LikertScaleProps,

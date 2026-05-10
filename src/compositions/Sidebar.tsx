@@ -42,9 +42,9 @@ export interface SidebarProps {
   footer?: React.ReactNode;
   collapsed?: boolean;
   onToggleCollapse?: () => void;
-  /** Sidebar width when expanded (default: "16rem") */
+  /** Sidebar width when expanded (default: "256px") */
   width?: string;
-  /** Sidebar width when collapsed (default: "4rem") */
+  /** Sidebar width when collapsed (default: "64px") */
   collapsedWidth?: string;
   /** Active item text color (default: TextColor.Brand) */
   activeColor?: TextColorToken;
@@ -55,13 +55,13 @@ export interface SidebarProps {
 }
 
 const ChevronLeftIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" style={{ width: "1rem", height: "1rem" }}>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" style={{ width: "16px", height: "16px" }}>
     <path fillRule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clipRule="evenodd" />
   </svg>
 );
 
 const ChevronRightIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" style={{ width: "1rem", height: "1rem" }}>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" style={{ width: "16px", height: "16px" }}>
     <path fillRule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clipRule="evenodd" />
   </svg>
 );
@@ -76,8 +76,8 @@ export const Sidebar = forwardRef<HTMLElement, SidebarProps>(
       footer,
       collapsed = false,
       onToggleCollapse,
-      width = "16rem",
-      collapsedWidth = "4rem",
+      width = "256px",
+      collapsedWidth = "64px",
       activeColor = TextColor.Brand,
       activeBackground = BackgroundColor.Subtle,
       borderColor = BorderColor.Default,

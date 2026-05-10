@@ -29,11 +29,11 @@ const sizeMap: Record<AvatarSize, number> = {
 };
 
 const fontSizeMap: Record<AvatarSize, string> = {
-  xsmall: "0.625rem",
-  small: "0.75rem",
-  medium: "0.875rem",
-  large: "1rem",
-  xlarge: "1.5rem",
+  xsmall: "10px",
+  small: "12px",
+  medium: "14px",
+  large: "16px",
+  xlarge: "24px",
 };
 
 const statusSizeMap: Record<AvatarSize, number> = {

@@ -79,7 +79,7 @@ const MenuIcon = () => (
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
-    style={{ width: "1.5rem", height: "1.5rem" }}
+    style={{ width: "24px", height: "24px" }}
   >
     <path
       strokeLinecap="round"
@@ -94,7 +94,7 @@ const CloseIcon = () => (
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 20 20"
     fill="currentColor"
-    style={{ width: "1.5rem", height: "1.5rem" }}
+    style={{ width: "24px", height: "24px" }}
   >
     <path
       fillRule="evenodd"
@@ -109,7 +109,7 @@ const ChevronIcon = () => (
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 20 20"
     fill="currentColor"
-    style={{ width: "1.25rem", height: "1.25rem" }}
+    style={{ width: "20px", height: "20px" }}
   >
     <path
       fillRule="evenodd"

@@ -9,42 +9,25 @@
 // ── Spacing ──────────────────────────────────────────────────────────
 
 export const Spacing = {
-  /** 0px */
   None: "0",
-  /** 2px */
-  XXSmall: "0.125rem",
-  /** 4px */
-  XSmall: "0.25rem",
-  /** 6px */
-  Small: "0.375rem",
-  /** 8px — base unit */
-  Medium: "0.5rem",
-  /** 12px */
-  MediumLarge: "0.75rem",
-  /** 16px */
-  Large: "1rem",
-  /** 20px */
-  XLarge: "1.25rem",
-  /** 24px */
-  XXLarge: "1.5rem",
-  /** 32px */
-  XXXLarge: "2rem",
-  /** 40px */
-  Huge: "2.5rem",
-  /** 48px */
-  XHuge: "3rem",
-  /** 64px */
-  XXHuge: "4rem",
-  /** 80px */
-  XXXHuge: "5rem",
-  /** 56px */
-  Size3_5: "3.5rem",
-  /** 112px */
-  Size7: "7rem",
-  /** 128px */
-  Size8: "8rem",
-  /** 256px */
-  Size16: "16rem",
+  XXSmall: "2px",
+  XSmall: "4px",
+  Small: "6px",
+  /** Base unit. */
+  Medium: "8px",
+  MediumLarge: "12px",
+  Large: "16px",
+  XLarge: "20px",
+  XXLarge: "24px",
+  XXXLarge: "32px",
+  Huge: "40px",
+  XHuge: "48px",
+  XXHuge: "64px",
+  XXXHuge: "80px",
+  Size3_5: "56px",
+  Size7: "112px",
+  Size8: "128px",
+  Size16: "256px",
 } as const;
 
 export type SpaceToken = (typeof Spacing)[keyof typeof Spacing];
@@ -130,26 +113,16 @@ export const FontFamily = {
 export type FontFamilyToken = (typeof FontFamily)[keyof typeof FontFamily];
 
 export const FontSize = {
-  /** 0.625rem / 10px */
-  Micro: "0.625rem",
-  /** 0.75rem / 12px */
-  XXSmall: "0.75rem",
-  /** 0.875rem / 14px */
-  XSmall: "0.875rem",
-  /** 1rem / 16px */
-  Small: "1rem",
-  /** 1.125rem / 18px */
-  Medium: "1.125rem",
-  /** 1.25rem / 20px */
-  Large: "1.25rem",
-  /** 1.5rem / 24px */
-  XLarge: "1.5rem",
-  /** 1.875rem / 30px */
-  XXLarge: "1.875rem",
-  /** 2.25rem / 36px */
-  XXXLarge: "2.25rem",
-  /** 3rem / 48px */
-  Huge: "3rem",
+  Micro: "10px",
+  XXSmall: "12px",
+  XSmall: "14px",
+  Small: "16px",
+  Medium: "18px",
+  Large: "20px",
+  XLarge: "24px",
+  XXLarge: "30px",
+  XXXLarge: "36px",
+  Huge: "48px",
 } as const;
 
 export type FontSizeToken = (typeof FontSize)[keyof typeof FontSize];
@@ -183,14 +156,14 @@ export type LetterSpacingToken =
 
 export const BorderRadius = {
   None: "0",
-  Small: "0.25rem",
-  Medium: "0.375rem",
-  Large: "0.5rem",
-  XLarge: "0.75rem",
-  XXLarge: "1rem",
-  XXXLarge: "1.5rem",
-  Huge: "2rem",
-  XHuge: "3rem",
+  Small: "4px",
+  Medium: "6px",
+  Large: "8px",
+  XLarge: "12px",
+  XXLarge: "16px",
+  XXXLarge: "24px",
+  Huge: "32px",
+  XHuge: "48px",
   Full: "9999px",
 } as const;
 
@@ -282,11 +255,11 @@ export type ZIndexToken = (typeof ZIndex)[keyof typeof ZIndex];
 // ── Icon Size ────────────────────────────────────────────────────────
 
 export const IconSize = {
-  Small: "1rem",
-  Medium: "1.25rem",
-  Large: "1.5rem",
-  XLarge: "2rem",
-  XXLarge: "2.5rem",
+  Small: "16px",
+  Medium: "20px",
+  Large: "24px",
+  XLarge: "32px",
+  XXLarge: "40px",
 } as const;
 
 export type IconSizeToken = (typeof IconSize)[keyof typeof IconSize];

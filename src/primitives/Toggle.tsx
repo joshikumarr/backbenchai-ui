@@ -9,9 +9,9 @@ export interface ToggleProps
   label?: string;
 }
 
-const TRACK_WIDTH = "2.5rem";
-const TRACK_HEIGHT = "1.5rem";
-const THUMB_SIZE = "1.25rem";
+const TRACK_WIDTH = "40px";
+const TRACK_HEIGHT = "24px";
+const THUMB_SIZE = "20px";
 const THUMB_OFFSET = Spacing.XXSmall;
 
 export const Toggle = forwardRef<HTMLButtonElement, ToggleProps>(

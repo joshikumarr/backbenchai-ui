@@ -20,9 +20,8 @@ export type ChipAppearance = "filled" | "outlined";
 
 /**
  * Padding density.
- *   compact     — XSmall block, Medium inline. Default. Hugs the label.
- *   comfortable — Small block, MediumLarge inline. Roomier; close to the
- *                 pre-Chip Button-as-chip dimensions.
+ *   compact     — XXSmall block, Small inline. Default. Hugs the label tight.
+ *   comfortable — XSmall block, Medium inline. Roomier; for hero/nav rows.
  */
 export type ChipDensity = "compact" | "comfortable";
 
@@ -46,8 +45,8 @@ export interface ChipProps
 }
 
 const DENSITY_PADDING: Record<ChipDensity, { block: string; inline: string }> = {
-  compact: { block: Spacing.XSmall, inline: Spacing.Medium },
-  comfortable: { block: Spacing.Small, inline: Spacing.MediumLarge },
+  compact: { block: Spacing.XXSmall, inline: Spacing.Small },
+  comfortable: { block: Spacing.XSmall, inline: Spacing.Medium },
 };
 
 /**
@@ -104,12 +103,15 @@ export const Chip = forwardRef<HTMLButtonElement, ChipProps>(
       backgroundColor,
       color,
       border,
+      fontFamily: "inherit",
       fontWeight,
       fontSize,
       lineHeight: 1.2,
       cursor: disabled ? "not-allowed" : "pointer",
       opacity: disabled ? 0.5 : 1,
       whiteSpace: "nowrap",
+      width: "auto",
+      flex: "0 0 auto",
       ...style,
     };
 

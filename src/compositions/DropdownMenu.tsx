@@ -86,7 +86,7 @@ export const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>(
               top: "100%",
               right: 0,
               marginTop: Spacing.XSmall,
-              minWidth: "12rem",
+              minWidth: "192px",
               zIndex: ZIndex.Dropdown,
             }}
           >
