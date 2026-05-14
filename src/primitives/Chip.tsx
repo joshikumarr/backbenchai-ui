@@ -10,11 +10,14 @@ import {
   type FontSizeToken,
   type FontWeightToken,
 } from "../tokens";
+import type { BadgeVariant } from "./Badge";
 
 /**
  * Visual treatment.
  *   filled    — solid Subtle background when unselected, Brand when selected.
  *   outlined  — transparent + Outline border when unselected, Brand when selected.
+ *
+ * Ignored when `variant` is set — variants paint their own colors.
  */
 export type ChipAppearance = "filled" | "outlined";
 
@@ -26,13 +29,24 @@ export type ChipAppearance = "filled" | "outlined";
 export type ChipDensity = "compact" | "comfortable";
 
 export interface ChipProps
-  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "color"> {
-  /** Whether the chip is in the selected/active state. */
+  extends Omit<React.HTMLAttributes<HTMLElement>, "color"> {
+  /**
+   * Selected/active state for interactive chips. Omit entirely for static
+   * display chips — without `selected` AND without `onClick` the chip
+   * renders as a `<span>` (no button semantics, no focus ring, no
+   * aria-pressed).
+   */
   selected?: boolean;
-  /** Visual treatment. Default: "filled". */
+  /** Visual treatment. Default: "filled". Ignored when `variant` is set. */
   appearance?: ChipAppearance;
   /** Padding density. Default: "compact". */
   density?: ChipDensity;
+  /**
+   * Color preset matching the Badge palette. Use for static display chips
+   * (status tags, property type labels, rating pills). When set, overrides
+   * appearance + selected colors entirely.
+   */
+  variant?: BadgeVariant;
   /** Label font weight. Default: FontWeight.Medium. */
   fontWeight?: FontWeightToken;
   /** Label font size. Default: FontSize.XSmall. */
@@ -41,6 +55,10 @@ export interface ChipProps
   icon?: React.ReactNode;
   /** When true, renders a Material check icon before the label while selected. */
   showCheckWhenSelected?: boolean;
+  /** Click handler. Presence flips the chip from static to interactive. */
+  onClick?: React.MouseEventHandler<HTMLElement>;
+  /** Disabled state (only meaningful for interactive chips). */
+  disabled?: boolean;
   children?: React.ReactNode;
 }
 
@@ -50,25 +68,50 @@ const DENSITY_PADDING: Record<ChipDensity, { block: string; inline: string }> = 
 };
 
 /**
- * Selectable pill. Lighter and tighter than `<Button borderRadius={Full}>` —
- * use for multi-select chip rows, category filters, and tag pickers. Renders
- * as a `<button>` with `aria-pressed` reflecting `selected`.
- *
- * Example:
- *   <Chip selected={isOn} onClick={toggle}>PG</Chip>
- *   <Chip appearance="outlined" showCheckWhenSelected ...>Pet-friendly</Chip>
- *   <Chip icon={<Icon name="restaurant" />}>Food</Chip>
+ * Variant color presets — mirrored from Badge so a single primitive can
+ * cover both selectable chips and Badge-style display tags. Kept here
+ * rather than imported so Chip stays self-contained if Badge is removed.
  */
-export const Chip = forwardRef<HTMLButtonElement, ChipProps>(
+const VARIANT_STYLES: Record<BadgeVariant, { backgroundColor: string; color: string }> = {
+  default: { backgroundColor: BackgroundColor.NeutralBold, color: TextColor.Default },
+  success: { backgroundColor: BackgroundColor.Success, color: TextColor.Inverse },
+  warning: { backgroundColor: BackgroundColor.Warning, color: TextColor.Warning },
+  error: { backgroundColor: BackgroundColor.Error, color: TextColor.Error },
+  info: { backgroundColor: BackgroundColor.Info, color: TextColor.Info },
+  brand: { backgroundColor: BackgroundColor.Brand, color: TextColor.Inverse },
+  primaryTint: { backgroundColor: BackgroundColor.PrimaryTint, color: TextColor.Brand },
+  errorTint: { backgroundColor: BackgroundColor.ErrorTint, color: TextColor.Error },
+  warningTint: { backgroundColor: BackgroundColor.WarningTint, color: "#ea580c" },
+  infoTint: { backgroundColor: BackgroundColor.InfoTint, color: "#2563eb" },
+  accentTint: { backgroundColor: BackgroundColor.AccentTint, color: "#7c3aed" },
+};
+
+/**
+ * Pill primitive — covers both selectable chips and Badge-style display tags.
+ *
+ * Interactive (button):
+ *   <Chip selected={isOn} onClick={toggle}>PG</Chip>
+ *   <Chip appearance="outlined" showCheckWhenSelected onClick={...}>Pet-friendly</Chip>
+ *
+ * Static display (span):
+ *   <Chip variant="primaryTint">3BHK</Chip>
+ *   <Chip variant="primaryTint" icon={<StarIcon />}>4.8</Chip>
+ *
+ * The element auto-switches: `<span>` by default, `<button>` once `onClick`
+ * or `selected` is provided. Pass extra props through `...rest` either way.
+ */
+export const Chip = forwardRef<HTMLElement, ChipProps>(
   (
     {
-      selected = false,
+      selected,
       appearance = "filled",
       density = "compact",
+      variant,
       fontWeight = FontWeight.Medium,
-      fontSize = FontSize.XSmall,
+      fontSize: fontSizeProp,
       icon,
       showCheckWhenSelected = false,
+      onClick,
       disabled,
       style,
       children,
@@ -76,20 +119,36 @@ export const Chip = forwardRef<HTMLButtonElement, ChipProps>(
     },
     ref
   ) => {
-    const padding = DENSITY_PADDING[density];
+    const isInteractive = onClick !== undefined || selected !== undefined;
+    const isSelected = selected === true;
 
-    const backgroundColor = selected
-      ? BackgroundColor.Brand
-      : appearance === "outlined"
-        ? BackgroundColor.Transparent
-        : BackgroundColor.Subtle;
+    // Variant chips are display tags (Badge replacement) — match Badge's
+    // tighter typography + padding so short labels like "Villa" hug the
+    // text. Interactive chips keep the larger, more tappable defaults.
+    const fontSize = fontSizeProp ?? (variant ? FontSize.XXSmall : FontSize.XSmall);
+    const padding = variant
+      ? { block: Spacing.XXSmall, inline: Spacing.XSmall }
+      : DENSITY_PADDING[density];
 
-    const color = selected ? TextColor.OnBrand : TextColor.Default;
+    let backgroundColor: string;
+    let color: string;
+    if (variant) {
+      const v = VARIANT_STYLES[variant];
+      backgroundColor = v.backgroundColor;
+      color = v.color;
+    } else {
+      backgroundColor = isSelected
+        ? BackgroundColor.Brand
+        : appearance === "outlined"
+          ? BackgroundColor.Transparent
+          : BackgroundColor.Subtle;
+      color = isSelected ? TextColor.OnBrand : TextColor.Default;
+    }
 
-    // Always reserve 1px of border so swapping between outlined/filled
-    // doesn't shift adjacent chips.
+    // Reserve 1px of border so swapping between outlined/filled (or between
+    // unselected/selected) doesn't shift adjacent chips in a row.
     const border =
-      appearance === "outlined" && !selected
+      !variant && appearance === "outlined" && !isSelected
         ? `1px solid ${BorderColor.Outline}`
         : "1px solid transparent";
 
@@ -107,35 +166,55 @@ export const Chip = forwardRef<HTMLButtonElement, ChipProps>(
       fontWeight,
       fontSize,
       lineHeight: 1.2,
-      cursor: disabled ? "not-allowed" : "pointer",
+      cursor: isInteractive ? (disabled ? "not-allowed" : "pointer") : "default",
       opacity: disabled ? 0.5 : 1,
       whiteSpace: "nowrap",
       width: "auto",
       flex: "0 0 auto",
+      // Stop a flex parent (Stack/Inline with default align-items: stretch)
+      // from stretching the chip to fill the cross-axis. Without this,
+      // a <Chip> inside <Stack> renders edge-to-edge instead of fit-to-text.
+      alignSelf: "flex-start",
       ...style,
     };
 
+    const checkIcon = showCheckWhenSelected && isSelected ? (
+      <span
+        className="material-symbols-outlined"
+        style={{ fontSize: 14 }}
+        aria-hidden
+      >
+        check
+      </span>
+    ) : null;
+
+    if (isInteractive) {
+      return (
+        <button
+          ref={ref as React.Ref<HTMLButtonElement>}
+          type="button"
+          aria-pressed={selected}
+          disabled={disabled}
+          onClick={onClick}
+          style={computedStyle}
+          {...(rest as React.ButtonHTMLAttributes<HTMLButtonElement>)}
+        >
+          {icon}
+          {checkIcon}
+          {children}
+        </button>
+      );
+    }
+
     return (
-      <button
-        ref={ref}
-        type="button"
-        aria-pressed={selected}
-        disabled={disabled}
+      <span
+        ref={ref as React.Ref<HTMLSpanElement>}
         style={computedStyle}
-        {...rest}
+        {...(rest as React.HTMLAttributes<HTMLSpanElement>)}
       >
         {icon}
-        {showCheckWhenSelected && selected && (
-          <span
-            className="material-symbols-outlined"
-            style={{ fontSize: 14 }}
-            aria-hidden
-          >
-            check
-          </span>
-        )}
         {children}
-      </button>
+      </span>
     );
   }
 );

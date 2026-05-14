@@ -57,6 +57,12 @@ export interface BoxProps extends React.HTMLAttributes<HTMLElement> {
   overflow?: "hidden" | "auto" | "scroll" | "visible";
   elevation?: ElevationToken;
   maxWidth?: ContainerWidthToken;
+  /**
+   * Override CSS min-width. Pass 0 to let this Box shrink below its content
+   * size inside a flex parent — the canonical fix for "ancestor doesn't allow
+   * my truncating child to ellipsize". Default behaviour is auto.
+   */
+  minWidth?: 0 | "auto";
   children?: React.ReactNode;
 }
 
@@ -82,6 +88,7 @@ export const Box = forwardRef<HTMLElement, BoxProps>(
       overflow,
       elevation,
       maxWidth,
+      minWidth,
       style,
       children,
       ...rest
@@ -144,6 +151,7 @@ export const Box = forwardRef<HTMLElement, BoxProps>(
       ...(overflow && { overflow }),
       ...(elevation && { boxShadow: elevation }),
       ...(maxWidth && { maxWidth, marginInline: "auto" }),
+      ...(minWidth !== undefined && { minWidth }),
       ...style,
     };
 

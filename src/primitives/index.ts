@@ -40,6 +40,9 @@ export type { BadgeProps, BadgeVariant } from "./Badge";
 export { Chip } from "./Chip";
 export type { ChipProps, ChipAppearance, ChipDensity } from "./Chip";
 
+export { LiquidGlass } from "./LiquidGlass";
+export type { LiquidGlassProps, LiquidGlassBlur, LiquidGlassIntensity } from "./LiquidGlass";
+
 export { Toggle } from "./Toggle";
 export type { ToggleProps } from "./Toggle";
 

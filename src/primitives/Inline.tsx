@@ -31,6 +31,12 @@ export interface InlineProps extends React.HTMLAttributes<HTMLElement> {
   borderRadius?: BorderRadiusToken;
   overflow?: "hidden" | "auto" | "scroll" | "visible";
   elevation?: ElevationToken;
+  /**
+   * Override CSS min-width. Pass 0 to let this Inline shrink below its content
+   * size inside a flex parent (the canonical fix for "ancestor doesn't allow
+   * my truncating child to ellipsize"). Default behaviour is auto.
+   */
+  minWidth?: 0 | "auto";
   children?: React.ReactNode;
 }
 
@@ -69,6 +75,7 @@ export const Inline = forwardRef<HTMLElement, InlineProps>(
       borderRadius,
       overflow,
       elevation,
+      minWidth,
       style,
       children,
       ...rest
@@ -92,6 +99,7 @@ export const Inline = forwardRef<HTMLElement, InlineProps>(
       ...(borderRadius && { borderRadius }),
       ...(overflow && { overflow }),
       ...(elevation && { boxShadow: elevation }),
+      ...(minWidth !== undefined && { minWidth }),
       ...style,
     };
 

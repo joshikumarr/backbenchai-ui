@@ -247,6 +247,12 @@ export declare interface BoxProps extends default_2.HTMLAttributes<HTMLElement> 
     overflow?: "hidden" | "auto" | "scroll" | "visible";
     elevation?: ElevationToken;
     maxWidth?: ContainerWidthToken;
+    /**
+     * Override CSS min-width. Pass 0 to let this Box shrink below its content
+     * size inside a flex parent — the canonical fix for "ancestor doesn't allow
+     * my truncating child to ellipsize". Default behaviour is auto.
+     */
+    minWidth?: 0 | "auto";
     children?: default_2.ReactNode;
 }
 
@@ -338,21 +344,27 @@ export declare interface CheckboxProps extends Omit<default_2.InputHTMLAttribute
 }
 
 /**
- * Selectable pill. Lighter and tighter than `<Button borderRadius={Full}>` —
- * use for multi-select chip rows, category filters, and tag pickers. Renders
- * as a `<button>` with `aria-pressed` reflecting `selected`.
+ * Pill primitive — covers both selectable chips and Badge-style display tags.
  *
- * Example:
+ * Interactive (button):
  *   <Chip selected={isOn} onClick={toggle}>PG</Chip>
- *   <Chip appearance="outlined" showCheckWhenSelected ...>Pet-friendly</Chip>
- *   <Chip icon={<Icon name="restaurant" />}>Food</Chip>
+ *   <Chip appearance="outlined" showCheckWhenSelected onClick={...}>Pet-friendly</Chip>
+ *
+ * Static display (span):
+ *   <Chip variant="primaryTint">3BHK</Chip>
+ *   <Chip variant="primaryTint" icon={<StarIcon />}>4.8</Chip>
+ *
+ * The element auto-switches: `<span>` by default, `<button>` once `onClick`
+ * or `selected` is provided. Pass extra props through `...rest` either way.
  */
-export declare const Chip: default_2.ForwardRefExoticComponent<ChipProps & default_2.RefAttributes<HTMLButtonElement>>;
+export declare const Chip: default_2.ForwardRefExoticComponent<ChipProps & default_2.RefAttributes<HTMLElement>>;
 
 /**
  * Visual treatment.
  *   filled    — solid Subtle background when unselected, Brand when selected.
  *   outlined  — transparent + Outline border when unselected, Brand when selected.
+ *
+ * Ignored when `variant` is set — variants paint their own colors.
  */
 export declare type ChipAppearance = "filled" | "outlined";
 
@@ -363,13 +375,24 @@ export declare type ChipAppearance = "filled" | "outlined";
  */
 export declare type ChipDensity = "compact" | "comfortable";
 
-export declare interface ChipProps extends Omit<default_2.ButtonHTMLAttributes<HTMLButtonElement>, "color"> {
-    /** Whether the chip is in the selected/active state. */
+export declare interface ChipProps extends Omit<default_2.HTMLAttributes<HTMLElement>, "color"> {
+    /**
+     * Selected/active state for interactive chips. Omit entirely for static
+     * display chips — without `selected` AND without `onClick` the chip
+     * renders as a `<span>` (no button semantics, no focus ring, no
+     * aria-pressed).
+     */
     selected?: boolean;
-    /** Visual treatment. Default: "filled". */
+    /** Visual treatment. Default: "filled". Ignored when `variant` is set. */
     appearance?: ChipAppearance;
     /** Padding density. Default: "compact". */
     density?: ChipDensity;
+    /**
+     * Color preset matching the Badge palette. Use for static display chips
+     * (status tags, property type labels, rating pills). When set, overrides
+     * appearance + selected colors entirely.
+     */
+    variant?: BadgeVariant;
     /** Label font weight. Default: FontWeight.Medium. */
     fontWeight?: FontWeightToken;
     /** Label font size. Default: FontSize.XSmall. */
@@ -378,6 +401,10 @@ export declare interface ChipProps extends Omit<default_2.ButtonHTMLAttributes<H
     icon?: default_2.ReactNode;
     /** When true, renders a Material check icon before the label while selected. */
     showCheckWhenSelected?: boolean;
+    /** Click handler. Presence flips the chip from static to interactive. */
+    onClick?: default_2.MouseEventHandler<HTMLElement>;
+    /** Disabled state (only meaningful for interactive chips). */
+    disabled?: boolean;
     children?: default_2.ReactNode;
 }
 
@@ -804,6 +831,12 @@ export declare interface InlineProps extends default_2.HTMLAttributes<HTMLElemen
     borderRadius?: BorderRadiusToken;
     overflow?: "hidden" | "auto" | "scroll" | "visible";
     elevation?: ElevationToken;
+    /**
+     * Override CSS min-width. Pass 0 to let this Inline shrink below its content
+     * size inside a flex parent (the canonical fix for "ancestor doesn't allow
+     * my truncating child to ellipsize"). Default behaviour is auto.
+     */
+    minWidth?: 0 | "auto";
     children?: default_2.ReactNode;
 }
 
@@ -850,6 +883,52 @@ export declare interface LinkButtonProps extends default_2.AnchorHTMLAttributes<
     paddingInline?: SpaceToken;
     borderRadius?: BorderRadiusToken;
     children?: default_2.ReactNode;
+}
+
+/**
+ * LiquidGlass — frosted-glass panel with wobbly edge distortion.
+ *
+ * Three stacked layers inside one container:
+ *   1. **Bend** — backdrop-blur + SVG turbulence/displacement
+ *   2. **Glow** — outer drop-shadow
+ *   3. **Edge** — inset highlight (glass rim)
+ *
+ * Pure visual primitive — no drag, no expand, no motion. Children render above
+ * all decorative layers via stacking context.
+ *
+ * ```tsx
+ * <LiquidGlass blurIntensity="xl" glowIntensity="sm">
+ *   <Box padding={Spacing.XHuge}>…</Box>
+ * </LiquidGlass>
+ * ```
+ */
+export declare const LiquidGlass: default_2.ForwardRefExoticComponent<LiquidGlassProps & default_2.RefAttributes<HTMLDivElement>>;
+
+export declare type LiquidGlassBlur = "sm" | "md" | "lg" | "xl";
+
+export declare type LiquidGlassIntensity = "none" | "xs" | "sm" | "md" | "lg" | "xl";
+
+export declare interface LiquidGlassProps extends default_2.HTMLAttributes<HTMLDivElement> {
+    children?: default_2.ReactNode;
+    /** CSS border-radius value (token or string). Default: BorderRadius.XLarge. */
+    borderRadius?: string;
+    /** Backdrop-filter blur intensity. Default: "xl". */
+    blurIntensity?: LiquidGlassBlur;
+    /** Outer glow shadow intensity. Default: "sm". */
+    glowIntensity?: LiquidGlassIntensity;
+    /** Inner edge-highlight intensity. Default: "md". */
+    shadowIntensity?: LiquidGlassIntensity;
+    /**
+     * Optional CSS gradient string painted as a 1px rim around the panel
+     * via mask-compositing. Visible against any background — use to add
+     * brand colour to the glass edge on light or dark scenes.
+     */
+    borderGradient?: string;
+    /** Border ring width in px when `borderGradient` is set. Default: 1. */
+    borderWidth?: number;
+    /** Optional explicit width / height. */
+    width?: string;
+    height?: string;
 }
 
 export declare const Menu: default_2.ForwardRefExoticComponent<MenuProps & default_2.RefAttributes<HTMLElement>>;
@@ -1479,6 +1558,16 @@ export declare interface TextProps extends default_2.HTMLAttributes<HTMLElement>
     textTransform?: default_2.CSSProperties["textTransform"];
     lineHeight?: number | string;
     opacity?: number;
+    /**
+     * Single-line ellipsis truncation. Applies overflow:hidden + text-overflow:ellipsis
+     * + white-space:nowrap + min-width:0. Use on a label that should shrink inside a
+     * flex parent; ensure the chain of ancestors also allows shrinking (Inline minWidth=0).
+     */
+    truncate?: boolean;
+    /** white-space: nowrap. Useful for short tags or counts. */
+    noWrap?: boolean;
+    /** flex-shrink: 0. Keeps a sibling rigid while another truncates. */
+    noShrink?: boolean;
     children?: default_2.ReactNode;
 }
 
