@@ -31,6 +31,9 @@ export type { HeaderProps, Breadcrumb } from "./Header";
 export { Modal, ModalSize } from "./Modal";
 export type { ModalProps, ModalSizeToken } from "./Modal";
 
+export { Drawer } from "./Drawer";
+export type { DrawerProps, DrawerAlign } from "./Drawer";
+
 export { DropdownMenu } from "./DropdownMenu";
 export type { DropdownMenuProps } from "./DropdownMenu";
 

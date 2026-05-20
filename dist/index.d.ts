@@ -1,6 +1,7 @@
 import { default as default_2 } from 'react';
 import { JSX as JSX_2 } from 'react/jsx-runtime';
 import { ReactNode } from 'react';
+import { ReactPortal } from 'react';
 
 export declare const AccentColor: {
     readonly Occupied: "var(--bbui-accent-occupied)";
@@ -439,6 +440,32 @@ export declare interface DividerProps {
     color?: BorderColorToken;
     /** Spacing above and below (horizontal) or left and right (vertical) */
     spacing?: SpaceToken;
+}
+
+export declare function Drawer({ open, onClose, children, offsetTop, padding, maxWidth, align, blur, closeOnMouseLeave, }: DrawerProps): ReactPortal | null;
+
+export declare namespace Drawer {
+    var displayName: string;
+}
+
+export declare type DrawerAlign = "start" | "center" | "end";
+
+export declare interface DrawerProps {
+    open: boolean;
+    onClose: () => void;
+    children: ReactNode;
+    /** Offset from viewport top — leaves room for a sticky navbar. */
+    offsetTop?: Responsive<number | string>;
+    /** Padding inside the content area. */
+    padding?: Responsive<SpaceToken>;
+    /** Clamp inner content width. */
+    maxWidth?: ContainerWidthToken;
+    /** Horizontal alignment of inner content. */
+    align?: Responsive<DrawerAlign>;
+    /** Render a blur band filling the viewport below the content. */
+    blur?: boolean;
+    /** Close when the mouse leaves the content area (hover-nav pattern). */
+    closeOnMouseLeave?: boolean;
 }
 
 export declare const DropdownCheckboxMenu: default_2.ForwardRefExoticComponent<DropdownCheckboxMenuProps & default_2.RefAttributes<HTMLDivElement>>;
