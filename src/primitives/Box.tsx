@@ -25,30 +25,39 @@ type AllowedElements =
   | "li";
 
 /**
- * Padding and margin props on Box accept either a single SpaceToken (applied
- * at every breakpoint) or a Responsive<SpaceToken> object that varies the
- * value across mobile / tablet / desktop:
+ * Spacing values follow CSS shorthand:
+ *   `Spacing.Medium`                         → all sides
+ *   `[v, h]`                                 → vertical, horizontal
+ *   `[t, h, b]`                              → top, horizontal, bottom
+ *   `[t, r, b, l]`                           → top, right, bottom, left
  *
- * ```tsx
- * <Box padding={Spacing.Large} />                           // always Large
- * <Box padding={{ mobile: Spacing.Medium, desktop: Spacing.XLarge }} />
- * ```
+ * Each entry is a token; arrays are joined into a CSS shorthand string. The
+ * single-axis props (`paddingBlock`, `paddingInline`, `marginBlock`,
+ * `marginInline`) accept 1–2 tokens (`[start, end]`); the per-edge props
+ * (`paddingBlockStart`, etc.) accept a single token only.
  *
- * Resolution happens at render via useResponsiveValue, which subscribes to
- * window.resize. SSR-safe (defaults to "desktop" when window is undefined).
+ * Any of these may also be wrapped in a `Responsive` object to vary by
+ * breakpoint:
+ *   `padding={{ mobile: Spacing.Medium, desktop: [Spacing.Large, Spacing.XLarge] }}`
  */
+type ShorthandSpace = SpaceToken | readonly SpaceToken[];
+
 export interface BoxProps extends React.HTMLAttributes<HTMLElement> {
   as?: AllowedElements;
-  padding?: Responsive<SpaceToken>;
-  paddingBlock?: Responsive<SpaceToken>;
+  padding?: Responsive<ShorthandSpace>;
+  paddingBlock?: Responsive<ShorthandSpace>;
   paddingBlockStart?: Responsive<SpaceToken>;
   paddingBlockEnd?: Responsive<SpaceToken>;
-  paddingInline?: Responsive<SpaceToken>;
+  paddingInline?: Responsive<ShorthandSpace>;
   paddingInlineStart?: Responsive<SpaceToken>;
   paddingInlineEnd?: Responsive<SpaceToken>;
-  marginBlock?: Responsive<SpaceToken>;
+  margin?: Responsive<ShorthandSpace>;
+  marginBlock?: Responsive<ShorthandSpace>;
   marginBlockStart?: Responsive<SpaceToken>;
   marginBlockEnd?: Responsive<SpaceToken>;
+  marginInline?: Responsive<ShorthandSpace>;
+  marginInlineStart?: Responsive<SpaceToken>;
+  marginInlineEnd?: Responsive<SpaceToken>;
   backgroundColor?: BackgroundColorToken;
   borderRadius?: BorderRadiusToken;
   borderColor?: BorderColorToken;
@@ -66,6 +75,11 @@ export interface BoxProps extends React.HTMLAttributes<HTMLElement> {
   children?: React.ReactNode;
 }
 
+const toCss = (value: ShorthandSpace | undefined): string | undefined => {
+  if (value === undefined) return undefined;
+  return Array.isArray(value) ? value.join(" ") : (value as string);
+};
+
 export const Box = forwardRef<HTMLElement, BoxProps>(
   (
     {
@@ -77,9 +91,13 @@ export const Box = forwardRef<HTMLElement, BoxProps>(
       paddingInline,
       paddingInlineStart,
       paddingInlineEnd,
+      margin,
       marginBlock,
       marginBlockStart,
       marginBlockEnd,
+      marginInline,
+      marginInlineStart,
+      marginInlineEnd,
       backgroundColor,
       borderRadius,
       borderColor,
@@ -95,19 +113,20 @@ export const Box = forwardRef<HTMLElement, BoxProps>(
     },
     ref
   ) => {
-    // Resolve every responsive prop against the current breakpoint. Returns
-    // the literal value when a non-responsive token is passed, so single-value
-    // callers pay zero ergonomic cost.
-    const resolvedPadding = useResponsiveValue(padding);
-    const resolvedPaddingBlock = useResponsiveValue(paddingBlock);
+    const resolvedPadding = toCss(useResponsiveValue(padding));
+    const resolvedPaddingBlock = toCss(useResponsiveValue(paddingBlock));
     const resolvedPaddingBlockStart = useResponsiveValue(paddingBlockStart);
     const resolvedPaddingBlockEnd = useResponsiveValue(paddingBlockEnd);
-    const resolvedPaddingInline = useResponsiveValue(paddingInline);
+    const resolvedPaddingInline = toCss(useResponsiveValue(paddingInline));
     const resolvedPaddingInlineStart = useResponsiveValue(paddingInlineStart);
     const resolvedPaddingInlineEnd = useResponsiveValue(paddingInlineEnd);
-    const resolvedMarginBlock = useResponsiveValue(marginBlock);
+    const resolvedMargin = toCss(useResponsiveValue(margin));
+    const resolvedMarginBlock = toCss(useResponsiveValue(marginBlock));
     const resolvedMarginBlockStart = useResponsiveValue(marginBlockStart);
     const resolvedMarginBlockEnd = useResponsiveValue(marginBlockEnd);
+    const resolvedMarginInline = toCss(useResponsiveValue(marginInline));
+    const resolvedMarginInlineStart = useResponsiveValue(marginInlineStart);
+    const resolvedMarginInlineEnd = useResponsiveValue(marginInlineEnd);
 
     const borderValue = borderColor
       ? `${borderWidth} solid ${borderColor}`
@@ -142,9 +161,13 @@ export const Box = forwardRef<HTMLElement, BoxProps>(
       ...(resolvedPaddingInline && { paddingInline: resolvedPaddingInline }),
       ...(resolvedPaddingInlineStart && { paddingInlineStart: resolvedPaddingInlineStart }),
       ...(resolvedPaddingInlineEnd && { paddingInlineEnd: resolvedPaddingInlineEnd }),
+      ...(resolvedMargin && { margin: resolvedMargin }),
       ...(resolvedMarginBlock && { marginBlock: resolvedMarginBlock }),
       ...(resolvedMarginBlockStart && { marginBlockStart: resolvedMarginBlockStart }),
       ...(resolvedMarginBlockEnd && { marginBlockEnd: resolvedMarginBlockEnd }),
+      ...(resolvedMarginInline && { marginInline: resolvedMarginInline }),
+      ...(resolvedMarginInlineStart && { marginInlineStart: resolvedMarginInlineStart }),
+      ...(resolvedMarginInlineEnd && { marginInlineEnd: resolvedMarginInlineEnd }),
       ...(backgroundColor && { backgroundColor }),
       ...(borderRadius && { borderRadius }),
       ...borderStyles,

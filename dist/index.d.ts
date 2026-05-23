@@ -215,31 +215,22 @@ export declare type BorderWidthToken = (typeof BorderWidth)[keyof typeof BorderW
 
 export declare const Box: default_2.ForwardRefExoticComponent<BoxProps & default_2.RefAttributes<HTMLElement>>;
 
-/**
- * Padding and margin props on Box accept either a single SpaceToken (applied
- * at every breakpoint) or a Responsive<SpaceToken> object that varies the
- * value across mobile / tablet / desktop:
- *
- * ```tsx
- * <Box padding={Spacing.Large} />                           // always Large
- * <Box padding={{ mobile: Spacing.Medium, desktop: Spacing.XLarge }} />
- * ```
- *
- * Resolution happens at render via useResponsiveValue, which subscribes to
- * window.resize. SSR-safe (defaults to "desktop" when window is undefined).
- */
 export declare interface BoxProps extends default_2.HTMLAttributes<HTMLElement> {
     as?: AllowedElements;
-    padding?: Responsive<SpaceToken>;
-    paddingBlock?: Responsive<SpaceToken>;
+    padding?: Responsive<ShorthandSpace>;
+    paddingBlock?: Responsive<ShorthandSpace>;
     paddingBlockStart?: Responsive<SpaceToken>;
     paddingBlockEnd?: Responsive<SpaceToken>;
-    paddingInline?: Responsive<SpaceToken>;
+    paddingInline?: Responsive<ShorthandSpace>;
     paddingInlineStart?: Responsive<SpaceToken>;
     paddingInlineEnd?: Responsive<SpaceToken>;
-    marginBlock?: Responsive<SpaceToken>;
+    margin?: Responsive<ShorthandSpace>;
+    marginBlock?: Responsive<ShorthandSpace>;
     marginBlockStart?: Responsive<SpaceToken>;
     marginBlockEnd?: Responsive<SpaceToken>;
+    marginInline?: Responsive<ShorthandSpace>;
+    marginInlineStart?: Responsive<SpaceToken>;
+    marginInlineEnd?: Responsive<SpaceToken>;
     backgroundColor?: BackgroundColorToken;
     borderRadius?: BorderRadiusToken;
     borderColor?: BorderColorToken;
@@ -837,9 +828,16 @@ declare type InlineElement = "div" | "span" | "ul" | "ol" | "nav";
 
 export declare interface InlineProps extends default_2.HTMLAttributes<HTMLElement> {
     as?: InlineElement;
-    /** Responsive gap between children (horizontal) */
-    space?: Responsive<SpaceToken>;
-    /** Gap between rows when wrapping */
+    /**
+     * Responsive gap between children. Single token = both rows and columns;
+     * `[rowGap, columnGap]` tuple sets each axis independently (CSS `gap`
+     * shorthand). Tuple form supersedes `rowSpace`.
+     */
+    space?: Responsive<SpaceValue>;
+    /**
+     * @deprecated Pass `space={[rowGap, columnGap]}` instead. Kept for
+     * backwards compatibility — overrides the row component of `space` when set.
+     */
     rowSpace?: SpaceToken;
     /** Align children on the cross axis (vertical) */
     alignBlock?: AlignBlock_2;
@@ -1232,6 +1230,24 @@ export declare interface SelectProps extends Omit<default_2.SelectHTMLAttributes
 }
 
 /**
+ * Spacing values follow CSS shorthand:
+ *   `Spacing.Medium`                         → all sides
+ *   `[v, h]`                                 → vertical, horizontal
+ *   `[t, h, b]`                              → top, horizontal, bottom
+ *   `[t, r, b, l]`                           → top, right, bottom, left
+ *
+ * Each entry is a token; arrays are joined into a CSS shorthand string. The
+ * single-axis props (`paddingBlock`, `paddingInline`, `marginBlock`,
+ * `marginInline`) accept 1–2 tokens (`[start, end]`); the per-edge props
+ * (`paddingBlockStart`, etc.) accept a single token only.
+ *
+ * Any of these may also be wrapped in a `Responsive` object to vary by
+ * breakpoint:
+ *   `padding={{ mobile: Spacing.Medium, desktop: [Spacing.Large, Spacing.XLarge] }}`
+ */
+declare type ShorthandSpace = SpaceToken | readonly SpaceToken[];
+
+/**
  * Show — conditional render based on the current breakpoint.
  *
  * ```tsx
@@ -1304,6 +1320,13 @@ export declare interface SidebarSection {
 export declare type SortOrder = "ASC" | "DESC";
 
 export declare type SpaceToken = (typeof Spacing)[keyof typeof Spacing];
+
+/**
+ * Gap value for `space`. Mirrors CSS `gap` shorthand:
+ *   `Spacing.Medium`                    → same gap for rows and columns
+ *   `[rowGap, columnGap]`               → distinct row + column gaps
+ */
+declare type SpaceValue = SpaceToken | readonly [SpaceToken, SpaceToken];
 
 /**
  * Design tokens — theme-aware via CSS custom properties.

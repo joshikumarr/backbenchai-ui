@@ -8,11 +8,25 @@ type AlignInline = "start" | "center" | "end" | "stretch";
 type AlignBlock = "start" | "center" | "end" | "baseline" | "stretch";
 type Grow = "hug" | "fill";
 
+/**
+ * Gap value for `space`. Mirrors CSS `gap` shorthand:
+ *   `Spacing.Medium`                    → same gap for rows and columns
+ *   `[rowGap, columnGap]`               → distinct row + column gaps
+ */
+type SpaceValue = SpaceToken | readonly [SpaceToken, SpaceToken];
+
 export interface InlineProps extends React.HTMLAttributes<HTMLElement> {
   as?: InlineElement;
-  /** Responsive gap between children (horizontal) */
-  space?: Responsive<SpaceToken>;
-  /** Gap between rows when wrapping */
+  /**
+   * Responsive gap between children. Single token = both rows and columns;
+   * `[rowGap, columnGap]` tuple sets each axis independently (CSS `gap`
+   * shorthand). Tuple form supersedes `rowSpace`.
+   */
+  space?: Responsive<SpaceValue>;
+  /**
+   * @deprecated Pass `space={[rowGap, columnGap]}` instead. Kept for
+   * backwards compatibility — overrides the row component of `space` when set.
+   */
   rowSpace?: SpaceToken;
   /** Align children on the cross axis (vertical) */
   alignBlock?: AlignBlock;
@@ -82,13 +96,16 @@ export const Inline = forwardRef<HTMLElement, InlineProps>(
     },
     ref
   ) => {
-    const space = useResponsiveValue(spaceProp ?? ("0" as SpaceToken));
+    const resolvedSpace = useResponsiveValue(spaceProp ?? ("0" as SpaceToken));
+    const [defaultRow, defaultCol] = Array.isArray(resolvedSpace)
+      ? [resolvedSpace[0], resolvedSpace[1]]
+      : [resolvedSpace as SpaceToken, resolvedSpace as SpaceToken];
 
     const computedStyle: React.CSSProperties = {
       display: "flex",
       flexDirection: "row",
-      columnGap: space,
-      rowGap: rowSpace ?? space,
+      columnGap: defaultCol,
+      rowGap: rowSpace ?? defaultRow,
       ...(alignBlock && { alignItems: alignMap[alignBlock] }),
       ...(alignInline && !spread && { justifyContent: alignMap[alignInline] }),
       ...(spread && { justifyContent: spread }),
