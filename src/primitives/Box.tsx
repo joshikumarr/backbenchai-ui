@@ -68,6 +68,14 @@ export interface BoxProps extends React.HTMLAttributes<HTMLElement> {
   marginInline?: Responsive<ShorthandSpace>;
   marginInlineStart?: Responsive<SpaceToken>;
   marginInlineEnd?: Responsive<SpaceToken>;
+  /** Physical-direction margin (LTR alias of marginBlockStart). */
+  marginTop?: Responsive<SpaceToken>;
+  /** Physical-direction margin (LTR alias of marginInlineEnd). */
+  marginRight?: Responsive<SpaceToken>;
+  /** Physical-direction margin (LTR alias of marginBlockEnd). */
+  marginBottom?: Responsive<SpaceToken>;
+  /** Physical-direction margin (LTR alias of marginInlineStart). */
+  marginLeft?: Responsive<SpaceToken>;
   backgroundColor?: BackgroundColorToken;
   borderRadius?: BorderRadiusToken;
   borderColor?: BorderColorToken;
@@ -109,12 +117,16 @@ export interface BoxProps extends React.HTMLAttributes<HTMLElement> {
 
   // ── Position ──────────────────────────────────────────────────────
   position?: PositionToken;
-  inset?: 0 | string;
-  /** CSS top — pass a number for px, a string for any other unit. */
-  top?: number | string;
-  right?: number | string;
-  bottom?: number | string;
-  left?: number | string;
+  /** Inset shorthand. Accepts a Spacing token, `0`, or a raw CSS string. */
+  inset?: SpaceToken | 0 | string;
+  /**
+   * CSS top. Prefer a `Spacing.X` token; falls back to a number (treated as
+   * px) or a raw CSS string for negative or non-token offsets.
+   */
+  top?: SpaceToken | number | string;
+  right?: SpaceToken | number | string;
+  bottom?: SpaceToken | number | string;
+  left?: SpaceToken | number | string;
   zIndex?: number;
 
   // ── Visual ────────────────────────────────────────────────────────
@@ -176,6 +188,10 @@ export const Box = forwardRef<HTMLElement, BoxProps>(
       marginInline,
       marginInlineStart,
       marginInlineEnd,
+      marginTop,
+      marginRight,
+      marginBottom,
+      marginLeft,
       backgroundColor,
       borderRadius,
       borderColor,
@@ -240,6 +256,10 @@ export const Box = forwardRef<HTMLElement, BoxProps>(
     const resolvedMarginInline = toCss(useResponsiveValue(marginInline));
     const resolvedMarginInlineStart = useResponsiveValue(marginInlineStart);
     const resolvedMarginInlineEnd = useResponsiveValue(marginInlineEnd);
+    const resolvedMarginTop = useResponsiveValue(marginTop);
+    const resolvedMarginRight = useResponsiveValue(marginRight);
+    const resolvedMarginBottom = useResponsiveValue(marginBottom);
+    const resolvedMarginLeft = useResponsiveValue(marginLeft);
     const resolvedDisplay = useResponsiveValue(display);
     const resolvedAlignItems = useResponsiveValue(alignItems);
     const resolvedJustifyContent = useResponsiveValue(justifyContent);
@@ -285,6 +305,10 @@ export const Box = forwardRef<HTMLElement, BoxProps>(
       ...(resolvedMarginInline && { marginInline: resolvedMarginInline }),
       ...(resolvedMarginInlineStart && { marginInlineStart: resolvedMarginInlineStart }),
       ...(resolvedMarginInlineEnd && { marginInlineEnd: resolvedMarginInlineEnd }),
+      ...(resolvedMarginTop && { marginTop: resolvedMarginTop }),
+      ...(resolvedMarginRight && { marginRight: resolvedMarginRight }),
+      ...(resolvedMarginBottom && { marginBottom: resolvedMarginBottom }),
+      ...(resolvedMarginLeft && { marginLeft: resolvedMarginLeft }),
       ...(backgroundColor && { backgroundColor }),
       ...(borderRadius && { borderRadius }),
       ...borderStyles,

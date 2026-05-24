@@ -252,6 +252,14 @@ export declare interface BoxProps extends default_2.HTMLAttributes<HTMLElement> 
     marginInline?: Responsive<ShorthandSpace>;
     marginInlineStart?: Responsive<SpaceToken>;
     marginInlineEnd?: Responsive<SpaceToken>;
+    /** Physical-direction margin (LTR alias of marginBlockStart). */
+    marginTop?: Responsive<SpaceToken>;
+    /** Physical-direction margin (LTR alias of marginInlineEnd). */
+    marginRight?: Responsive<SpaceToken>;
+    /** Physical-direction margin (LTR alias of marginBlockEnd). */
+    marginBottom?: Responsive<SpaceToken>;
+    /** Physical-direction margin (LTR alias of marginInlineStart). */
+    marginLeft?: Responsive<SpaceToken>;
     backgroundColor?: BackgroundColorToken;
     borderRadius?: BorderRadiusToken;
     borderColor?: BorderColorToken;
@@ -287,12 +295,16 @@ export declare interface BoxProps extends default_2.HTMLAttributes<HTMLElement> 
     /** Gap between flex/grid children. */
     gap?: SpaceToken;
     position?: PositionToken;
-    inset?: 0 | string;
-    /** CSS top — pass a number for px, a string for any other unit. */
-    top?: number | string;
-    right?: number | string;
-    bottom?: number | string;
-    left?: number | string;
+    /** Inset shorthand. Accepts a Spacing token, `0`, or a raw CSS string. */
+    inset?: SpaceToken | 0 | string;
+    /**
+     * CSS top. Prefer a `Spacing.X` token; falls back to a number (treated as
+     * px) or a raw CSS string for negative or non-token offsets.
+     */
+    top?: SpaceToken | number | string;
+    right?: SpaceToken | number | string;
+    bottom?: SpaceToken | number | string;
+    left?: SpaceToken | number | string;
     zIndex?: number;
     /** CSS color (inherited by SVG icon children). */
     color?: TextColorToken | string;
