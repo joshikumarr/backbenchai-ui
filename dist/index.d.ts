@@ -259,13 +259,21 @@ export declare interface BoxProps extends default_2.HTMLAttributes<HTMLElement> 
     borderWidth?: BorderWidthToken;
     overflow?: "hidden" | "auto" | "scroll" | "visible";
     elevation?: ElevationToken;
-    maxWidth?: ContainerWidthToken;
+    /** CSS width — accepts ContainerWidth token or raw "100%" / "640px". */
+    width?: ContainerWidthToken | string | number;
+    /** CSS max-width — accepts ContainerWidth token or raw string. Auto-applies marginInline:auto when set as a ContainerWidth token. */
+    maxWidth?: ContainerWidthToken | string;
+    /** CSS height. */
+    height?: string | number;
+    /** CSS min-height. */
+    minHeight?: string | number;
+    /** CSS max-height. */
+    maxHeight?: string | number;
     /**
-     * Override CSS min-width. Pass 0 to let this Box shrink below its content
-     * size inside a flex parent — the canonical fix for "ancestor doesn't allow
-     * my truncating child to ellipsize". Default behaviour is auto.
+     * CSS min-width. `0` is the canonical flex-shrink fix (lets this Box
+     * shrink below its content size inside a flex parent).
      */
-    minWidth?: 0 | "auto";
+    minWidth?: 0 | "auto" | string | number;
     display?: Responsive<DisplayToken>;
     alignItems?: Responsive<AlignItemsToken>;
     justifyContent?: Responsive<JustifyContentToken>;
@@ -273,7 +281,7 @@ export declare interface BoxProps extends default_2.HTMLAttributes<HTMLElement> 
     flexDirection?: Responsive<FlexDirectionToken>;
     flexWrap?: FlexWrapToken;
     /** flex shorthand: number, "auto", or "none". */
-    flex?: number | "auto" | "none";
+    flex?: number | "auto" | "none" | string;
     flexGrow?: number;
     flexShrink?: number;
     /** Gap between flex/grid children. */
@@ -281,6 +289,16 @@ export declare interface BoxProps extends default_2.HTMLAttributes<HTMLElement> 
     position?: PositionToken;
     inset?: 0 | string;
     zIndex?: number;
+    /** CSS color (inherited by SVG icon children). */
+    color?: TextColorToken | string;
+    /** Opacity 0–1. */
+    opacity?: number;
+    /** Cursor style. */
+    cursor?: CursorToken;
+    /** white-space behavior. */
+    whiteSpace?: WhiteSpaceToken;
+    /** pointer-events — useful for non-interactive overlays. */
+    pointerEvents?: "auto" | "none";
     children?: default_2.ReactNode;
 }
 
@@ -477,6 +495,24 @@ export declare const ContainerWidth: {
 };
 
 export declare type ContainerWidthToken = (typeof ContainerWidth)[keyof typeof ContainerWidth];
+
+export declare const Cursor: {
+    readonly Auto: "auto";
+    readonly Default: "default";
+    readonly Pointer: "pointer";
+    readonly Text: "text";
+    readonly Wait: "wait";
+    readonly Help: "help";
+    readonly NotAllowed: "not-allowed";
+    readonly Grab: "grab";
+    readonly Grabbing: "grabbing";
+    readonly Move: "move";
+    readonly ZoomIn: "zoom-in";
+    readonly ZoomOut: "zoom-out";
+    readonly None: "none";
+};
+
+export declare type CursorToken = (typeof Cursor)[keyof typeof Cursor];
 
 /**
  * Mastery delta direction — bound to backend `mastery_update.direction`
@@ -1863,6 +1899,17 @@ export declare function useTheme(): {
     readonly resolvedTheme: "dark" | "light";
     readonly setTheme: (next: Theme) => void;
 };
+
+export declare const WhiteSpace: {
+    readonly Normal: "normal";
+    readonly NoWrap: "nowrap";
+    readonly Pre: "pre";
+    readonly PreWrap: "pre-wrap";
+    readonly PreLine: "pre-line";
+    readonly BreakSpaces: "break-spaces";
+};
+
+export declare type WhiteSpaceToken = (typeof WhiteSpace)[keyof typeof WhiteSpace];
 
 export declare const ZIndex: {
     readonly Dropdown: 100;

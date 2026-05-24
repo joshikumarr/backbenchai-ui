@@ -233,6 +233,33 @@ export const Position = {
 } as const;
 export type PositionToken = (typeof Position)[keyof typeof Position];
 
+export const Cursor = {
+  Auto: "auto",
+  Default: "default",
+  Pointer: "pointer",
+  Text: "text",
+  Wait: "wait",
+  Help: "help",
+  NotAllowed: "not-allowed",
+  Grab: "grab",
+  Grabbing: "grabbing",
+  Move: "move",
+  ZoomIn: "zoom-in",
+  ZoomOut: "zoom-out",
+  None: "none",
+} as const;
+export type CursorToken = (typeof Cursor)[keyof typeof Cursor];
+
+export const WhiteSpace = {
+  Normal: "normal",
+  NoWrap: "nowrap",
+  Pre: "pre",
+  PreWrap: "pre-wrap",
+  PreLine: "pre-line",
+  BreakSpaces: "break-spaces",
+} as const;
+export type WhiteSpaceToken = (typeof WhiteSpace)[keyof typeof WhiteSpace];
+
 // ── Border ───────────────────────────────────────────────────────────
 
 export const BorderRadius = {

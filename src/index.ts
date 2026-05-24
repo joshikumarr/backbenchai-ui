@@ -89,6 +89,8 @@ export {
   FlexDirection,
   FlexWrap,
   Position,
+  Cursor,
+  WhiteSpace,
 } from "./tokens";
 export type {
   DisplayToken,
@@ -98,6 +100,8 @@ export type {
   FlexDirectionToken,
   FlexWrapToken,
   PositionToken,
+  CursorToken,
+  WhiteSpaceToken,
 } from "./tokens";
 
 export { BorderRadius, BorderColor, BorderWidth } from "./tokens";

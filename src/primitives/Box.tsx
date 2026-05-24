@@ -1,6 +1,7 @@
 import React, { forwardRef } from "react";
 import type {
   SpaceToken,
+  TextColorToken,
   BackgroundColorToken,
   BorderRadiusToken,
   BorderColorToken,
@@ -14,6 +15,8 @@ import type {
   FlexDirectionToken,
   FlexWrapToken,
   PositionToken,
+  CursorToken,
+  WhiteSpaceToken,
 } from "../tokens";
 import { useResponsiveValue, type Responsive } from "../hooks/useResponsive";
 
@@ -72,13 +75,23 @@ export interface BoxProps extends React.HTMLAttributes<HTMLElement> {
   borderWidth?: BorderWidthToken;
   overflow?: "hidden" | "auto" | "scroll" | "visible";
   elevation?: ElevationToken;
-  maxWidth?: ContainerWidthToken;
+
+  // ── Sizing ────────────────────────────────────────────────────────
+  /** CSS width — accepts ContainerWidth token or raw "100%" / "640px". */
+  width?: ContainerWidthToken | string | number;
+  /** CSS max-width — accepts ContainerWidth token or raw string. Auto-applies marginInline:auto when set as a ContainerWidth token. */
+  maxWidth?: ContainerWidthToken | string;
+  /** CSS height. */
+  height?: string | number;
+  /** CSS min-height. */
+  minHeight?: string | number;
+  /** CSS max-height. */
+  maxHeight?: string | number;
   /**
-   * Override CSS min-width. Pass 0 to let this Box shrink below its content
-   * size inside a flex parent — the canonical fix for "ancestor doesn't allow
-   * my truncating child to ellipsize". Default behaviour is auto.
+   * CSS min-width. `0` is the canonical flex-shrink fix (lets this Box
+   * shrink below its content size inside a flex parent).
    */
-  minWidth?: 0 | "auto";
+  minWidth?: 0 | "auto" | string | number;
 
   // ── Layout (display + flexbox) ────────────────────────────────────
   display?: Responsive<DisplayToken>;
@@ -88,7 +101,7 @@ export interface BoxProps extends React.HTMLAttributes<HTMLElement> {
   flexDirection?: Responsive<FlexDirectionToken>;
   flexWrap?: FlexWrapToken;
   /** flex shorthand: number, "auto", or "none". */
-  flex?: number | "auto" | "none";
+  flex?: number | "auto" | "none" | string;
   flexGrow?: number;
   flexShrink?: number;
   /** Gap between flex/grid children. */
@@ -98,6 +111,18 @@ export interface BoxProps extends React.HTMLAttributes<HTMLElement> {
   position?: PositionToken;
   inset?: 0 | string;
   zIndex?: number;
+
+  // ── Visual ────────────────────────────────────────────────────────
+  /** CSS color (inherited by SVG icon children). */
+  color?: TextColorToken | string;
+  /** Opacity 0–1. */
+  opacity?: number;
+  /** Cursor style. */
+  cursor?: CursorToken;
+  /** white-space behavior. */
+  whiteSpace?: WhiteSpaceToken;
+  /** pointer-events — useful for non-interactive overlays. */
+  pointerEvents?: "auto" | "none";
 
   children?: React.ReactNode;
 }
@@ -132,7 +157,11 @@ export const Box = forwardRef<HTMLElement, BoxProps>(
       borderWidth = "1px",
       overflow,
       elevation,
+      width,
       maxWidth,
+      height,
+      minHeight,
+      maxHeight,
       minWidth,
       display,
       alignItems,
@@ -147,6 +176,11 @@ export const Box = forwardRef<HTMLElement, BoxProps>(
       position,
       inset,
       zIndex,
+      color,
+      opacity,
+      cursor,
+      whiteSpace,
+      pointerEvents,
       style,
       children,
       ...rest
@@ -217,7 +251,11 @@ export const Box = forwardRef<HTMLElement, BoxProps>(
       ...borderStyles,
       ...(overflow && { overflow }),
       ...(elevation && { boxShadow: elevation }),
+      ...(width !== undefined && { width }),
       ...(maxWidth && { maxWidth, marginInline: "auto" }),
+      ...(height !== undefined && { height }),
+      ...(minHeight !== undefined && { minHeight }),
+      ...(maxHeight !== undefined && { maxHeight }),
       ...(minWidth !== undefined && { minWidth }),
       ...(resolvedDisplay && { display: resolvedDisplay }),
       ...(resolvedAlignItems && { alignItems: resolvedAlignItems }),
@@ -232,6 +270,11 @@ export const Box = forwardRef<HTMLElement, BoxProps>(
       ...(position && { position }),
       ...(inset !== undefined && { inset }),
       ...(zIndex !== undefined && { zIndex }),
+      ...(color && { color }),
+      ...(opacity !== undefined && { opacity }),
+      ...(cursor && { cursor }),
+      ...(whiteSpace && { whiteSpace }),
+      ...(pointerEvents && { pointerEvents }),
       ...style,
     };
 
