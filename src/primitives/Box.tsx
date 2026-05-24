@@ -110,6 +110,11 @@ export interface BoxProps extends React.HTMLAttributes<HTMLElement> {
   // ── Position ──────────────────────────────────────────────────────
   position?: PositionToken;
   inset?: 0 | string;
+  /** CSS top — pass a number for px, a string for any other unit. */
+  top?: number | string;
+  right?: number | string;
+  bottom?: number | string;
+  left?: number | string;
   zIndex?: number;
 
   // ── Visual ────────────────────────────────────────────────────────
@@ -123,6 +128,25 @@ export interface BoxProps extends React.HTMLAttributes<HTMLElement> {
   whiteSpace?: WhiteSpaceToken;
   /** pointer-events — useful for non-interactive overlays. */
   pointerEvents?: "auto" | "none";
+  /**
+   * CSS `background` shorthand. Use for gradients, color-mix, or images.
+   * For solid theme colors, prefer `backgroundColor` (token-typed).
+   */
+  background?: string;
+  /** CSS `border` shorthand. For token-driven borders prefer `borderColor` + `borderSide`. */
+  border?: string;
+  /** CSS `box-shadow`. For tokenized shadows prefer `elevation`. */
+  boxShadow?: string;
+  /** CSS `transition` shorthand. */
+  transition?: string;
+  /** CSS `transform`. */
+  transform?: string;
+  /** CSS `aspect-ratio`. */
+  aspectRatio?: string | number;
+  /** CSS `filter` (e.g., `blur(8px)`). */
+  filter?: string;
+  /** CSS `backdrop-filter` (frosted-glass effects). */
+  backdropFilter?: string;
 
   children?: React.ReactNode;
 }
@@ -175,12 +199,24 @@ export const Box = forwardRef<HTMLElement, BoxProps>(
       gap,
       position,
       inset,
+      top,
+      right,
+      bottom,
+      left,
       zIndex,
       color,
       opacity,
       cursor,
       whiteSpace,
       pointerEvents,
+      background,
+      border,
+      boxShadow,
+      transition,
+      transform,
+      aspectRatio,
+      filter,
+      backdropFilter,
       style,
       children,
       ...rest
@@ -269,12 +305,24 @@ export const Box = forwardRef<HTMLElement, BoxProps>(
       ...(gap && { gap }),
       ...(position && { position }),
       ...(inset !== undefined && { inset }),
+      ...(top !== undefined && { top }),
+      ...(right !== undefined && { right }),
+      ...(bottom !== undefined && { bottom }),
+      ...(left !== undefined && { left }),
       ...(zIndex !== undefined && { zIndex }),
       ...(color && { color }),
       ...(opacity !== undefined && { opacity }),
       ...(cursor && { cursor }),
       ...(whiteSpace && { whiteSpace }),
       ...(pointerEvents && { pointerEvents }),
+      ...(background && { background }),
+      ...(border && { border }),
+      ...(boxShadow && { boxShadow }),
+      ...(transition && { transition }),
+      ...(transform && { transform }),
+      ...(aspectRatio !== undefined && { aspectRatio }),
+      ...(filter && { filter }),
+      ...(backdropFilter && { backdropFilter }),
       ...style,
     };
 

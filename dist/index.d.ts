@@ -288,6 +288,11 @@ export declare interface BoxProps extends default_2.HTMLAttributes<HTMLElement> 
     gap?: SpaceToken;
     position?: PositionToken;
     inset?: 0 | string;
+    /** CSS top — pass a number for px, a string for any other unit. */
+    top?: number | string;
+    right?: number | string;
+    bottom?: number | string;
+    left?: number | string;
     zIndex?: number;
     /** CSS color (inherited by SVG icon children). */
     color?: TextColorToken | string;
@@ -299,6 +304,25 @@ export declare interface BoxProps extends default_2.HTMLAttributes<HTMLElement> 
     whiteSpace?: WhiteSpaceToken;
     /** pointer-events — useful for non-interactive overlays. */
     pointerEvents?: "auto" | "none";
+    /**
+     * CSS `background` shorthand. Use for gradients, color-mix, or images.
+     * For solid theme colors, prefer `backgroundColor` (token-typed).
+     */
+    background?: string;
+    /** CSS `border` shorthand. For token-driven borders prefer `borderColor` + `borderSide`. */
+    border?: string;
+    /** CSS `box-shadow`. For tokenized shadows prefer `elevation`. */
+    boxShadow?: string;
+    /** CSS `transition` shorthand. */
+    transition?: string;
+    /** CSS `transform`. */
+    transform?: string;
+    /** CSS `aspect-ratio`. */
+    aspectRatio?: string | number;
+    /** CSS `filter` (e.g., `blur(8px)`). */
+    filter?: string;
+    /** CSS `backdrop-filter` (frosted-glass effects). */
+    backdropFilter?: string;
     children?: default_2.ReactNode;
 }
 
@@ -1760,9 +1784,16 @@ export declare interface TextProps extends default_2.HTMLAttributes<HTMLElement>
     fontFamily?: FontFamilyToken;
     letterSpacing?: LetterSpacingToken;
     align?: default_2.CSSProperties["textAlign"];
-    textTransform?: default_2.CSSProperties["textTransform"];
+    textTransform?: TextTransformToken | default_2.CSSProperties["textTransform"];
     lineHeight?: number | string;
     opacity?: number;
+    /** Italicizes the text (font-style: italic). */
+    italic?: boolean;
+    /**
+     * Multi-line clamp. Truncates to N lines with `…`. Implements the
+     * `-webkit-line-clamp` 3-property combo for you.
+     */
+    clamp?: number;
     /**
      * Single-line ellipsis truncation. Applies overflow:hidden + text-overflow:ellipsis
      * + white-space:nowrap + min-width:0. Use on a label that should shrink inside a

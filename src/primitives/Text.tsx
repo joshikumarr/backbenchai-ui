@@ -1,5 +1,12 @@
 import React, { forwardRef } from "react";
-import type { TextColorToken, FontSizeToken, FontWeightToken, FontFamilyToken, LetterSpacingToken } from "../tokens";
+import type {
+  TextColorToken,
+  FontSizeToken,
+  FontWeightToken,
+  FontFamilyToken,
+  LetterSpacingToken,
+  TextTransformToken,
+} from "../tokens";
 
 type AllowedElements =
   | "span"
@@ -24,9 +31,16 @@ export interface TextProps extends React.HTMLAttributes<HTMLElement> {
   fontFamily?: FontFamilyToken;
   letterSpacing?: LetterSpacingToken;
   align?: React.CSSProperties["textAlign"];
-  textTransform?: React.CSSProperties["textTransform"];
+  textTransform?: TextTransformToken | React.CSSProperties["textTransform"];
   lineHeight?: number | string;
   opacity?: number;
+  /** Italicizes the text (font-style: italic). */
+  italic?: boolean;
+  /**
+   * Multi-line clamp. Truncates to N lines with `…`. Implements the
+   * `-webkit-line-clamp` 3-property combo for you.
+   */
+  clamp?: number;
   /**
    * Single-line ellipsis truncation. Applies overflow:hidden + text-overflow:ellipsis
    * + white-space:nowrap + min-width:0. Use on a label that should shrink inside a
@@ -53,6 +67,8 @@ export const Text = forwardRef<HTMLElement, TextProps>(
       textTransform,
       lineHeight,
       opacity,
+      italic,
+      clamp,
       truncate,
       noWrap,
       noShrink,
@@ -72,6 +88,13 @@ export const Text = forwardRef<HTMLElement, TextProps>(
       ...(textTransform && { textTransform }),
       ...(lineHeight !== undefined && { lineHeight }),
       ...(opacity !== undefined && { opacity }),
+      ...(italic && { fontStyle: "italic" }),
+      ...(clamp !== undefined && {
+        display: "-webkit-box",
+        WebkitLineClamp: clamp,
+        WebkitBoxOrient: "vertical",
+        overflow: "hidden",
+      }),
       ...(truncate && {
         display: "block",
         overflow: "hidden",
