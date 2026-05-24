@@ -123,3 +123,25 @@ button, a, input, select, textarea {
   background: var(--bbui-selection-bg);
   color: var(--bbui-color-on-surface);
 }
+
+/* ── Button hover/pressed state hookup ───────────────────────────── */
+
+.bbui-button {
+  background: var(--bbui-btn-bg, transparent);
+  color: var(--bbui-btn-color, inherit);
+  border-color: var(--bbui-btn-border, currentColor);
+}
+.bbui-button:hover:not(:disabled) {
+  background: var(--bbui-btn-bg-hover, var(--bbui-btn-bg, transparent));
+  color: var(--bbui-btn-color-hover, var(--bbui-btn-color, inherit));
+  border-color: var(--bbui-btn-border-hover, var(--bbui-btn-border, currentColor));
+}
+.bbui-button:active:not(:disabled) {
+  background: var(--bbui-btn-bg-pressed, var(--bbui-btn-bg-hover, var(--bbui-btn-bg, transparent)));
+  color: var(--bbui-btn-color-pressed, var(--bbui-btn-color-hover, var(--bbui-btn-color, inherit)));
+  border-color: var(--bbui-btn-border-pressed, var(--bbui-btn-border-hover, var(--bbui-btn-border, currentColor)));
+}
+.bbui-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}

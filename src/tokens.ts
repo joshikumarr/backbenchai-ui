@@ -152,6 +152,87 @@ export const LetterSpacing = {
 export type LetterSpacingToken =
   (typeof LetterSpacing)[keyof typeof LetterSpacing];
 
+// ── Text transform ───────────────────────────────────────────────────
+
+export const TextTransform = {
+  None: "none",
+  Uppercase: "uppercase",
+  Lowercase: "lowercase",
+  Capitalize: "capitalize",
+} as const;
+
+export type TextTransformToken =
+  (typeof TextTransform)[keyof typeof TextTransform];
+
+// ── Layout (display + flexbox) ───────────────────────────────────────
+
+export const Display = {
+  Block: "block",
+  InlineBlock: "inline-block",
+  Inline: "inline",
+  Flex: "flex",
+  InlineFlex: "inline-flex",
+  Grid: "grid",
+  InlineGrid: "inline-grid",
+  None: "none",
+} as const;
+export type DisplayToken = (typeof Display)[keyof typeof Display];
+
+export const AlignItems = {
+  Start: "flex-start",
+  Center: "center",
+  End: "flex-end",
+  Stretch: "stretch",
+  Baseline: "baseline",
+} as const;
+export type AlignItemsToken = (typeof AlignItems)[keyof typeof AlignItems];
+
+export const JustifyContent = {
+  Start: "flex-start",
+  Center: "center",
+  End: "flex-end",
+  SpaceBetween: "space-between",
+  SpaceAround: "space-around",
+  SpaceEvenly: "space-evenly",
+} as const;
+export type JustifyContentToken =
+  (typeof JustifyContent)[keyof typeof JustifyContent];
+
+export const AlignSelf = {
+  Auto: "auto",
+  Start: "flex-start",
+  Center: "center",
+  End: "flex-end",
+  Stretch: "stretch",
+  Baseline: "baseline",
+} as const;
+export type AlignSelfToken = (typeof AlignSelf)[keyof typeof AlignSelf];
+
+export const FlexDirection = {
+  Row: "row",
+  Column: "column",
+  RowReverse: "row-reverse",
+  ColumnReverse: "column-reverse",
+} as const;
+export type FlexDirectionToken =
+  (typeof FlexDirection)[keyof typeof FlexDirection];
+
+export const FlexWrap = {
+  NoWrap: "nowrap",
+  Wrap: "wrap",
+  WrapReverse: "wrap-reverse",
+} as const;
+export type FlexWrapToken = (typeof FlexWrap)[keyof typeof FlexWrap];
+
+export const Position = {
+  Static: "static",
+  Relative: "relative",
+  Absolute: "absolute",
+  Fixed: "fixed",
+  Sticky: "sticky",
+} as const;
+export type PositionToken = (typeof Position)[keyof typeof Position];
+
 // ── Border ───────────────────────────────────────────────────────────
 
 export const BorderRadius = {

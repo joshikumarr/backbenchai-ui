@@ -72,12 +72,32 @@ export type { SpaceToken } from "./tokens";
 export { TextColor, BackgroundColor } from "./tokens";
 export type { TextColorToken, BackgroundColorToken } from "./tokens";
 
-export { FontFamily, FontSize, FontWeight, LetterSpacing } from "./tokens";
+export { FontFamily, FontSize, FontWeight, LetterSpacing, TextTransform } from "./tokens";
 export type {
   FontFamilyToken,
   FontSizeToken,
   FontWeightToken,
   LetterSpacingToken,
+  TextTransformToken,
+} from "./tokens";
+
+export {
+  Display,
+  AlignItems,
+  JustifyContent,
+  AlignSelf,
+  FlexDirection,
+  FlexWrap,
+  Position,
+} from "./tokens";
+export type {
+  DisplayToken,
+  AlignItemsToken,
+  JustifyContentToken,
+  AlignSelfToken,
+  FlexDirectionToken,
+  FlexWrapToken,
+  PositionToken,
 } from "./tokens";
 
 export { BorderRadius, BorderColor, BorderWidth } from "./tokens";

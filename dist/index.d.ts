@@ -23,6 +23,27 @@ declare type AlignInline = "start" | "center" | "end" | "stretch";
 
 declare type AlignInline_2 = "start" | "center" | "end" | "stretch";
 
+export declare const AlignItems: {
+    readonly Start: "flex-start";
+    readonly Center: "center";
+    readonly End: "flex-end";
+    readonly Stretch: "stretch";
+    readonly Baseline: "baseline";
+};
+
+export declare type AlignItemsToken = (typeof AlignItems)[keyof typeof AlignItems];
+
+export declare const AlignSelf: {
+    readonly Auto: "auto";
+    readonly Start: "flex-start";
+    readonly Center: "center";
+    readonly End: "flex-end";
+    readonly Stretch: "stretch";
+    readonly Baseline: "baseline";
+};
+
+export declare type AlignSelfToken = (typeof AlignSelf)[keyof typeof AlignSelf];
+
 declare type AllowedElements = "div" | "span" | "section" | "header" | "footer" | "nav" | "main" | "article" | "aside" | "ul" | "ol" | "li";
 
 declare type AllowedElements_2 = "span" | "p" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "strong" | "em" | "small" | "label" | "div";
@@ -245,6 +266,21 @@ export declare interface BoxProps extends default_2.HTMLAttributes<HTMLElement> 
      * my truncating child to ellipsize". Default behaviour is auto.
      */
     minWidth?: 0 | "auto";
+    display?: Responsive<DisplayToken>;
+    alignItems?: Responsive<AlignItemsToken>;
+    justifyContent?: Responsive<JustifyContentToken>;
+    alignSelf?: AlignSelfToken;
+    flexDirection?: Responsive<FlexDirectionToken>;
+    flexWrap?: FlexWrapToken;
+    /** flex shorthand: number, "auto", or "none". */
+    flex?: number | "auto" | "none";
+    flexGrow?: number;
+    flexShrink?: number;
+    /** Gap between flex/grid children. */
+    gap?: SpaceToken;
+    position?: PositionToken;
+    inset?: 0 | string;
+    zIndex?: number;
     children?: default_2.ReactNode;
 }
 
@@ -267,15 +303,47 @@ export declare type BreakpointName = "mobile" | "tablet" | "desktop";
 export declare const Button: default_2.ForwardRefExoticComponent<ButtonProps & default_2.RefAttributes<HTMLButtonElement>>;
 
 export declare interface ButtonProps extends default_2.ButtonHTMLAttributes<HTMLButtonElement> {
+    /** Default background. */
     backgroundColor?: BackgroundColorToken;
-    /** CSS gradient string — overrides backgroundColor when set */
+    /** Background on hover. Falls back to backgroundColor. */
+    hover?: BackgroundColorToken;
+    /** Background on press/active. Falls back to hover, then backgroundColor. */
+    pressed?: BackgroundColorToken;
+    /** CSS gradient — overrides backgroundColor when set. */
     gradient?: GradientToken;
+    /** Default text color. */
     color?: TextColorToken;
+    /** Text color on hover. Falls back to color. */
+    colorHover?: TextColorToken;
+    /** Text color on press. Falls back to colorHover, then color. */
+    colorPressed?: TextColorToken;
+    /** Border color. */
+    borderColor?: BorderColorToken;
+    /** Border color on hover. */
+    borderColorHover?: BorderColorToken;
+    /** Border color on press. */
+    borderColorPressed?: BorderColorToken;
+    /** Border width (default: 1px if borderColor set, else none). */
+    borderWidth?: BorderWidthToken;
+    /** Typography. */
+    size?: FontSizeToken;
+    weight?: FontWeightToken;
+    letterSpacing?: LetterSpacingToken;
+    textTransform?: TextTransformToken;
     fontFamily?: FontFamilyToken;
+    /** Gap between iconStart, label, iconEnd. */
+    gap?: SpaceToken;
+    /** Spacing. */
     padding?: SpaceToken;
     paddingBlock?: SpaceToken;
     paddingInline?: SpaceToken;
     borderRadius?: BorderRadiusToken;
+    /** Text content shorthand (alternative to children). */
+    label?: string;
+    /** Icon before the label. */
+    iconStart?: default_2.ReactNode;
+    /** Icon after the label. */
+    iconEnd?: default_2.ReactNode;
     children?: default_2.ReactNode;
 }
 
@@ -422,6 +490,19 @@ export declare const DirectionColor: {
 
 export declare type DirectionValue = keyof typeof DirectionColor;
 
+export declare const Display: {
+    readonly Block: "block";
+    readonly InlineBlock: "inline-block";
+    readonly Inline: "inline";
+    readonly Flex: "flex";
+    readonly InlineFlex: "inline-flex";
+    readonly Grid: "grid";
+    readonly InlineGrid: "inline-grid";
+    readonly None: "none";
+};
+
+export declare type DisplayToken = (typeof Display)[keyof typeof Display];
+
 export declare const Divider: default_2.ForwardRefExoticComponent<DividerProps & default_2.RefAttributes<HTMLHRElement>>;
 
 export declare interface DividerProps {
@@ -515,6 +596,23 @@ export declare const EvaluationResultColor: {
 };
 
 export declare type EvaluationResultValue = keyof typeof EvaluationResultColor;
+
+export declare const FlexDirection: {
+    readonly Row: "row";
+    readonly Column: "column";
+    readonly RowReverse: "row-reverse";
+    readonly ColumnReverse: "column-reverse";
+};
+
+export declare type FlexDirectionToken = (typeof FlexDirection)[keyof typeof FlexDirection];
+
+export declare const FlexWrap: {
+    readonly NoWrap: "nowrap";
+    readonly Wrap: "wrap";
+    readonly WrapReverse: "wrap-reverse";
+};
+
+export declare type FlexWrapToken = (typeof FlexWrap)[keyof typeof FlexWrap];
 
 export declare const FontFamily: {
     readonly Display: "var(--bbui-font-display)";
@@ -865,6 +963,17 @@ export declare interface InlineProps extends default_2.HTMLAttributes<HTMLElemen
     children?: default_2.ReactNode;
 }
 
+export declare const JustifyContent: {
+    readonly Start: "flex-start";
+    readonly Center: "center";
+    readonly End: "flex-end";
+    readonly SpaceBetween: "space-between";
+    readonly SpaceAround: "space-around";
+    readonly SpaceEvenly: "space-evenly";
+};
+
+export declare type JustifyContentToken = (typeof JustifyContent)[keyof typeof JustifyContent];
+
 export declare const Layout: default_2.ForwardRefExoticComponent<LayoutProps & default_2.RefAttributes<HTMLElement>>;
 
 export declare interface LayoutProps {
@@ -1116,6 +1225,16 @@ export declare const PersonaAccent: {
 };
 
 export declare type PersonaAccentToken = (typeof PersonaAccent)[keyof typeof PersonaAccent];
+
+export declare const Position: {
+    readonly Static: "static";
+    readonly Relative: "relative";
+    readonly Absolute: "absolute";
+    readonly Fixed: "fixed";
+    readonly Sticky: "sticky";
+};
+
+export declare type PositionToken = (typeof Position)[keyof typeof Position];
 
 export declare const ProgressTracker: default_2.ForwardRefExoticComponent<ProgressTrackerProps & default_2.RefAttributes<HTMLDivElement>>;
 
@@ -1620,6 +1739,15 @@ export declare interface TextProps extends default_2.HTMLAttributes<HTMLElement>
     noShrink?: boolean;
     children?: default_2.ReactNode;
 }
+
+export declare const TextTransform: {
+    readonly None: "none";
+    readonly Uppercase: "uppercase";
+    readonly Lowercase: "lowercase";
+    readonly Capitalize: "capitalize";
+};
+
+export declare type TextTransformToken = (typeof TextTransform)[keyof typeof TextTransform];
 
 export declare type Theme = "light" | "dark" | "system";
 

@@ -7,6 +7,13 @@ import type {
   BorderWidthToken,
   ElevationToken,
   ContainerWidthToken,
+  DisplayToken,
+  AlignItemsToken,
+  JustifyContentToken,
+  AlignSelfToken,
+  FlexDirectionToken,
+  FlexWrapToken,
+  PositionToken,
 } from "../tokens";
 import { useResponsiveValue, type Responsive } from "../hooks/useResponsive";
 
@@ -72,6 +79,26 @@ export interface BoxProps extends React.HTMLAttributes<HTMLElement> {
    * my truncating child to ellipsize". Default behaviour is auto.
    */
   minWidth?: 0 | "auto";
+
+  // ── Layout (display + flexbox) ────────────────────────────────────
+  display?: Responsive<DisplayToken>;
+  alignItems?: Responsive<AlignItemsToken>;
+  justifyContent?: Responsive<JustifyContentToken>;
+  alignSelf?: AlignSelfToken;
+  flexDirection?: Responsive<FlexDirectionToken>;
+  flexWrap?: FlexWrapToken;
+  /** flex shorthand: number, "auto", or "none". */
+  flex?: number | "auto" | "none";
+  flexGrow?: number;
+  flexShrink?: number;
+  /** Gap between flex/grid children. */
+  gap?: SpaceToken;
+
+  // ── Position ──────────────────────────────────────────────────────
+  position?: PositionToken;
+  inset?: 0 | string;
+  zIndex?: number;
+
   children?: React.ReactNode;
 }
 
@@ -107,6 +134,19 @@ export const Box = forwardRef<HTMLElement, BoxProps>(
       elevation,
       maxWidth,
       minWidth,
+      display,
+      alignItems,
+      justifyContent,
+      alignSelf,
+      flexDirection,
+      flexWrap,
+      flex,
+      flexGrow,
+      flexShrink,
+      gap,
+      position,
+      inset,
+      zIndex,
       style,
       children,
       ...rest
@@ -127,6 +167,10 @@ export const Box = forwardRef<HTMLElement, BoxProps>(
     const resolvedMarginInline = toCss(useResponsiveValue(marginInline));
     const resolvedMarginInlineStart = useResponsiveValue(marginInlineStart);
     const resolvedMarginInlineEnd = useResponsiveValue(marginInlineEnd);
+    const resolvedDisplay = useResponsiveValue(display);
+    const resolvedAlignItems = useResponsiveValue(alignItems);
+    const resolvedJustifyContent = useResponsiveValue(justifyContent);
+    const resolvedFlexDirection = useResponsiveValue(flexDirection);
 
     const borderValue = borderColor
       ? `${borderWidth} solid ${borderColor}`
@@ -175,6 +219,19 @@ export const Box = forwardRef<HTMLElement, BoxProps>(
       ...(elevation && { boxShadow: elevation }),
       ...(maxWidth && { maxWidth, marginInline: "auto" }),
       ...(minWidth !== undefined && { minWidth }),
+      ...(resolvedDisplay && { display: resolvedDisplay }),
+      ...(resolvedAlignItems && { alignItems: resolvedAlignItems }),
+      ...(resolvedJustifyContent && { justifyContent: resolvedJustifyContent }),
+      ...(alignSelf && { alignSelf }),
+      ...(resolvedFlexDirection && { flexDirection: resolvedFlexDirection }),
+      ...(flexWrap && { flexWrap }),
+      ...(flex !== undefined && { flex }),
+      ...(flexGrow !== undefined && { flexGrow }),
+      ...(flexShrink !== undefined && { flexShrink }),
+      ...(gap && { gap }),
+      ...(position && { position }),
+      ...(inset !== undefined && { inset }),
+      ...(zIndex !== undefined && { zIndex }),
       ...style,
     };
 
