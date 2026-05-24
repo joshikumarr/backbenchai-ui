@@ -18,7 +18,7 @@ import type {
   BorderWidthToken,
 } from "../tokens";
 
-export interface CardProps {
+export interface CardProps extends Omit<React.HTMLAttributes<HTMLElement>, "color"> {
   /** Padding inside the card sections (default: Spacing.Large) */
   padding?: SpaceToken;
   /** Card background (default: BackgroundColor.Default) */
@@ -53,6 +53,7 @@ export const Card = forwardRef<HTMLElement, CardProps>(
       header,
       footer,
       children,
+      ...rest
     },
     ref
   ) => {
@@ -70,6 +71,7 @@ export const Card = forwardRef<HTMLElement, CardProps>(
             borderTop: `${accentWidth} solid ${accentColor}`,
           }),
         }}
+        {...rest}
       >
         <Stack>
           {header && (

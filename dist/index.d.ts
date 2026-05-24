@@ -1,7 +1,9 @@
 import { default as default_2 } from 'react';
+import { ForwardRefExoticComponent } from 'react';
 import { JSX as JSX_2 } from 'react/jsx-runtime';
 import { ReactNode } from 'react';
 import { ReactPortal } from 'react';
+import { RefAttributes } from 'react';
 
 export declare const AccentColor: {
     readonly Occupied: "var(--bbui-accent-occupied)";
@@ -428,7 +430,7 @@ export declare interface CalendarProps {
 
 export declare const Card: default_2.ForwardRefExoticComponent<CardProps & default_2.RefAttributes<HTMLElement>>;
 
-export declare interface CardProps {
+export declare interface CardProps extends Omit<default_2.HTMLAttributes<HTMLElement>, "color"> {
     /** Padding inside the card sections (default: Spacing.Large) */
     padding?: SpaceToken;
     /** Card background (default: BackgroundColor.Default) */
@@ -1089,7 +1091,7 @@ export declare const LetterSpacing: {
 
 export declare type LetterSpacingToken = (typeof LetterSpacing)[keyof typeof LetterSpacing];
 
-export declare const LikertScale: default_2.ForwardRefExoticComponent<LikertScaleProps & default_2.RefAttributes<HTMLDivElement>>;
+export declare const LikertScale: ForwardRefExoticComponent<LikertScaleProps & RefAttributes<HTMLDivElement>>;
 
 export declare interface LikertScaleProps {
     value?: number;
