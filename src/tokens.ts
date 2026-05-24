@@ -152,6 +152,16 @@ export const LetterSpacing = {
 export type LetterSpacingToken =
   (typeof LetterSpacing)[keyof typeof LetterSpacing];
 
+// ── Font style ───────────────────────────────────────────────────────
+
+export const FontStyle = {
+  Normal: "normal",
+  Italic: "italic",
+  Oblique: "oblique",
+} as const;
+
+export type FontStyleToken = (typeof FontStyle)[keyof typeof FontStyle];
+
 // ── Text transform ───────────────────────────────────────────────────
 
 export const TextTransform = {

@@ -367,6 +367,8 @@ export declare interface ButtonProps extends default_2.ButtonHTMLAttributes<HTML
     borderColorPressed?: BorderColorToken;
     /** Border width (default: 1px if borderColor set, else none). */
     borderWidth?: BorderWidthToken;
+    /** Which sides to apply the border to. Defaults to "all" when borderColor is set. */
+    borderSide?: "top" | "bottom" | "left" | "right" | "all";
     /** Typography. */
     size?: FontSizeToken;
     weight?: FontWeightToken;
@@ -375,11 +377,18 @@ export declare interface ButtonProps extends default_2.ButtonHTMLAttributes<HTML
     fontFamily?: FontFamilyToken;
     /** Gap between iconStart, label, iconEnd. */
     gap?: SpaceToken;
-    /** Spacing. */
-    padding?: SpaceToken;
-    paddingBlock?: SpaceToken;
-    paddingInline?: SpaceToken;
+    /**
+     * Spacing — accepts shorthand arrays (`[v, h]`, `[t, h, b]`, `[t, r, b, l]`)
+     * matching Box.padding semantics.
+     */
+    padding?: ShorthandSpace_2;
+    paddingBlock?: ShorthandSpace_2;
+    paddingInline?: ShorthandSpace_2;
     borderRadius?: BorderRadiusToken;
+    /** Fixed width — pass "100%" for full-width menu-item buttons. */
+    width?: string | number;
+    /** Horizontal alignment of contents. Defaults to "center" (pill button); use "start" for menu items. */
+    align?: "start" | "center" | "end";
     /** Text content shorthand (alternative to children). */
     label?: string;
     /** Icon before the label. */
@@ -695,6 +704,14 @@ export declare const FontSize: {
 };
 
 export declare type FontSizeToken = (typeof FontSize)[keyof typeof FontSize];
+
+export declare const FontStyle: {
+    readonly Normal: "normal";
+    readonly Italic: "italic";
+    readonly Oblique: "oblique";
+};
+
+export declare type FontStyleToken = (typeof FontStyle)[keyof typeof FontStyle];
 
 export declare const FontWeight: {
     readonly Regular: 400;
@@ -1426,6 +1443,8 @@ export declare interface SelectProps extends Omit<default_2.SelectHTMLAttributes
  */
 declare type ShorthandSpace = SpaceToken | readonly SpaceToken[];
 
+declare type ShorthandSpace_2 = SpaceToken | readonly SpaceToken[];
+
 /**
  * Show — conditional render based on the current breakpoint.
  *
@@ -1787,8 +1806,8 @@ export declare interface TextProps extends default_2.HTMLAttributes<HTMLElement>
     textTransform?: TextTransformToken | default_2.CSSProperties["textTransform"];
     lineHeight?: number | string;
     opacity?: number;
-    /** Italicizes the text (font-style: italic). */
-    italic?: boolean;
+    /** Font style — pass `FontStyle.Italic` to italicize. */
+    fontStyle?: FontStyleToken;
     /**
      * Multi-line clamp. Truncates to N lines with `…`. Implements the
      * `-webkit-line-clamp` 3-property combo for you.

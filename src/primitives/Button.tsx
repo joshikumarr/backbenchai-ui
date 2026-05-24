@@ -14,6 +14,8 @@ import type {
   TextTransformToken,
 } from "../tokens";
 
+type ShorthandSpace = SpaceToken | readonly SpaceToken[];
+
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /** Default background. */
@@ -40,6 +42,8 @@ export interface ButtonProps
   borderColorPressed?: BorderColorToken;
   /** Border width (default: 1px if borderColor set, else none). */
   borderWidth?: BorderWidthToken;
+  /** Which sides to apply the border to. Defaults to "all" when borderColor is set. */
+  borderSide?: "top" | "bottom" | "left" | "right" | "all";
 
   /** Typography. */
   size?: FontSizeToken;
@@ -51,11 +55,19 @@ export interface ButtonProps
   /** Gap between iconStart, label, iconEnd. */
   gap?: SpaceToken;
 
-  /** Spacing. */
-  padding?: SpaceToken;
-  paddingBlock?: SpaceToken;
-  paddingInline?: SpaceToken;
+  /**
+   * Spacing — accepts shorthand arrays (`[v, h]`, `[t, h, b]`, `[t, r, b, l]`)
+   * matching Box.padding semantics.
+   */
+  padding?: ShorthandSpace;
+  paddingBlock?: ShorthandSpace;
+  paddingInline?: ShorthandSpace;
   borderRadius?: BorderRadiusToken;
+
+  /** Fixed width — pass "100%" for full-width menu-item buttons. */
+  width?: string | number;
+  /** Horizontal alignment of contents. Defaults to "center" (pill button); use "start" for menu items. */
+  align?: "start" | "center" | "end";
 
   /** Text content shorthand (alternative to children). */
   label?: string;
@@ -66,6 +78,17 @@ export interface ButtonProps
 
   children?: React.ReactNode;
 }
+
+const toCss = (v: ShorthandSpace | undefined): string | undefined => {
+  if (v === undefined) return undefined;
+  return Array.isArray(v) ? v.join(" ") : (v as string);
+};
+
+const ALIGN_MAP = {
+  start: "flex-start",
+  center: "center",
+  end: "flex-end",
+} as const;
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
@@ -81,6 +104,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       borderColorHover,
       borderColorPressed,
       borderWidth = "1px",
+      borderSide = "all",
       size,
       weight,
       letterSpacing,
@@ -91,6 +115,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       paddingBlock,
       paddingInline,
       borderRadius,
+      width,
+      align = "center",
       label,
       iconStart,
       iconEnd,
@@ -112,12 +138,43 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     if (borderColorHover) cssVars["--bbui-btn-border-hover"] = borderColorHover;
     if (borderColorPressed) cssVars["--bbui-btn-border-pressed"] = borderColorPressed;
 
+    const borderValue = borderColor
+      ? `${borderWidth} solid var(--bbui-btn-border)`
+      : undefined;
+    const borderStyles: React.CSSProperties = {};
+    if (borderValue) {
+      switch (borderSide) {
+        case "top":
+          borderStyles.borderTop = borderValue;
+          break;
+        case "bottom":
+          borderStyles.borderBottom = borderValue;
+          break;
+        case "left":
+          borderStyles.borderLeft = borderValue;
+          break;
+        case "right":
+          borderStyles.borderRight = borderValue;
+          break;
+        case "all":
+          borderStyles.border = borderValue;
+          break;
+      }
+    } else {
+      borderStyles.border = "none";
+    }
+
+    const resolvedPadding = toCss(padding);
+    const resolvedPaddingBlock = toCss(paddingBlock);
+    const resolvedPaddingInline = toCss(paddingInline);
+
     const computedStyle: React.CSSProperties = {
       cursor: "pointer",
       display: "inline-flex",
       alignItems: "center",
-      justifyContent: "center",
-      border: borderColor ? `${borderWidth} solid var(--bbui-btn-border)` : "none",
+      justifyContent: ALIGN_MAP[align],
+      ...borderStyles,
+      ...(width !== undefined && { width }),
       ...(gradient && { background: gradient }),
       ...(size && { fontSize: size }),
       ...(weight && { fontWeight: weight }),
@@ -125,9 +182,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       ...(textTransform && { textTransform }),
       ...(fontFamily && { fontFamily }),
       ...(gap && { gap }),
-      ...(padding && { padding }),
-      ...(paddingBlock && { paddingBlock }),
-      ...(paddingInline && { paddingInline }),
+      ...(resolvedPadding && { padding: resolvedPadding }),
+      ...(resolvedPaddingBlock && { paddingBlock: resolvedPaddingBlock }),
+      ...(resolvedPaddingInline && { paddingInline: resolvedPaddingInline }),
       ...(borderRadius && { borderRadius }),
       ...(cssVars as React.CSSProperties),
       ...style,

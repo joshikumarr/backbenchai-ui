@@ -72,12 +72,13 @@ export type { SpaceToken } from "./tokens";
 export { TextColor, BackgroundColor } from "./tokens";
 export type { TextColorToken, BackgroundColorToken } from "./tokens";
 
-export { FontFamily, FontSize, FontWeight, LetterSpacing, TextTransform } from "./tokens";
+export { FontFamily, FontSize, FontWeight, LetterSpacing, FontStyle, TextTransform } from "./tokens";
 export type {
   FontFamilyToken,
   FontSizeToken,
   FontWeightToken,
   LetterSpacingToken,
+  FontStyleToken,
   TextTransformToken,
 } from "./tokens";
 

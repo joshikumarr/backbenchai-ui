@@ -5,6 +5,7 @@ import type {
   FontWeightToken,
   FontFamilyToken,
   LetterSpacingToken,
+  FontStyleToken,
   TextTransformToken,
 } from "../tokens";
 
@@ -34,8 +35,8 @@ export interface TextProps extends React.HTMLAttributes<HTMLElement> {
   textTransform?: TextTransformToken | React.CSSProperties["textTransform"];
   lineHeight?: number | string;
   opacity?: number;
-  /** Italicizes the text (font-style: italic). */
-  italic?: boolean;
+  /** Font style — pass `FontStyle.Italic` to italicize. */
+  fontStyle?: FontStyleToken;
   /**
    * Multi-line clamp. Truncates to N lines with `…`. Implements the
    * `-webkit-line-clamp` 3-property combo for you.
@@ -67,7 +68,7 @@ export const Text = forwardRef<HTMLElement, TextProps>(
       textTransform,
       lineHeight,
       opacity,
-      italic,
+      fontStyle,
       clamp,
       truncate,
       noWrap,
@@ -88,7 +89,7 @@ export const Text = forwardRef<HTMLElement, TextProps>(
       ...(textTransform && { textTransform }),
       ...(lineHeight !== undefined && { lineHeight }),
       ...(opacity !== undefined && { opacity }),
-      ...(italic && { fontStyle: "italic" }),
+      ...(fontStyle && { fontStyle }),
       ...(clamp !== undefined && {
         display: "-webkit-box",
         WebkitLineClamp: clamp,
