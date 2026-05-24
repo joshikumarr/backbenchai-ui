@@ -302,6 +302,8 @@ export declare interface BoxProps extends default_2.HTMLAttributes<HTMLElement> 
     cursor?: CursorToken;
     /** white-space behavior. */
     whiteSpace?: WhiteSpaceToken;
+    /** CSS line-height — useful on icon wrappers to prevent inherited extra vertical space. */
+    lineHeight?: number | string;
     /** pointer-events — useful for non-interactive overlays. */
     pointerEvents?: "auto" | "none";
     /**
