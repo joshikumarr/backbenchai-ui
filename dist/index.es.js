@@ -642,7 +642,8 @@ const l = {
   OnBrand: "var(--bbui-color-on-brand)",
   Brand: "var(--bbui-color-primary)",
   Selected: "var(--bbui-color-on-primary-container)",
-  Success: "var(--bbui-color-primary)",
+  /** Green — positive feedback (Correct, completed, success states). */
+  Success: "var(--bbui-color-success)",
   Warning: "var(--bbui-color-warning)",
   Error: "var(--bbui-color-error)",
   ErrorContainer: "var(--bbui-color-error-container)",
@@ -674,8 +675,9 @@ const l = {
   BrandBold: "var(--bbui-bg-brand-bold)",
   PrimaryContainer: "var(--bbui-bg-primary-container)",
   SecondaryContainer: "var(--bbui-bg-secondary-container)",
-  Success: "var(--bbui-bg-primary-container)",
-  SuccessBold: "var(--bbui-bg-brand)",
+  Success: "var(--bbui-bg-success)",
+  SuccessBold: "var(--bbui-bg-success-bold)",
+  SuccessTint: "var(--bbui-bg-success-tint)",
   Warning: "var(--bbui-bg-warning)",
   WarningBold: "var(--bbui-bg-warning-bold)",
   Error: "var(--bbui-bg-error)",
@@ -849,6 +851,7 @@ const l = {
   Banner: 400,
   FAB: 50
 }, ul = {
+  XSmall: "14px",
   Small: "16px",
   Medium: "20px",
   Large: "24px",
@@ -907,7 +910,7 @@ const bl = {
   Custom: "var(--bbui-persona-custom)"
 }, nt = {
   default: { backgroundColor: x.NeutralBold, color: c.Default },
-  success: { backgroundColor: x.Success, color: c.Inverse },
+  success: { backgroundColor: x.SuccessBold, color: c.OnBrand },
   warning: { backgroundColor: x.Warning, color: c.Warning },
   error: { backgroundColor: x.Error, color: c.Error },
   info: { backgroundColor: x.Info, color: c.Info },

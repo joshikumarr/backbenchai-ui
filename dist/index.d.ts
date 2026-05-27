@@ -119,8 +119,9 @@ export declare const BackgroundColor: {
     readonly BrandBold: "var(--bbui-bg-brand-bold)";
     readonly PrimaryContainer: "var(--bbui-bg-primary-container)";
     readonly SecondaryContainer: "var(--bbui-bg-secondary-container)";
-    readonly Success: "var(--bbui-bg-primary-container)";
-    readonly SuccessBold: "var(--bbui-bg-brand)";
+    readonly Success: "var(--bbui-bg-success)";
+    readonly SuccessBold: "var(--bbui-bg-success-bold)";
+    readonly SuccessTint: "var(--bbui-bg-success-tint)";
     readonly Warning: "var(--bbui-bg-warning)";
     readonly WarningBold: "var(--bbui-bg-warning-bold)";
     readonly Error: "var(--bbui-bg-error)";
@@ -959,6 +960,7 @@ export declare interface IconProps extends default_2.HTMLAttributes<HTMLSpanElem
 }
 
 export declare const IconSize: {
+    readonly XSmall: "14px";
     readonly Small: "16px";
     readonly Medium: "20px";
     readonly Large: "24px";
@@ -1735,7 +1737,8 @@ export declare const TextColor: {
     readonly OnBrand: "var(--bbui-color-on-brand)";
     readonly Brand: "var(--bbui-color-primary)";
     readonly Selected: "var(--bbui-color-on-primary-container)";
-    readonly Success: "var(--bbui-color-primary)";
+    /** Green — positive feedback (Correct, completed, success states). */
+    readonly Success: "var(--bbui-color-success)";
     readonly Warning: "var(--bbui-color-warning)";
     readonly Error: "var(--bbui-color-error)";
     readonly ErrorContainer: "var(--bbui-color-error-container)";

@@ -23,7 +23,7 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
 
 const variantStyles: Record<BadgeVariant, { backgroundColor: string; color: string }> = {
   default: { backgroundColor: BackgroundColor.NeutralBold, color: TextColor.Default },
-  success: { backgroundColor: BackgroundColor.Success, color: TextColor.Inverse },
+  success: { backgroundColor: BackgroundColor.SuccessBold, color: TextColor.OnBrand },
   warning: { backgroundColor: BackgroundColor.Warning, color: TextColor.Warning },
   error: { backgroundColor: BackgroundColor.Error, color: TextColor.Error },
   info: { backgroundColor: BackgroundColor.Info, color: TextColor.Info },
