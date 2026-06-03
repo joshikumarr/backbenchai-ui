@@ -1,11 +1,14 @@
 import React, { forwardRef } from "react";
-import type { SpaceToken } from "../tokens";
+import type { SpaceToken, AlignItemsToken } from "../tokens";
 import { useResponsiveValue } from "../hooks/useResponsive";
 import type { Responsive } from "../hooks/useResponsive";
 
 type StackElement = "div" | "span" | "ul" | "ol" | "section" | "nav";
-type AlignInline = "start" | "center" | "end" | "stretch";
-type AlignBlock = "start" | "center" | "end" | "stretch";
+/**
+ * Accepts AlignItems tokens (AlignItems.Start/.End/.Center/…) as well as the
+ * bare `"start"`/`"end"` shorthands — both resolve to the same flex value.
+ */
+type Align = AlignItemsToken | "start" | "end";
 type Grow = "hug" | "fill";
 
 export interface StackProps extends React.HTMLAttributes<HTMLElement> {
@@ -13,9 +16,9 @@ export interface StackProps extends React.HTMLAttributes<HTMLElement> {
   /** Responsive gap between children (vertical) */
   space?: Responsive<SpaceToken>;
   /** Align children along the cross axis (horizontal) */
-  alignInline?: AlignInline;
+  alignInline?: Align;
   /** Align children along the main axis (vertical) */
-  alignBlock?: AlignBlock;
+  alignBlock?: Align;
   /** Distribute children along the main axis */
   spread?: "space-between";
   /** Whether the stack grows to fill available space */
@@ -25,11 +28,15 @@ export interface StackProps extends React.HTMLAttributes<HTMLElement> {
   children?: React.ReactNode;
 }
 
-const alignMap = {
+const alignMap: Record<string, string> = {
   start: "flex-start",
-  center: "center",
   end: "flex-end",
+  // AlignItems token values pass through unchanged
+  "flex-start": "flex-start",
+  "flex-end": "flex-end",
+  center: "center",
   stretch: "stretch",
+  baseline: "baseline",
 };
 
 export const Stack = forwardRef<HTMLElement, StackProps>(

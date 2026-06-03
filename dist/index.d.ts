@@ -17,13 +17,17 @@ export declare const AccentColor: {
 
 export declare type AccentColorToken = (typeof AccentColor)[keyof typeof AccentColor];
 
-declare type AlignBlock = "start" | "center" | "end" | "stretch";
+/**
+ * Accepts AlignItems tokens (AlignItems.Start/.End/.Center/…) as well as the
+ * bare `"start"`/`"end"` shorthands — both resolve to the same flex value.
+ */
+declare type Align = AlignItemsToken | "start" | "end";
 
-declare type AlignBlock_2 = "start" | "center" | "end" | "baseline" | "stretch";
-
-declare type AlignInline = "start" | "center" | "end" | "stretch";
-
-declare type AlignInline_2 = "start" | "center" | "end" | "stretch";
+/**
+ * Accepts AlignItems tokens (AlignItems.Start/.End/.Center/…) as well as the
+ * bare `"start"`/`"end"` shorthands — both resolve to the same flex value.
+ */
+declare type Align_2 = AlignItemsToken | "start" | "end";
 
 export declare const AlignItems: {
     readonly Start: "flex-start";
@@ -1033,9 +1037,9 @@ export declare interface InlineProps extends default_2.HTMLAttributes<HTMLElemen
      */
     rowSpace?: SpaceToken;
     /** Align children on the cross axis (vertical) */
-    alignBlock?: AlignBlock_2;
+    alignBlock?: Align_2;
     /** Align children on the main axis (horizontal) */
-    alignInline?: AlignInline_2;
+    alignInline?: Align_2;
     /** Distribute children along the main axis */
     spread?: "space-between";
     /** Whether children wrap */
@@ -1055,6 +1059,27 @@ export declare interface InlineProps extends default_2.HTMLAttributes<HTMLElemen
      * my truncating child to ellipsize"). Default behaviour is auto.
      */
     minWidth?: 0 | "auto";
+    children?: default_2.ReactNode;
+}
+
+/**
+ * Inset — the padding primitive, completing the spacing trio with Stack and
+ * Inline. Where Stack/Inline space children apart, Inset adds even padding
+ * around them. Symmetric only: reach for Box when you need per-side padding
+ * or anything beyond padding (background, border, flex).
+ */
+export declare const Inset: default_2.ForwardRefExoticComponent<InsetProps & default_2.RefAttributes<HTMLElement>>;
+
+declare type InsetElement = "div" | "span" | "section" | "article" | "header" | "footer";
+
+export declare interface InsetProps extends default_2.HTMLAttributes<HTMLElement> {
+    as?: InsetElement;
+    /** Padding on all four sides — overridden per-axis by block/inline */
+    space?: Responsive<SpaceToken>;
+    /** Vertical padding (top + bottom) — overrides space on the block axis */
+    block?: Responsive<SpaceToken>;
+    /** Horizontal padding (left + right) — overrides space on the inline axis */
+    inline?: Responsive<SpaceToken>;
     children?: default_2.ReactNode;
 }
 
@@ -1594,9 +1619,9 @@ export declare interface StackProps extends default_2.HTMLAttributes<HTMLElement
     /** Responsive gap between children (vertical) */
     space?: Responsive<SpaceToken>;
     /** Align children along the cross axis (horizontal) */
-    alignInline?: AlignInline;
+    alignInline?: Align;
     /** Align children along the main axis (vertical) */
-    alignBlock?: AlignBlock;
+    alignBlock?: Align;
     /** Distribute children along the main axis */
     spread?: "space-between";
     /** Whether the stack grows to fill available space */
@@ -1753,6 +1778,12 @@ export declare const TextColor: {
     readonly OnWarning: "var(--bbui-color-on-warning)";
     /** Text on info containers */
     readonly OnInfo: "var(--bbui-color-on-info)";
+    /**
+     * Brand gradient clipped to the glyphs (background-clip: text). Text
+     * special-cases this value — it paints the gradient as the fill instead
+     * of a flat color. Backed by the same `--bbui-gradient-brand` as Gradient.Brand.
+     */
+    readonly Gradient: "var(--bbui-gradient-brand)";
 };
 
 export declare type TextColorToken = (typeof TextColor)[keyof typeof TextColor];

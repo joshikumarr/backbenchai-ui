@@ -93,6 +93,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          padding: Spacing.Large,
           backgroundColor: BackgroundColor.Overlay,
         }}
         onClick={(e: React.MouseEvent) => {

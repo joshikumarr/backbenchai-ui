@@ -1,11 +1,19 @@
 import React, { forwardRef, Fragment } from "react";
-import type { SpaceToken, BorderRadiusToken, ElevationToken } from "../tokens";
+import type {
+  SpaceToken,
+  BorderRadiusToken,
+  ElevationToken,
+  AlignItemsToken,
+} from "../tokens";
 import { useResponsiveValue } from "../hooks/useResponsive";
 import type { Responsive } from "../hooks/useResponsive";
 
 type InlineElement = "div" | "span" | "ul" | "ol" | "nav";
-type AlignInline = "start" | "center" | "end" | "stretch";
-type AlignBlock = "start" | "center" | "end" | "baseline" | "stretch";
+/**
+ * Accepts AlignItems tokens (AlignItems.Start/.End/.Center/…) as well as the
+ * bare `"start"`/`"end"` shorthands — both resolve to the same flex value.
+ */
+type Align = AlignItemsToken | "start" | "end";
 type Grow = "hug" | "fill";
 
 /**
@@ -29,9 +37,9 @@ export interface InlineProps extends React.HTMLAttributes<HTMLElement> {
    */
   rowSpace?: SpaceToken;
   /** Align children on the cross axis (vertical) */
-  alignBlock?: AlignBlock;
+  alignBlock?: Align;
   /** Align children on the main axis (horizontal) */
-  alignInline?: AlignInline;
+  alignInline?: Align;
   /** Distribute children along the main axis */
   spread?: "space-between";
   /** Whether children wrap */
@@ -56,8 +64,11 @@ export interface InlineProps extends React.HTMLAttributes<HTMLElement> {
 
 const alignMap: Record<string, string> = {
   start: "flex-start",
-  center: "center",
   end: "flex-end",
+  // AlignItems token values pass through unchanged
+  "flex-start": "flex-start",
+  "flex-end": "flex-end",
+  center: "center",
   stretch: "stretch",
   baseline: "baseline",
 };

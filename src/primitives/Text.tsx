@@ -1,4 +1,5 @@
 import React, { forwardRef } from "react";
+import { TextColor } from "../tokens";
 import type {
   TextColorToken,
   FontSizeToken,
@@ -82,7 +83,16 @@ export const Text = forwardRef<HTMLElement, TextProps>(
     const computedStyle: React.CSSProperties = {
       ...(size && { fontSize: size }),
       ...(weight && { fontWeight: weight }),
-      ...(color && { color }),
+      ...(color &&
+        (color === TextColor.Gradient
+          ? {
+              background: color,
+              backgroundClip: "text",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              color: "transparent",
+            }
+          : { color })),
       ...(fontFamily && { fontFamily }),
       ...(letterSpacing && { letterSpacing }),
       ...(align && { textAlign: align }),

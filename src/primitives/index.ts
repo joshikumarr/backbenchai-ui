@@ -13,6 +13,9 @@ export type { StackProps } from "./Stack";
 export { Inline } from "./Inline";
 export type { InlineProps } from "./Inline";
 
+export { Inset } from "./Inset";
+export type { InsetProps } from "./Inset";
+
 export { Text } from "./Text";
 export type { TextProps } from "./Text";
 

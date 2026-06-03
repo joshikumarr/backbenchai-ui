@@ -60,6 +60,12 @@ export const TextColor = {
   OnWarning: "var(--bbui-color-on-warning)",
   /** Text on info containers */
   OnInfo: "var(--bbui-color-on-info)",
+  /**
+   * Brand gradient clipped to the glyphs (background-clip: text). Text
+   * special-cases this value — it paints the gradient as the fill instead
+   * of a flat color. Backed by the same `--bbui-gradient-brand` as Gradient.Brand.
+   */
+  Gradient: "var(--bbui-gradient-brand)",
 } as const;
 
 export type TextColorToken = (typeof TextColor)[keyof typeof TextColor];
