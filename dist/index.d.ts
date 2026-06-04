@@ -139,12 +139,14 @@ export declare const BackgroundColor: {
     readonly WarningTint: "var(--bbui-bg-warning-tint)";
     readonly InfoTint: "var(--bbui-bg-info-tint)";
     readonly AccentTint: "var(--bbui-bg-accent-tint)";
+    /** Brand navy tint (#163255) — a fixed surface, independent of theme. */
+    readonly BrandTint: "#163255";
     /**
      * Brand blue→gold gradient. A gradient is NOT a valid `background-color`, so
      * Box special-cases this value and emits `background` instead. Theme-aware
      * via the primary/warning color vars.
      */
-    readonly Gradient: "linear-gradient(to right, var(--bbui-color-primary), var(--bbui-color-warning))";
+    readonly Gradient: "linear-gradient(to right, #ffffff80, #16325580, color-mix(in srgb, var(--bbui-color-warning) 50%, transparent))";
 };
 
 export declare type BackgroundColorToken = (typeof BackgroundColor)[keyof typeof BackgroundColor];
