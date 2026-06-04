@@ -106,6 +106,12 @@ export const BackgroundColor = {
   WarningTint: "var(--bbui-bg-warning-tint)",
   InfoTint: "var(--bbui-bg-info-tint)",
   AccentTint: "var(--bbui-bg-accent-tint)",
+  /**
+   * Brand blue→gold gradient. A gradient is NOT a valid `background-color`, so
+   * Box special-cases this value and emits `background` instead. Theme-aware
+   * via the primary/warning color vars.
+   */
+  Gradient: "linear-gradient(to right, var(--bbui-color-primary), var(--bbui-color-warning))",
 } as const;
 
 export type BackgroundColorToken =

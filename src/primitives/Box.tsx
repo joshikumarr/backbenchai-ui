@@ -18,6 +18,7 @@ import type {
   CursorToken,
   WhiteSpaceToken,
 } from "../tokens";
+import { BackgroundColor } from "../tokens";
 import { useResponsiveValue, type Responsive } from "../hooks/useResponsive";
 
 type AllowedElements =
@@ -309,7 +310,10 @@ export const Box = forwardRef<HTMLElement, BoxProps>(
       ...(resolvedMarginRight && { marginRight: resolvedMarginRight }),
       ...(resolvedMarginBottom && { marginBottom: resolvedMarginBottom }),
       ...(resolvedMarginLeft && { marginLeft: resolvedMarginLeft }),
-      ...(backgroundColor && { backgroundColor }),
+      ...(backgroundColor &&
+        (backgroundColor === BackgroundColor.Gradient
+          ? { background: backgroundColor }
+          : { backgroundColor })),
       ...(borderRadius && { borderRadius }),
       ...borderStyles,
       ...(overflow && { overflow }),
