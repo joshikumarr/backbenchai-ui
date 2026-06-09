@@ -554,6 +554,7 @@ export declare const ContainerWidth: {
     readonly Large: "1024px";
     readonly XLarge: "1280px";
     readonly XXLarge: "1600px";
+    readonly XXXLarge: "1800px";
 };
 
 export declare type ContainerWidthToken = (typeof ContainerWidth)[keyof typeof ContainerWidth];
@@ -730,6 +731,9 @@ export declare const FontSize: {
     readonly XXLarge: "30px";
     readonly XXXLarge: "36px";
     readonly Huge: "48px";
+    /** Display tier — hero headlines */
+    readonly Display: "64px";
+    readonly Mega: "84px";
 };
 
 export declare type FontSizeToken = (typeof FontSize)[keyof typeof FontSize];

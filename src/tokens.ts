@@ -139,6 +139,9 @@ export const FontSize = {
   XXLarge: "30px",
   XXXLarge: "36px",
   Huge: "48px",
+  /** Display tier — hero headlines */
+  Display: "64px",
+  Mega: "84px",
 } as const;
 
 export type FontSizeToken = (typeof FontSize)[keyof typeof FontSize];
@@ -369,6 +372,7 @@ export const ContainerWidth = {
   Large: "1024px",
   XLarge: "1280px",
   XXLarge: "1600px",
+  XXXLarge: "1800px",
 } as const;
 
 export type ContainerWidthToken =

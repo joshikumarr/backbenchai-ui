@@ -108,7 +108,10 @@ const i = {
   XLarge: "24px",
   XXLarge: "30px",
   XXXLarge: "36px",
-  Huge: "48px"
+  Huge: "48px",
+  /** Display tier — hero headlines */
+  Display: "64px",
+  Mega: "84px"
 }, R = {
   Regular: 400,
   Medium: 500,
@@ -246,7 +249,8 @@ const i = {
   Medium: "768px",
   Large: "1024px",
   XLarge: "1280px",
-  XXLarge: "1600px"
+  XXLarge: "1600px",
+  XXXLarge: "1800px"
 }, pe = {
   Dropdown: 100,
   Sticky: 200,
