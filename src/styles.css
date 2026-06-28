@@ -114,7 +114,9 @@ button, a, input, select, textarea {
     color 200ms ease,
     border-color 200ms ease,
     box-shadow 200ms ease,
-    opacity 200ms ease;
+    opacity 200ms ease,
+    filter 150ms ease-out,
+    transform 120ms ease-out;
 }
 
 /* ── Selection ───────────────────────────────────────────────────── */
@@ -144,4 +146,31 @@ button, a, input, select, textarea {
 .bbui-button:disabled {
   cursor: not-allowed;
   opacity: 0.5;
+}
+
+/* ── Default interactive affordance ──────────────────────────────────
+ * Every button/link gets feedback even without per-instance hover/pressed
+ * colors. GPU-only (filter/transform) so it layers on top of inline
+ * background/color without specificity fights, and is theme-agnostic
+ * (brightness works in light and dark). Hover is pointer-gated so touch
+ * devices don't get stuck-hover; press is a snappy system response. */
+@media (hover: hover) and (pointer: fine) {
+  .bbui-button:hover:not(:disabled) {
+    filter: brightness(1.06);
+  }
+  a:hover {
+    filter: brightness(1.1);
+  }
+}
+.bbui-button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  button, a, input, select, textarea {
+    transition: none;
+  }
+  .bbui-button:active:not(:disabled) {
+    transform: none;
+  }
 }

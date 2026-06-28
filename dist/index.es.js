@@ -21,7 +21,7 @@ const i = {
   Size7: "112px",
   Size8: "128px",
   Size16: "256px"
-}, c = {
+}, u = {
   Default: "var(--bbui-color-on-surface)",
   Subtle: "var(--bbui-color-subtle)",
   Subtlest: "var(--bbui-color-subtlest)",
@@ -364,9 +364,9 @@ const ye = (e) => {
     paddingInline: a,
     paddingInlineStart: d,
     paddingInlineEnd: s,
-    margin: u,
+    margin: p,
     marginBlock: b,
-    marginBlockStart: p,
+    marginBlockStart: c,
     marginBlockEnd: g,
     marginInline: h,
     marginInlineStart: m,
@@ -423,7 +423,7 @@ const ye = (e) => {
     children: Fn,
     ...On
   }, Hn) => {
-    const Qe = ye($(t)), en = ye($(r)), nn = $(l), tn = $(o), rn = ye($(a)), ln = $(d), on = $(s), an = ye($(u)), sn = ye($(b)), dn = $(p), cn = $(g), un = ye($(h)), pn = $(m), bn = $(x), hn = $(v), gn = $(C), mn = $(B), fn = $(H), yn = $(V), xn = $(Z), vn = $(q), Sn = $(de), me = z ? `${O} solid ${z}` : void 0, fe = {};
+    const Qe = ye($(t)), en = ye($(r)), nn = $(l), tn = $(o), rn = ye($(a)), ln = $(d), on = $(s), an = ye($(p)), sn = ye($(b)), dn = $(c), cn = $(g), un = ye($(h)), pn = $(m), bn = $(x), hn = $(v), gn = $(C), mn = $(B), fn = $(H), yn = $(V), xn = $(Z), vn = $(q), Sn = $(de), me = z ? `${O} solid ${z}` : void 0, fe = {};
     if (me && F)
       switch (F) {
         case "top":
@@ -554,9 +554,9 @@ const Xn = {
     grow: a = "hug",
     marginBlockStart: d,
     marginBlockEnd: s,
-    style: u,
+    style: p,
     children: b,
-    ...p
+    ...c
   }, g) => {
     const m = {
       display: "flex",
@@ -568,11 +568,11 @@ const Xn = {
       ...a === "fill" && { flex: "1 1 auto" },
       ...d && { marginBlockStart: d },
       ...s && { marginBlockEnd: s },
-      ...u
+      ...p
     };
     return te.createElement(
       e,
-      { ...p, ref: g, style: m },
+      { ...c, ref: g, style: m },
       b
     );
   }
@@ -597,9 +597,9 @@ const Cn = {
     spread: a,
     shouldWrap: d,
     separator: s,
-    grow: u = "hug",
+    grow: p = "hug",
     marginBlockStart: b,
-    marginBlockEnd: p,
+    marginBlockEnd: c,
     borderRadius: g,
     overflow: h,
     elevation: m,
@@ -617,9 +617,9 @@ const Cn = {
       ...o && !a && { justifyContent: Cn[o] },
       ...a && { justifyContent: a },
       ...d && { flexWrap: "wrap" },
-      ...u === "fill" && { flex: "1 1 auto" },
+      ...p === "fill" && { flex: "1 1 auto" },
       ...b && { marginBlockStart: b },
-      ...p && { marginBlockEnd: p },
+      ...c && { marginBlockEnd: c },
       ...g && { borderRadius: g },
       ...h && { overflow: h },
       ...m && { boxShadow: m },
@@ -644,7 +644,7 @@ const Cn = {
 W.displayName = "Inline";
 const Zn = L(
   ({ as: e = "div", space: t, block: r, inline: l, style: o, children: a, ...d }, s) => {
-    const u = $(t), b = $(r), p = $(l), g = b ?? u, h = p ?? u, m = {
+    const p = $(t), b = $(r), c = $(l), g = b ?? p, h = c ?? p, m = {
       ...g && { paddingBlock: g },
       ...h && { paddingInline: h },
       ...o
@@ -667,9 +667,9 @@ const D = L(
     letterSpacing: a,
     align: d,
     textTransform: s,
-    lineHeight: u,
+    lineHeight: p,
     opacity: b,
-    fontStyle: p,
+    fontStyle: c,
     clamp: g,
     truncate: h,
     noWrap: m,
@@ -681,7 +681,7 @@ const D = L(
     const X = {
       ...t && { fontSize: t },
       ...r && { fontWeight: r },
-      ...l && (l === c.Gradient ? {
+      ...l && (l === u.Gradient ? {
         background: l,
         backgroundClip: "text",
         WebkitBackgroundClip: "text",
@@ -692,9 +692,9 @@ const D = L(
       ...a && { letterSpacing: a },
       ...d && { textAlign: d },
       ...s && { textTransform: s },
-      ...u !== void 0 && { lineHeight: u },
+      ...p !== void 0 && { lineHeight: p },
       ...b !== void 0 && { opacity: b },
-      ...p && { fontStyle: p },
+      ...c && { fontStyle: c },
       ...g !== void 0 && {
         display: "-webkit-box",
         WebkitLineClamp: g,
@@ -734,9 +734,9 @@ const zn = L(
     marginBlockEnd: a,
     borderRadius: d,
     overflow: s,
-    elevation: u,
+    elevation: p,
     style: b,
-    children: p,
+    children: c,
     ...g
   }, h) => {
     const m = $(t ?? 1), x = $(r ?? "0"), v = {
@@ -748,13 +748,13 @@ const zn = L(
       ...a && { marginBlockEnd: a },
       ...d && { borderRadius: d },
       ...s && { overflow: s },
-      ...u && { boxShadow: u },
+      ...p && { boxShadow: p },
       ...b
     };
     return te.createElement(
       e,
       { ...g, ref: h, style: v },
-      p
+      c
     );
   }
 );
@@ -769,9 +769,9 @@ const he = L(
     paddingBlock: a,
     paddingBlockStart: d,
     paddingInline: s,
-    borderRadius: u,
+    borderRadius: p,
     textTransform: b,
-    display: p,
+    display: c,
     alignSelf: g,
     style: h,
     children: m,
@@ -786,9 +786,9 @@ const he = L(
       ...a && { paddingBlock: a },
       ...d && { paddingBlockStart: d },
       ...s && { paddingInline: s },
-      ...u && { borderRadius: u },
+      ...p && { borderRadius: p },
       ...b && { textTransform: b },
-      ...p && { display: p },
+      ...c && { display: c },
       ...g && { alignSelf: g },
       ...h
     };
@@ -798,7 +798,7 @@ const he = L(
 he.displayName = "Anchor";
 const Be = L(
   ({ borderRadius: e, objectFit: t, width: r, height: l, fill: o, style: a, ...d }, s) => {
-    const u = {
+    const p = {
       display: "block",
       ...o ? { width: "100%", height: "100%" } : {
         ...r ? { width: r, flexShrink: 0 } : { width: "100%" },
@@ -808,7 +808,7 @@ const Be = L(
       ...t && { objectFit: t },
       ...a
     };
-    return /* @__PURE__ */ n("img", { ref: s, style: u, ...d });
+    return /* @__PURE__ */ n("img", { ref: s, style: p, ...d });
   }
 );
 Be.displayName = "Image";
@@ -829,9 +829,9 @@ const Le = (e) => {
     colorHover: a,
     colorPressed: d,
     borderColor: s,
-    borderColorHover: u,
+    borderColorHover: p,
     borderColorPressed: b,
-    borderWidth: p = "1px",
+    borderWidth: c = "1px",
     borderSide: g = "all",
     size: h,
     weight: m,
@@ -854,8 +854,8 @@ const Le = (e) => {
     ...U
   }, E) => {
     const V = {};
-    e && (V["--bbui-btn-bg"] = e), t && (V["--bbui-btn-bg-hover"] = t), r && (V["--bbui-btn-bg-pressed"] = r), o && (V["--bbui-btn-color"] = o), a && (V["--bbui-btn-color-hover"] = a), d && (V["--bbui-btn-color-pressed"] = d), s && (V["--bbui-btn-border"] = s), u && (V["--bbui-btn-border-hover"] = u), b && (V["--bbui-btn-border-pressed"] = b);
-    const Z = s ? `${p} solid var(--bbui-btn-border)` : void 0, q = {};
+    e && (V["--bbui-btn-bg"] = e), t && (V["--bbui-btn-bg-hover"] = t), r && (V["--bbui-btn-bg-pressed"] = r), o && (V["--bbui-btn-color"] = o), a && (V["--bbui-btn-color-hover"] = a), d && (V["--bbui-btn-color-pressed"] = d), s && (V["--bbui-btn-border"] = s), p && (V["--bbui-btn-border-hover"] = p), b && (V["--bbui-btn-border-pressed"] = b);
+    const Z = s ? `${c} solid var(--bbui-btn-border)` : void 0, q = {};
     if (Z)
       switch (g) {
         case "top":
@@ -915,7 +915,7 @@ const Ee = L(
     paddingInline: a,
     style: d,
     ...s
-  }, u) => {
+  }, p) => {
     const b = {
       ...e && { backgroundColor: e },
       ...t && { border: `1px solid ${t}` },
@@ -925,7 +925,7 @@ const Ee = L(
       ...a && { paddingInline: a },
       ...d
     };
-    return /* @__PURE__ */ n("input", { ref: u, style: b, ...s });
+    return /* @__PURE__ */ n("input", { ref: p, style: b, ...s });
   }
 );
 Ee.displayName = "TextInput";
@@ -955,14 +955,14 @@ const nt = L(
 );
 nt.displayName = "Icon";
 const tt = {
-  default: { backgroundColor: y.NeutralBold, color: c.Default },
-  success: { backgroundColor: y.SuccessBold, color: c.OnBrand },
-  warning: { backgroundColor: y.Warning, color: c.Warning },
-  error: { backgroundColor: y.Error, color: c.Error },
-  info: { backgroundColor: y.Info, color: c.Info },
-  brand: { backgroundColor: y.Brand, color: c.Inverse },
-  primaryTint: { backgroundColor: y.PrimaryTint, color: c.Brand },
-  errorTint: { backgroundColor: y.ErrorTint, color: c.Error },
+  default: { backgroundColor: y.NeutralBold, color: u.Default },
+  success: { backgroundColor: y.SuccessBold, color: u.OnBrand },
+  warning: { backgroundColor: y.Warning, color: u.Warning },
+  error: { backgroundColor: y.Error, color: u.Error },
+  info: { backgroundColor: y.Info, color: u.Info },
+  brand: { backgroundColor: y.Brand, color: u.Inverse },
+  primaryTint: { backgroundColor: y.PrimaryTint, color: u.Brand },
+  errorTint: { backgroundColor: y.ErrorTint, color: u.Error },
   warningTint: { backgroundColor: y.WarningTint, color: "#ea580c" },
   infoTint: { backgroundColor: y.InfoTint, color: "#2563eb" },
   accentTint: { backgroundColor: y.AccentTint, color: "#7c3aed" }
@@ -990,14 +990,14 @@ const rt = {
   compact: { block: i.XXSmall, inline: i.Small },
   comfortable: { block: i.XSmall, inline: i.Medium }
 }, lt = {
-  default: { backgroundColor: y.NeutralBold, color: c.Default },
-  success: { backgroundColor: y.Success, color: c.Inverse },
-  warning: { backgroundColor: y.Warning, color: c.Warning },
-  error: { backgroundColor: y.Error, color: c.Error },
-  info: { backgroundColor: y.Info, color: c.Info },
-  brand: { backgroundColor: y.Brand, color: c.Inverse },
-  primaryTint: { backgroundColor: y.PrimaryTint, color: c.Brand },
-  errorTint: { backgroundColor: y.ErrorTint, color: c.Error },
+  default: { backgroundColor: y.NeutralBold, color: u.Default },
+  success: { backgroundColor: y.Success, color: u.Inverse },
+  warning: { backgroundColor: y.Warning, color: u.Warning },
+  error: { backgroundColor: y.Error, color: u.Error },
+  info: { backgroundColor: y.Info, color: u.Info },
+  brand: { backgroundColor: y.Brand, color: u.Inverse },
+  primaryTint: { backgroundColor: y.PrimaryTint, color: u.Brand },
+  errorTint: { backgroundColor: y.ErrorTint, color: u.Error },
   warningTint: { backgroundColor: y.WarningTint, color: "#ea580c" },
   infoTint: { backgroundColor: y.InfoTint, color: "#2563eb" },
   accentTint: { backgroundColor: y.AccentTint, color: "#7c3aed" }
@@ -1011,19 +1011,19 @@ const rt = {
     fontSize: a,
     icon: d,
     showCheckWhenSelected: s = !1,
-    onClick: u,
+    onClick: p,
     disabled: b,
-    style: p,
+    style: c,
     children: g,
     ...h
   }, m) => {
-    const x = u !== void 0 || e !== void 0, v = e === !0, C = a ?? (l ? w.XXSmall : w.XSmall), B = l ? { block: i.XXSmall, inline: i.XSmall } : rt[r];
+    const x = p !== void 0 || e !== void 0, v = e === !0, C = a ?? (l ? w.XXSmall : w.XSmall), B = l ? { block: i.XXSmall, inline: i.XSmall } : rt[r];
     let H, X;
     if (l) {
       const O = lt[l];
       H = O.backgroundColor, X = O.color;
     } else
-      H = v ? y.Brand : t === "outlined" ? y.Transparent : y.Subtle, X = v ? c.OnBrand : c.Default;
+      H = v ? y.Brand : t === "outlined" ? y.Transparent : y.Subtle, X = v ? u.OnBrand : u.Default;
     const A = !l && t === "outlined" && !v ? `1px solid ${T.Outline}` : "1px solid transparent", z = {
       display: "inline-flex",
       alignItems: "center",
@@ -1047,7 +1047,7 @@ const rt = {
       // from stretching the chip to fill the cross-axis. Without this,
       // a <Chip> inside <Stack> renders edge-to-edge instead of fit-to-text.
       alignSelf: "flex-start",
-      ...p
+      ...c
     }, F = s && v ? /* @__PURE__ */ n(
       "span",
       {
@@ -1064,7 +1064,7 @@ const rt = {
         type: "button",
         "aria-pressed": e,
         disabled: b,
-        onClick: u,
+        onClick: p,
         style: z,
         ...h,
         children: [
@@ -1119,15 +1119,15 @@ const dt = L(
     borderGradient: a,
     borderWidth: d = 1,
     width: s,
-    height: u,
+    height: p,
     style: b,
-    ...p
+    ...c
   }, g) => {
     const h = ve(() => `bbui-liquid-glass-${++st}`, []), m = {
       position: "relative",
       borderRadius: t,
       ...s && { width: s },
-      ...u && { height: u },
+      ...p && { height: p },
       ...b
     }, x = {
       position: "absolute",
@@ -1135,7 +1135,7 @@ const dt = L(
       borderRadius: t,
       pointerEvents: "none"
     };
-    return /* @__PURE__ */ f("div", { ref: g, style: m, ...p, children: [
+    return /* @__PURE__ */ f("div", { ref: g, style: m, ...c, children: [
       /* @__PURE__ */ n("svg", { style: { position: "absolute", width: 0, height: 0 }, "aria-hidden": "true", children: /* @__PURE__ */ n("defs", { children: /* @__PURE__ */ f("filter", { id: h, x: "0", y: "0", width: "100%", height: "100%", filterUnits: "objectBoundingBox", children: [
         /* @__PURE__ */ n(
           "feTurbulence",
@@ -1194,17 +1194,17 @@ const dt = L(
 dt.displayName = "LiquidGlass";
 const ct = "40px", ut = "24px", Me = "20px", Ln = i.XXSmall, pt = L(
   ({ checked: e, defaultChecked: t = !1, onChange: r, label: l, style: o, ...a }, d) => {
-    const [s, u] = P(t), b = e !== void 0, p = b ? e : s, g = Q(() => {
-      const x = !p;
-      b || u(x), r == null || r(x);
-    }, [p, b, r]), h = {
+    const [s, p] = P(t), b = e !== void 0, c = b ? e : s, g = Q(() => {
+      const x = !c;
+      b || p(x), r == null || r(x);
+    }, [c, b, r]), h = {
       position: "relative",
       display: "inline-flex",
       alignItems: "center",
       width: ct,
       height: ut,
       borderRadius: M.Full,
-      backgroundColor: p ? y.Brand : y.Neutral,
+      backgroundColor: c ? y.Brand : y.Neutral,
       border: "none",
       cursor: "pointer",
       padding: 0,
@@ -1217,7 +1217,7 @@ const ct = "40px", ut = "24px", Me = "20px", Ln = i.XXSmall, pt = L(
       borderRadius: M.Full,
       backgroundColor: y.Default,
       transition: "left 150ms ease",
-      left: p ? `calc(100% - ${Me} - ${Ln})` : Ln,
+      left: c ? `calc(100% - ${Me} - ${Ln})` : Ln,
       boxShadow: "0 1px 3px rgba(0,0,0,.2)"
     };
     return /* @__PURE__ */ n(
@@ -1226,7 +1226,7 @@ const ct = "40px", ut = "24px", Me = "20px", Ln = i.XXSmall, pt = L(
         ref: d,
         type: "button",
         role: "switch",
-        "aria-checked": p,
+        "aria-checked": c,
         "aria-label": l,
         onClick: g,
         style: h,
@@ -1247,9 +1247,9 @@ const bt = L(
     borderRadius: a,
     style: d,
     children: s,
-    ...u
+    ...p
   }, b) => {
-    const p = {
+    const c = {
       display: "inline-flex",
       alignItems: "center",
       justifyContent: "center",
@@ -1264,13 +1264,13 @@ const bt = L(
       ...a && { borderRadius: a },
       ...d
     };
-    return /* @__PURE__ */ n("a", { ref: b, style: p, ...u, children: s });
+    return /* @__PURE__ */ n("a", { ref: b, style: c, ...p, children: s });
   }
 );
 bt.displayName = "LinkButton";
 const re = L(
-  ({ label: e, size: t, color: r, backgroundColor: l, padding: o, style: a, children: d, ...s }, u) => {
-    const b = {
+  ({ label: e, size: t, color: r, backgroundColor: l, padding: o, style: a, className: d, children: s, ...p }, b) => {
+    const c = {
       display: "inline-flex",
       alignItems: "center",
       justifyContent: "center",
@@ -1285,12 +1285,13 @@ const re = L(
     return /* @__PURE__ */ n(
       "button",
       {
-        ref: u,
+        ref: b,
         type: "button",
         "aria-label": e,
-        style: b,
-        ...s,
-        children: d
+        className: d ? `bbui-button ${d}` : "bbui-button",
+        style: c,
+        ...p,
+        children: s
       }
     );
   }
@@ -1333,15 +1334,15 @@ const xt = L(
     appearance: l = "circle",
     status: o,
     fallbackBackground: a = y.NeutralBold,
-    fallbackColor: d = c.Subtle
+    fallbackColor: d = u.Subtle
   }, s) => {
-    const [u, b] = P(!1), p = ht[r], g = e && !u, h = t ? yt(t) : "", m = {
+    const [p, b] = P(!1), c = ht[r], g = e && !p, h = t ? yt(t) : "", m = {
       position: "relative",
       display: "inline-flex",
       alignItems: "center",
       justifyContent: "center",
-      width: p,
-      height: p,
+      width: c,
+      height: c,
       borderRadius: l === "circle" ? M.Full : M.XLarge,
       overflow: "hidden",
       flexShrink: 0,
@@ -1397,8 +1398,8 @@ const vt = {
   large: 3,
   xlarge: 4
 }, An = L(
-  ({ size: e = "medium", label: t = "Loading", color: r = c.Brand }, l) => {
-    const o = ke().replace(/:/g, ""), a = vt[e], d = St[e], s = (a - d) / 2, u = 2 * Math.PI * s;
+  ({ size: e = "medium", label: t = "Loading", color: r = u.Brand }, l) => {
+    const o = ke().replace(/:/g, ""), a = vt[e], d = St[e], s = (a - d) / 2, p = 2 * Math.PI * s;
     return /* @__PURE__ */ f(
       "span",
       {
@@ -1438,8 +1439,8 @@ const vt = {
                     stroke: r,
                     strokeWidth: d,
                     strokeLinecap: "round",
-                    strokeDasharray: u,
-                    strokeDashoffset: u * 0.7,
+                    strokeDasharray: p,
+                    strokeDashoffset: p * 0.7,
                     opacity: 0.9
                   }
                 ),
@@ -1473,7 +1474,7 @@ const wt = L(
     paddingInline: a,
     style: d,
     ...s
-  }, u) => {
+  }, p) => {
     const b = {
       fontFamily: "inherit",
       fontSize: "inherit",
@@ -1486,7 +1487,7 @@ const wt = L(
       ...a && { paddingInline: a },
       ...d
     };
-    return /* @__PURE__ */ n("textarea", { ref: u, style: b, ...s });
+    return /* @__PURE__ */ n("textarea", { ref: p, style: b, ...s });
   }
 );
 wt.displayName = "TextArea";
@@ -1503,9 +1504,9 @@ const Nn = L(
     padding: a,
     paddingBlock: d,
     paddingInline: s,
-    fontSize: u,
+    fontSize: p,
     color: b,
-    style: p,
+    style: c,
     ...g
   }, h) => {
     const m = {
@@ -1524,9 +1525,9 @@ const Nn = L(
       ...a && { padding: a },
       ...d && { paddingBlock: d },
       ...s && { paddingInline: s },
-      ...u && { fontSize: u },
+      ...p && { fontSize: p },
       ...b && { color: b },
-      ...p
+      ...c
     };
     return /* @__PURE__ */ f("select", { ref: h, style: m, ...g, children: [
       t && /* @__PURE__ */ n("option", { value: "", disabled: !0, hidden: !0, children: t }),
@@ -1559,18 +1560,18 @@ const Xt = {
   }
 ), Bt = L(
   ({ label: e, size: t = "medium", checked: r, disabled: l, style: o, id: a, ...d }, s) => {
-    const u = ke(), b = a ?? u, p = Xt[t], g = !!r, h = {
+    const p = ke(), b = a ?? p, c = Xt[t], g = !!r, h = {
       position: "relative",
       display: "inline-flex",
       alignItems: "center",
       justifyContent: "center",
-      width: p.box,
-      height: p.box,
+      width: c.box,
+      height: c.box,
       borderRadius: M.Small,
       flexShrink: 0,
       border: g ? "none" : `2px solid ${T.Outline}`,
-      backgroundColor: g ? l ? c.Disabled : y.Brand : y.Transparent,
-      color: c.Inverse,
+      backgroundColor: g ? l ? u.Disabled : y.Brand : y.Transparent,
+      color: u.Inverse,
       cursor: l ? "default" : "pointer",
       opacity: l ? 0.5 : 1
     };
@@ -1581,7 +1582,7 @@ const Xt = {
         style: {
           display: "inline-flex",
           alignItems: "center",
-          gap: p.gap,
+          gap: c.gap,
           cursor: l ? "default" : "pointer",
           ...o
         },
@@ -1608,13 +1609,13 @@ const Xt = {
               ...d
             }
           ),
-          /* @__PURE__ */ n("span", { style: h, "aria-hidden": "true", children: g && /* @__PURE__ */ n(Ct, { size: `calc(${p.box} - 4px)` }) }),
+          /* @__PURE__ */ n("span", { style: h, "aria-hidden": "true", children: g && /* @__PURE__ */ n(Ct, { size: `calc(${c.box} - 4px)` }) }),
           e && /* @__PURE__ */ n(
             "span",
             {
               style: {
-                fontSize: p.font,
-                color: l ? c.Disabled : c.Default
+                fontSize: c.font,
+                color: l ? u.Disabled : u.Default
               },
               children: e
             }
@@ -1664,12 +1665,12 @@ const Mt = () => /* @__PURE__ */ n("svg", { xmlns: "http://www.w3.org/2000/svg",
     disabled: a = !1,
     backgroundColor: d = y.Subtle,
     padding: s = i.XSmall
-  }, u) => {
-    const b = e - o >= r, p = e + o <= l;
+  }, p) => {
+    const b = e - o >= r, c = e + o <= l;
     return /* @__PURE__ */ f(
       "div",
       {
-        ref: u,
+        ref: p,
         style: {
           display: "inline-flex",
           alignItems: "center",
@@ -1685,7 +1686,7 @@ const Mt = () => /* @__PURE__ */ n("svg", { xmlns: "http://www.w3.org/2000/svg",
               label: "Decrease",
               onClick: () => b && t(e - o),
               disabled: a || !b,
-              color: c.Brand,
+              color: u.Brand,
               padding: i.XSmall,
               children: /* @__PURE__ */ n(Mt, {})
             }
@@ -1696,7 +1697,7 @@ const Mt = () => /* @__PURE__ */ n("svg", { xmlns: "http://www.w3.org/2000/svg",
               as: "span",
               size: w.Medium,
               weight: R.Bold,
-              color: c.Default,
+              color: u.Default,
               style: { minWidth: "32px", textAlign: "center" },
               children: e
             }
@@ -1705,9 +1706,9 @@ const Mt = () => /* @__PURE__ */ n("svg", { xmlns: "http://www.w3.org/2000/svg",
             re,
             {
               label: "Increase",
-              onClick: () => p && t(e + o),
-              disabled: a || !p,
-              color: c.Brand,
+              onClick: () => c && t(e + o),
+              disabled: a || !c,
+              color: u.Brand,
               padding: i.XSmall,
               children: /* @__PURE__ */ n(It, {})
             }
@@ -1773,14 +1774,14 @@ const Et = () => /* @__PURE__ */ n(
     logo: e,
     navigation: t = [],
     cta: r,
-    linkColor: l = c.Subtle,
+    linkColor: l = u.Subtle,
     ctaBackgroundColor: o = y.Dark,
-    ctaColor: a = c.Inverse,
+    ctaColor: a = u.Inverse,
     ctaWeight: d = 500,
     ctaBorderRadius: s = M.Full,
-    paddingInline: u = i.XXXLarge,
+    paddingInline: p = i.XXXLarge,
     paddingBlock: b = i.XLarge,
-    linkGap: p = i.XXLarge,
+    linkGap: c = i.XXLarge,
     logoGap: g = i.Size3_5,
     mobileMenuBackground: h = y.Default,
     mobileMenuBorderColor: m = T.Default,
@@ -1850,7 +1851,7 @@ const Et = () => /* @__PURE__ */ n(
                 style: {
                   background: "none",
                   padding: 0,
-                  color: c.Subtle
+                  color: u.Subtle
                 },
                 children: B ? /* @__PURE__ */ n(Tt, {}) : /* @__PURE__ */ n(Et, {})
               }
@@ -1887,7 +1888,7 @@ const Et = () => /* @__PURE__ */ n(
       S,
       {
         as: "nav",
-        paddingInline: u,
+        paddingInline: p,
         paddingBlock: b,
         style: { width: "100%" },
         children: /* @__PURE__ */ f(W, { alignBlock: "center", spread: "space-between", children: [
@@ -1895,7 +1896,7 @@ const Et = () => /* @__PURE__ */ n(
           /* @__PURE__ */ f(
             W,
             {
-              space: p,
+              space: c,
               alignBlock: "center",
               grow: "fill",
               style: { marginInlineStart: g },
@@ -1903,7 +1904,7 @@ const Et = () => /* @__PURE__ */ n(
                 /* @__PURE__ */ n(
                   W,
                   {
-                    space: p,
+                    space: c,
                     alignBlock: "center",
                     grow: "fill",
                     alignInline: "center",
@@ -1946,15 +1947,15 @@ const Mn = () => /* @__PURE__ */ n(
     children: a,
     titleSize: d = w.XXXLarge,
     titleSizeLarge: s = w.Huge,
-    titleWeight: u = R.ExtraBold,
-    titleColor: b = c.Default,
-    subtitleSize: p = w.Small,
-    subtitleColor: g = c.Subtlest,
+    titleWeight: p = R.ExtraBold,
+    titleColor: b = u.Default,
+    subtitleSize: c = w.Small,
+    subtitleColor: g = u.Subtlest,
     primaryCtaBackground: h = y.Dark,
-    primaryCtaColor: m = c.Inverse,
+    primaryCtaColor: m = u.Inverse,
     primaryCtaBorderRadius: x = M.Full,
     primaryCtaWeight: v = 500,
-    secondaryCtaColor: C = c.Subtle,
+    secondaryCtaColor: C = u.Subtle,
     secondaryCtaWeight: B = 500,
     ctaGap: H = i.MediumLarge,
     paddingBlock: X = i.Size7,
@@ -1991,7 +1992,7 @@ const Mn = () => /* @__PURE__ */ n(
             {
               as: "span",
               size: w.XSmall,
-              color: r.labelColor ?? c.Inverse,
+              color: r.labelColor ?? u.Inverse,
               style: {
                 backgroundColor: r.labelBackgroundColor ?? y.Accent,
                 borderRadius: M.Full,
@@ -2047,7 +2048,7 @@ const Mn = () => /* @__PURE__ */ n(
             {
               as: "h1",
               size: G ? s : d,
-              weight: u,
+              weight: p,
               color: b,
               lineHeight: 1.2,
               children: e
@@ -2058,7 +2059,7 @@ const Mn = () => /* @__PURE__ */ n(
             {
               as: "p",
               color: g,
-              size: p,
+              size: c,
               lineHeight: 1.6,
               children: t
             }
@@ -2117,9 +2118,9 @@ const Nt = L(
     accentColor: a,
     accentWidth: d = "8px",
     header: s,
-    footer: u,
+    footer: p,
     children: b,
-    ...p
+    ...c
   }, g) => /* @__PURE__ */ n(
     S,
     {
@@ -2135,7 +2136,7 @@ const Nt = L(
           borderTop: `${d} solid ${a}`
         }
       },
-      ...p,
+      ...c,
       children: /* @__PURE__ */ f(_, { children: [
         s && /* @__PURE__ */ n(
           S,
@@ -2146,12 +2147,12 @@ const Nt = L(
           }
         ),
         /* @__PURE__ */ n(S, { padding: e, children: b }),
-        u && /* @__PURE__ */ n(
+        p && /* @__PURE__ */ n(
           S,
           {
             padding: e,
             style: { borderTop: `1px solid ${l}` },
-            children: u
+            children: p
           }
         )
       ] })
@@ -2165,13 +2166,13 @@ const $t = L(
     helperText: t,
     errorText: r,
     id: l,
-    labelColor: o = c.Default,
+    labelColor: o = u.Default,
     labelSize: a = w.XSmall,
     labelWeight: d = R.Medium,
     labelTextTransform: s,
-    labelLetterSpacing: u,
+    labelLetterSpacing: p,
     inputBackground: b = y.Default,
-    inputBorderColor: p = T.Input,
+    inputBorderColor: c = T.Input,
     inputBorderRadius: g = M.Medium,
     inputBorderSide: h = "all",
     inputPadding: m = i.Medium,
@@ -2191,7 +2192,7 @@ const $t = L(
     onBlur: G,
     onFocus: j
   }, Y) => {
-    const U = ke(), E = l ?? U, V = `${E}-helper`, Z = `${E}-error`, q = !!r, se = q ? T.Error : p, de = h === "bottom", ee = de || !!(x || v), J = /* @__PURE__ */ n(
+    const U = ke(), E = l ?? U, V = `${E}-helper`, Z = `${E}-error`, q = !!r, se = q ? T.Error : c, de = h === "bottom", ee = de || !!(x || v), J = /* @__PURE__ */ n(
       Ee,
       {
         ref: Y,
@@ -2241,14 +2242,14 @@ const $t = L(
             fontWeight: d,
             color: o,
             textTransform: s,
-            letterSpacing: u
+            letterSpacing: p
           },
           children: e
         }
       ),
       ce,
-      q && /* @__PURE__ */ n(D, { as: "span", size: w.XXSmall, color: c.Error, id: Z, children: r }),
-      !q && t && /* @__PURE__ */ n(D, { as: "span", size: w.XXSmall, color: c.Subtle, id: V, children: t })
+      q && /* @__PURE__ */ n(D, { as: "span", size: w.XXSmall, color: u.Error, id: Z, children: r }),
+      !q && t && /* @__PURE__ */ n(D, { as: "span", size: w.XXSmall, color: u.Subtle, id: V, children: t })
     ] });
   }
 );
@@ -2256,22 +2257,22 @@ $t.displayName = "TextField";
 const Wt = {
   info: {
     bg: y.InfoTint,
-    text: c.Info,
+    text: u.Info,
     border: T.Info
   },
   success: {
     bg: y.PrimaryTint,
-    text: c.Success,
+    text: u.Success,
     border: T.Success
   },
   warning: {
     bg: y.WarningTint,
-    text: c.Warning,
+    text: u.Warning,
     border: T.Warning
   },
   error: {
     bg: y.ErrorTint,
-    text: c.Error,
+    text: u.Error,
     border: T.Error
   }
 }, Ft = () => /* @__PURE__ */ n(
@@ -2332,7 +2333,7 @@ const $n = L(
     sections: e,
     activeId: t,
     onSelect: r,
-    activeColor: l = c.Brand,
+    activeColor: l = u.Brand,
     activeBackground: o = y.Subtle
   }, a) => /* @__PURE__ */ n(_, { ref: a, as: "nav", space: i.Small, children: e.map((d, s) => /* @__PURE__ */ f(_, { space: i.XXSmall, children: [
     d.title && /* @__PURE__ */ n(S, { paddingInline: i.Medium, paddingBlock: i.XSmall, children: /* @__PURE__ */ n(
@@ -2341,20 +2342,20 @@ const $n = L(
         as: "span",
         size: w.XXSmall,
         weight: 600,
-        color: c.Subtlest,
+        color: u.Subtlest,
         textTransform: "uppercase",
         children: d.title
       }
     ) }),
-    /* @__PURE__ */ n(_, { as: "ul", style: { listStyle: "none", padding: 0, margin: 0 }, children: d.items.map((u) => {
-      const b = u.id === t;
+    /* @__PURE__ */ n(_, { as: "ul", style: { listStyle: "none", padding: 0, margin: 0 }, children: d.items.map((p) => {
+      const b = p.id === t;
       return /* @__PURE__ */ n("li", { children: /* @__PURE__ */ n(
         ae,
         {
-          disabled: u.disabled,
-          onClick: () => r == null ? void 0 : r(u.id),
+          disabled: p.disabled,
+          onClick: () => r == null ? void 0 : r(p.id),
           borderRadius: M.Medium,
-          color: u.disabled ? c.Disabled : b ? l : c.Default,
+          color: p.disabled ? u.Disabled : b ? l : u.Default,
           backgroundColor: b ? o : y.Transparent,
           paddingBlock: i.Medium,
           paddingInline: i.MediumLarge,
@@ -2362,14 +2363,14 @@ const $n = L(
             width: "100%",
             fontSize: w.XSmall,
             textAlign: "left",
-            cursor: u.disabled ? "default" : "pointer"
+            cursor: p.disabled ? "default" : "pointer"
           },
           children: /* @__PURE__ */ f(W, { space: i.Medium, alignBlock: "center", children: [
-            u.icon && /* @__PURE__ */ n(S, { style: { flexShrink: 0 }, children: u.icon }),
-            /* @__PURE__ */ n(D, { as: "span", size: w.XSmall, style: { color: "inherit" }, children: u.label })
+            p.icon && /* @__PURE__ */ n(S, { style: { flexShrink: 0 }, children: p.icon }),
+            /* @__PURE__ */ n(D, { as: "span", size: w.XSmall, style: { color: "inherit" }, children: p.label })
           ] })
         }
-      ) }, u.id);
+      ) }, p.id);
     }) }),
     s < e.length - 1 && /* @__PURE__ */ n(
       S,
@@ -2390,19 +2391,19 @@ const Ht = L(
     defaultActiveId: r,
     onChange: l,
     variant: o = "underline",
-    activeColor: a = c.Brand,
-    inactiveColor: d = c.Subtle,
+    activeColor: a = u.Brand,
+    inactiveColor: d = u.Subtle,
     pillBackground: s = y.Subtle,
-    activePillBackground: u = y.Default,
+    activePillBackground: p = y.Default,
     panelPadding: b = i.Large
-  }, p) => {
+  }, c) => {
     var H;
     const [g, h] = P(
       r ?? ((H = e[0]) == null ? void 0 : H.id)
     ), m = t !== void 0, x = m ? t : g, v = (X) => {
       m || h(X), l == null || l(X);
     }, C = e.find((X) => X.id === x);
-    return /* @__PURE__ */ f(S, { ref: p, children: [
+    return /* @__PURE__ */ f(S, { ref: c, children: [
       o === "pill" ? /* @__PURE__ */ n(
         W,
         {
@@ -2429,8 +2430,8 @@ const Ht = L(
                 paddingBlock: i.Medium,
                 paddingInline: i.XXLarge,
                 borderRadius: M.XLarge,
-                color: A ? c.Default : X.disabled ? c.Disabled : d,
-                backgroundColor: A ? u : y.Transparent,
+                color: A ? u.Default : X.disabled ? u.Disabled : d,
+                backgroundColor: A ? p : y.Transparent,
                 style: {
                   fontWeight: A ? R.Bold : R.Medium,
                   fontSize: w.XSmall,
@@ -2466,7 +2467,7 @@ const Ht = L(
                 paddingBlock: i.Medium,
                 paddingInline: i.Large,
                 borderRadius: M.None,
-                color: A ? a : X.disabled ? c.Disabled : d,
+                color: A ? a : X.disabled ? u.Disabled : d,
                 style: {
                   background: "none",
                   fontWeight: A ? R.Semibold : R.Regular,
@@ -2504,33 +2505,33 @@ const jt = L(
     actions: l,
     titleSize: o = w.XLarge,
     titleWeight: a = R.Bold,
-    titleColor: d = c.Default,
-    subtitleColor: s = c.Subtle,
-    breadcrumbLinkColor: u = c.Link,
+    titleColor: d = u.Default,
+    subtitleColor: s = u.Subtle,
+    breadcrumbLinkColor: p = u.Link,
     borderColor: b = T.Default,
-    paddingBlock: p = i.Large
+    paddingBlock: c = i.Large
   }, g) => /* @__PURE__ */ n(
     S,
     {
       ref: g,
       as: "header",
-      paddingBlock: p,
+      paddingBlock: c,
       style: {
         borderBottom: `1px solid ${b}`
       },
       children: /* @__PURE__ */ f(_, { space: i.Medium, children: [
         r && r.length > 0 && /* @__PURE__ */ n(W, { space: i.XSmall, alignBlock: "center", children: r.map((h, m) => /* @__PURE__ */ f(te.Fragment, { children: [
-          m > 0 && /* @__PURE__ */ n(D, { as: "span", color: c.Disabled, size: w.XSmall, children: "/" }),
+          m > 0 && /* @__PURE__ */ n(D, { as: "span", color: u.Disabled, size: w.XSmall, children: "/" }),
           h.href ? /* @__PURE__ */ n(
             he,
             {
               href: h.href,
-              color: u,
+              color: p,
               size: w.XSmall,
               style: { textDecoration: "none" },
               children: h.label
             }
-          ) : /* @__PURE__ */ n(D, { as: "span", size: w.XSmall, color: c.Subtlest, children: h.label })
+          ) : /* @__PURE__ */ n(D, { as: "span", size: w.XSmall, color: u.Subtlest, children: h.label })
         ] }, m)) }),
         /* @__PURE__ */ f(W, { alignBlock: "center", spread: "space-between", children: [
           /* @__PURE__ */ f(_, { space: i.XXSmall, children: [
@@ -2570,8 +2571,8 @@ const Pt = {
 ), Gt = L(
   ({ open: e, onClose: t, title: r, children: l, footer: o, size: a = Pt.Medium }, d) => {
     const s = Q(
-      (u) => {
-        u.key === "Escape" && t();
+      (p) => {
+        p.key === "Escape" && t();
       },
       [t]
     );
@@ -2594,8 +2595,8 @@ const Pt = {
             padding: i.Large,
             backgroundColor: y.Overlay
           },
-          onClick: (u) => {
-            u.target === u.currentTarget && t();
+          onClick: (p) => {
+            p.target === p.currentTarget && t();
           },
           children: /* @__PURE__ */ n(
             S,
@@ -2622,8 +2623,8 @@ const Pt = {
                     padding: i.Large,
                     style: { borderBottom: `1px solid ${T.Default}` },
                     children: /* @__PURE__ */ f(W, { alignBlock: "center", spread: "space-between", children: [
-                      /* @__PURE__ */ n(D, { as: "h2", size: w.Large, weight: R.Semibold, color: c.Default, children: r }),
-                      /* @__PURE__ */ n(re, { label: "Close", onClick: t, color: c.Subtle, children: /* @__PURE__ */ n(Vt, {}) })
+                      /* @__PURE__ */ n(D, { as: "h2", size: w.Large, weight: R.Semibold, color: u.Default, children: r }),
+                      /* @__PURE__ */ n(re, { label: "Close", onClick: t, color: u.Subtle, children: /* @__PURE__ */ n(Vt, {}) })
                     ] })
                   }
                 ),
@@ -2660,17 +2661,17 @@ function Yt({
   maxWidth: a,
   align: d = "center",
   blur: s = !0,
-  closeOnMouseLeave: u = !1
+  closeOnMouseLeave: p = !1
 }) {
-  const [b, p] = P(e), [g, h] = P(!1), m = $(l), x = $(d);
+  const [b, c] = P(e), [g, h] = P(!1), m = $(l), x = $(d);
   if (K(() => {
     if (e) {
-      p(!0);
+      c(!0);
       const B = requestAnimationFrame(() => h(!0));
       return () => cancelAnimationFrame(B);
     }
     h(!1);
-    const C = window.setTimeout(() => p(!1), Ie);
+    const C = window.setTimeout(() => c(!1), Ie);
     return () => window.clearTimeout(C);
   }, [e]), K(() => {
     if (!e) return;
@@ -2703,7 +2704,7 @@ function Yt({
             S,
             {
               onClick: (C) => C.stopPropagation(),
-              onMouseLeave: u ? t : void 0,
+              onMouseLeave: p ? t : void 0,
               backgroundColor: y.Default,
               padding: o,
               style: {
@@ -2736,19 +2737,19 @@ function Yt({
 Yt.displayName = "Drawer";
 const Kt = L(
   ({ trigger: e, sections: t, activeId: r, onSelect: l }, o) => {
-    const [a, d] = P(!1), s = oe(null), u = () => d((h) => !h), b = (h) => {
+    const [a, d] = P(!1), s = oe(null), p = () => d((h) => !h), b = (h) => {
       l == null || l(h), d(!1);
-    }, p = Q((h) => {
+    }, c = Q((h) => {
       h.key === "Escape" && d(!1);
     }, []), g = Q((h) => {
       s.current && !s.current.contains(h.target) && d(!1);
     }, []);
     return K(() => {
       if (a)
-        return document.addEventListener("keydown", p), document.addEventListener("mousedown", g), () => {
-          document.removeEventListener("keydown", p), document.removeEventListener("mousedown", g);
+        return document.addEventListener("keydown", c), document.addEventListener("mousedown", g), () => {
+          document.removeEventListener("keydown", c), document.removeEventListener("mousedown", g);
         };
-    }, [a, p, g]), /* @__PURE__ */ f(
+    }, [a, c, g]), /* @__PURE__ */ f(
       S,
       {
         ref: (h) => {
@@ -2760,7 +2761,7 @@ const Kt = L(
             W,
             {
               style: { cursor: "pointer" },
-              onClick: u,
+              onClick: p,
               alignBlock: "center",
               children: e
             }
@@ -2808,9 +2809,9 @@ const Ut = () => /* @__PURE__ */ n("svg", { xmlns: "http://www.w3.org/2000/svg",
     collapsed: a = !1,
     onToggleCollapse: d,
     width: s = "256px",
-    collapsedWidth: u = "64px",
-    activeColor: b = c.Brand,
-    activeBackground: p = y.Subtle,
+    collapsedWidth: p = "64px",
+    activeColor: b = u.Brand,
+    activeBackground: c = y.Subtle,
     borderColor: g = T.Default
   }, h) => /* @__PURE__ */ f(
     S,
@@ -2819,7 +2820,7 @@ const Ut = () => /* @__PURE__ */ n("svg", { xmlns: "http://www.w3.org/2000/svg",
       as: "aside",
       backgroundColor: y.Default,
       style: {
-        width: a ? u : s,
+        width: a ? p : s,
         height: "100vh",
         position: "sticky",
         top: 0,
@@ -2852,7 +2853,7 @@ const Ut = () => /* @__PURE__ */ n("svg", { xmlns: "http://www.w3.org/2000/svg",
                   as: "span",
                   size: w.XXSmall,
                   weight: 600,
-                  color: c.Subtlest,
+                  color: u.Subtlest,
                   textTransform: "uppercase",
                   children: m.title
                 }
@@ -2865,8 +2866,8 @@ const Ut = () => /* @__PURE__ */ n("svg", { xmlns: "http://www.w3.org/2000/svg",
                     onClick: () => r == null ? void 0 : r(v.id),
                     title: a ? v.label : void 0,
                     borderRadius: M.Medium,
-                    color: C ? b : c.Default,
-                    backgroundColor: C ? p : y.Transparent,
+                    color: C ? b : u.Default,
+                    backgroundColor: C ? c : y.Transparent,
                     paddingBlock: i.Medium,
                     paddingInline: i.MediumLarge,
                     style: {
@@ -2902,7 +2903,7 @@ const Ut = () => /* @__PURE__ */ n("svg", { xmlns: "http://www.w3.org/2000/svg",
               {
                 label: a ? "Expand sidebar" : "Collapse sidebar",
                 onClick: d,
-                color: c.Subtle,
+                color: u.Subtle,
                 padding: i.XSmall,
                 children: a ? /* @__PURE__ */ n(qt, {}) : /* @__PURE__ */ n(Ut, {})
               }
@@ -2948,16 +2949,16 @@ const Zt = () => /* @__PURE__ */ n(
     width: a = "384px",
     children: d
   }, s) => {
-    const u = Q(
-      (p) => {
-        p.key === "Escape" && t();
+    const p = Q(
+      (c) => {
+        c.key === "Escape" && t();
       },
       [t]
     );
     if (K(() => {
       if (e)
-        return document.addEventListener("keydown", u), () => document.removeEventListener("keydown", u);
-    }, [e, u]), !e) return null;
+        return document.addEventListener("keydown", p), () => document.removeEventListener("keydown", p);
+    }, [e, p]), !e) return null;
     const b = /* @__PURE__ */ f(
       S,
       {
@@ -2982,8 +2983,8 @@ const Zt = () => /* @__PURE__ */ n(
               padding: i.Large,
               style: { borderBottom: `1px solid ${T.Default}` },
               children: /* @__PURE__ */ f(W, { alignBlock: "center", spread: "space-between", children: [
-                /* @__PURE__ */ n(D, { as: "h2", size: w.Large, weight: R.Semibold, color: c.Default, children: r }),
-                /* @__PURE__ */ n(re, { label: "Close panel", onClick: t, color: c.Subtle, children: /* @__PURE__ */ n(Zt, {}) })
+                /* @__PURE__ */ n(D, { as: "h2", size: w.Large, weight: R.Semibold, color: u.Default, children: r }),
+                /* @__PURE__ */ n(re, { label: "Close panel", onClick: t, color: u.Subtle, children: /* @__PURE__ */ n(Zt, {}) })
               ] })
             }
           ),
@@ -3001,8 +3002,8 @@ const Zt = () => /* @__PURE__ */ n(
             zIndex: pe.Modal,
             backgroundColor: y.Overlay
           },
-          onClick: (p) => {
-            p.target === p.currentTarget && t();
+          onClick: (c) => {
+            c.target === c.currentTarget && t();
           },
           children: b
         }
@@ -3015,7 +3016,7 @@ Qt.displayName = "Panel";
 const er = L(
   ({
     padding: e = i.Large,
-    color: t = c.Subtle,
+    color: t = u.Subtle,
     borderColor: r = T.Default,
     children: l
   }, o) => /* @__PURE__ */ n(
@@ -3116,20 +3117,20 @@ const ir = () => /* @__PURE__ */ n("svg", { xmlns: "http://www.w3.org/2000/svg",
     onChange: r,
     min: l,
     max: o,
-    selectedColor: a = c.Inverse,
+    selectedColor: a = u.Inverse,
     selectedBackground: d = y.Brand
   }, s) => {
-    const u = /* @__PURE__ */ new Date(), [b, p] = P(t), g = e !== void 0, h = g ? e : b, [m, x] = P(
-      (h ?? u).getFullYear()
+    const p = /* @__PURE__ */ new Date(), [b, c] = P(t), g = e !== void 0, h = g ? e : b, [m, x] = P(
+      (h ?? p).getFullYear()
     ), [v, C] = P(
-      (h ?? u).getMonth()
+      (h ?? p).getMonth()
     ), B = ve(() => rr(m, v), [m, v]), H = ve(() => lr(m, v), [m, v]), X = () => {
       v === 0 ? (C(11), x((k) => k - 1)) : C((k) => k - 1);
     }, A = () => {
       v === 11 ? (C(0), x((k) => k + 1)) : C((k) => k + 1);
     }, z = (k) => {
       const I = new Date(m, v, k);
-      g || p(I), r == null || r(I);
+      g || c(I), r == null || r(I);
     }, F = (k) => {
       const I = new Date(m, v, k);
       return !!(l && I < new Date(l.getFullYear(), l.getMonth(), l.getDate()) || o && I > new Date(o.getFullYear(), o.getMonth(), o.getDate()));
@@ -3137,7 +3138,7 @@ const ir = () => /* @__PURE__ */ n("svg", { xmlns: "http://www.w3.org/2000/svg",
     for (let k = 0; k < H; k++)
       O.push(/* @__PURE__ */ n(S, {}, `empty-${k}`));
     for (let k = 1; k <= B; k++) {
-      const I = new Date(m, v, k), N = h ? In(I, h) : !1, G = In(I, u), j = F(k);
+      const I = new Date(m, v, k), N = h ? In(I, h) : !1, G = In(I, p), j = F(k);
       O.push(
         /* @__PURE__ */ n(
           ae,
@@ -3152,7 +3153,7 @@ const ir = () => /* @__PURE__ */ n("svg", { xmlns: "http://www.w3.org/2000/svg",
               fontSize: w.XSmall,
               fontWeight: N ? R.Semibold : R.Regular,
               backgroundColor: N ? d : "transparent",
-              color: N ? a : j ? c.Disabled : c.Default,
+              color: N ? a : j ? u.Disabled : u.Default,
               border: G && !N ? `1px solid ${T.Default}` : "none",
               cursor: j ? "default" : "pointer"
             },
@@ -3180,13 +3181,13 @@ const ir = () => /* @__PURE__ */ n("svg", { xmlns: "http://www.w3.org/2000/svg",
               spread: "space-between",
               marginBlockEnd: i.Medium,
               children: [
-                /* @__PURE__ */ n(re, { label: "Previous month", onClick: X, color: c.Subtle, padding: i.XSmall, children: /* @__PURE__ */ n(ir, {}) }),
-                /* @__PURE__ */ f(D, { as: "span", size: w.XSmall, weight: R.Semibold, color: c.Default, children: [
+                /* @__PURE__ */ n(re, { label: "Previous month", onClick: X, color: u.Subtle, padding: i.XSmall, children: /* @__PURE__ */ n(ir, {}) }),
+                /* @__PURE__ */ f(D, { as: "span", size: w.XSmall, weight: R.Semibold, color: u.Default, children: [
                   ar[v],
                   " ",
                   m
                 ] }),
-                /* @__PURE__ */ n(re, { label: "Next month", onClick: A, color: c.Subtle, padding: i.XSmall, children: /* @__PURE__ */ n(or, {}) })
+                /* @__PURE__ */ n(re, { label: "Next month", onClick: A, color: u.Subtle, padding: i.XSmall, children: /* @__PURE__ */ n(or, {}) })
               ]
             }
           ),
@@ -3197,7 +3198,7 @@ const ir = () => /* @__PURE__ */ n("svg", { xmlns: "http://www.w3.org/2000/svg",
                 as: "span",
                 size: w.XXSmall,
                 weight: R.Medium,
-                color: c.Subtlest,
+                color: u.Subtlest,
                 align: "center",
                 style: { padding: `${i.XSmall} 0` },
                 children: k
@@ -3236,11 +3237,11 @@ const dr = L(
               fontFamily: Vn.Display,
               size: w.XLarge,
               weight: R.Bold,
-              color: c.Default,
+              color: u.Default,
               children: e
             }
           ),
-          t && /* @__PURE__ */ n(D, { as: "p", size: w.XSmall, color: c.Subtle, lineHeight: 1.6, children: t })
+          t && /* @__PURE__ */ n(D, { as: "p", size: w.XSmall, color: u.Subtle, lineHeight: 1.6, children: t })
         ] }),
         (l || o) && /* @__PURE__ */ f(W, { space: i.Medium, alignBlock: "center", children: [
           l,
@@ -3278,20 +3279,20 @@ const cr = ({ order: e }) => /* @__PURE__ */ n(
     defaultPage: a = 1,
     sortKey: d,
     sortOrder: s,
-    defaultSortKey: u,
+    defaultSortKey: p,
     defaultSortOrder: b = "ASC",
-    onSort: p,
+    onSort: c,
     onSetPage: g,
     isLoading: h = !1,
     isFixedSize: m = !1
   }, x) => {
-    const [v, C] = P(a), [B, H] = P(u), [X, A] = P(b), z = o !== void 0, F = z ? o : v, O = d !== void 0, k = O ? d : B, I = O ? s ?? "ASC" : X, N = l ? Math.max(1, Math.ceil(r.length / l)) : 1, G = ve(() => {
+    const [v, C] = P(a), [B, H] = P(p), [X, A] = P(b), z = o !== void 0, F = z ? o : v, O = d !== void 0, k = O ? d : B, I = O ? s ?? "ASC" : X, N = l ? Math.max(1, Math.ceil(r.length / l)) : 1, G = ve(() => {
       if (!l) return r;
       const E = (F - 1) * l;
       return r.slice(E, E + l);
     }, [r, l, F]), j = (E) => {
       const V = k === E && I === "ASC" ? "DESC" : "ASC";
-      O || (H(E), A(V)), p == null || p(E, V);
+      O || (H(E), A(V)), c == null || c(E, V);
     }, Y = (E) => {
       z || C(E), g == null || g(E);
     }, U = {
@@ -3333,7 +3334,7 @@ const cr = ({ order: e }) => /* @__PURE__ */ n(
                   paddingBlockEnd: i.Medium,
                   fontWeight: R.Semibold,
                   fontSize: w.Small,
-                  color: c.Default
+                  color: u.Default
                 },
                 children: e
               }
@@ -3346,7 +3347,7 @@ const cr = ({ order: e }) => /* @__PURE__ */ n(
                   textAlign: "left",
                   fontWeight: R.Semibold,
                   fontSize: w.XXSmall,
-                  color: c.Subtle,
+                  color: u.Subtle,
                   borderBottom: `1px solid ${T.Default}`,
                   whiteSpace: "nowrap",
                   cursor: E.isSortable ? "pointer" : "default",
@@ -3375,7 +3376,7 @@ const cr = ({ order: e }) => /* @__PURE__ */ n(
                     cursor: E.onClick ? "pointer" : "default",
                     borderBottom: `1px solid ${T.Default}`
                   },
-                  children: E.cells.map((V, Z) => /* @__PURE__ */ n("td", { style: { ...U, color: c.Default }, children: V }, Z))
+                  children: E.cells.map((V, Z) => /* @__PURE__ */ n("td", { style: { ...U, color: u.Default }, children: V }, Z))
                 },
                 E.key
               )),
@@ -3386,7 +3387,7 @@ const cr = ({ order: e }) => /* @__PURE__ */ n(
                   style: {
                     ...U,
                     textAlign: "center",
-                    color: c.Subtle
+                    color: u.Subtle
                   },
                   children: "No data"
                 }
@@ -3412,12 +3413,12 @@ const cr = ({ order: e }) => /* @__PURE__ */ n(
                 paddingInline: i.Medium,
                 borderRadius: M.Large,
                 backgroundColor: y.Default,
-                color: c.Default,
+                color: u.Default,
                 style: { fontSize: w.XXSmall, border: `1px solid ${T.Default}` },
                 children: "Previous"
               }
             ),
-            /* @__PURE__ */ f(D, { size: w.XXSmall, color: c.Subtle, children: [
+            /* @__PURE__ */ f(D, { size: w.XXSmall, color: u.Subtle, children: [
               "Page ",
               F,
               " of ",
@@ -3432,7 +3433,7 @@ const cr = ({ order: e }) => /* @__PURE__ */ n(
                 paddingInline: i.Medium,
                 borderRadius: M.Large,
                 backgroundColor: y.Default,
-                color: c.Default,
+                color: u.Default,
                 style: { fontSize: w.XXSmall, border: `1px solid ${T.Default}` },
                 children: "Next"
               }
@@ -3454,13 +3455,13 @@ const pr = () => /* @__PURE__ */ n("svg", { xmlns: "http://www.w3.org/2000/svg",
     onConfirm: a,
     onCancel: d
   }, s) => {
-    const [u, b] = P(!1), [p, g] = P(e);
+    const [p, b] = P(!1), [c, g] = P(e);
     oe(null), K(() => {
       g(e);
     }, [e]);
     const h = Q(() => {
-      b(!1), a(p);
-    }, [p, a]), m = Q(() => {
+      b(!1), a(c);
+    }, [c, a]), m = Q(() => {
       g(e), b(!1), d == null || d();
     }, [e, d]), x = Q(
       (B) => {
@@ -3478,7 +3479,7 @@ const pr = () => /* @__PURE__ */ n("svg", { xmlns: "http://www.w3.org/2000/svg",
           wordBreak: "break-word",
           minHeight: "1.5em"
         },
-        children: /* @__PURE__ */ n(D, { as: "span", size: w.Small, color: c.Default, children: B || " " })
+        children: /* @__PURE__ */ n(D, { as: "span", size: w.Small, color: u.Default, children: B || " " })
       }
     ), C = (B) => /* @__PURE__ */ n(
       Ee,
@@ -3501,14 +3502,14 @@ const pr = () => /* @__PURE__ */ n("svg", { xmlns: "http://www.w3.org/2000/svg",
           as: "label",
           size: w.XXSmall,
           weight: 500,
-          color: c.Subtle,
+          color: u.Subtle,
           style: { display: "block", marginBlockEnd: i.XSmall },
           children: t
         }
       ),
-      u ? /* @__PURE__ */ f(W, { space: i.XSmall, alignBlock: "start", children: [
+      p ? /* @__PURE__ */ f(W, { space: i.XSmall, alignBlock: "start", children: [
         /* @__PURE__ */ n(S, { style: { flex: "1 1 auto" }, children: (l ?? C)({
-          value: p,
+          value: c,
           onChange: (B) => g(B.target.value),
           onKeyDown: x,
           autoFocus: !0
@@ -3518,7 +3519,7 @@ const pr = () => /* @__PURE__ */ n("svg", { xmlns: "http://www.w3.org/2000/svg",
           {
             label: "Confirm",
             onClick: h,
-            color: c.Success,
+            color: u.Success,
             padding: i.XSmall,
             children: /* @__PURE__ */ n(pr, {})
           }
@@ -3528,7 +3529,7 @@ const pr = () => /* @__PURE__ */ n("svg", { xmlns: "http://www.w3.org/2000/svg",
           {
             label: "Cancel",
             onClick: m,
-            color: c.Error,
+            color: u.Error,
             padding: i.XSmall,
             children: /* @__PURE__ */ n(br, {})
           }
@@ -3553,21 +3554,21 @@ const pr = () => /* @__PURE__ */ n("svg", { xmlns: "http://www.w3.org/2000/svg",
 hr.displayName = "InlineEdit";
 const gr = () => /* @__PURE__ */ n("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 16 16", fill: "currentColor", style: { width: "14px", height: "14px" }, children: /* @__PURE__ */ n("path", { fillRule: "evenodd", d: "M12.416 3.376a.75.75 0 01.208 1.04l-5 7.5a.75.75 0 01-1.154.114l-3-3a.75.75 0 011.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 011.04-.207z", clipRule: "evenodd" }) }), mr = L(
   ({ trigger: e, groups: t, checked: r, onChange: l }, o) => {
-    const [a, d] = P(!1), s = oe(null), u = Q((p) => {
-      p.key === "Escape" && d(!1);
-    }, []), b = Q((p) => {
-      s.current && !s.current.contains(p.target) && d(!1);
+    const [a, d] = P(!1), s = oe(null), p = Q((c) => {
+      c.key === "Escape" && d(!1);
+    }, []), b = Q((c) => {
+      s.current && !s.current.contains(c.target) && d(!1);
     }, []);
     return K(() => {
       if (a)
-        return document.addEventListener("keydown", u), document.addEventListener("mousedown", b), () => {
-          document.removeEventListener("keydown", u), document.removeEventListener("mousedown", b);
+        return document.addEventListener("keydown", p), document.addEventListener("mousedown", b), () => {
+          document.removeEventListener("keydown", p), document.removeEventListener("mousedown", b);
         };
-    }, [a, u, b]), /* @__PURE__ */ f(
+    }, [a, p, b]), /* @__PURE__ */ f(
       S,
       {
-        ref: (p) => {
-          s.current = p, typeof o == "function" ? o(p) : o && (o.current = p);
+        ref: (c) => {
+          s.current = c, typeof o == "function" ? o(c) : o && (o.current = c);
         },
         style: { position: "relative", display: "inline-block" },
         children: [
@@ -3575,7 +3576,7 @@ const gr = () => /* @__PURE__ */ n("svg", { xmlns: "http://www.w3.org/2000/svg",
             W,
             {
               style: { cursor: "pointer" },
-              onClick: () => d((p) => !p),
+              onClick: () => d((c) => !c),
               alignBlock: "center",
               children: e
             }
@@ -3597,19 +3598,19 @@ const gr = () => /* @__PURE__ */ n("svg", { xmlns: "http://www.w3.org/2000/svg",
                 minWidth: "224px",
                 zIndex: pe.Dropdown
               },
-              children: /* @__PURE__ */ n(_, { space: i.XSmall, children: t.map((p, g) => /* @__PURE__ */ f(_, { space: i.XXSmall, children: [
-                p.title && /* @__PURE__ */ n(S, { paddingInline: i.MediumLarge, paddingBlock: i.XSmall, children: /* @__PURE__ */ n(
+              children: /* @__PURE__ */ n(_, { space: i.XSmall, children: t.map((c, g) => /* @__PURE__ */ f(_, { space: i.XXSmall, children: [
+                c.title && /* @__PURE__ */ n(S, { paddingInline: i.MediumLarge, paddingBlock: i.XSmall, children: /* @__PURE__ */ n(
                   D,
                   {
                     as: "span",
                     size: w.XXSmall,
                     weight: R.Semibold,
-                    color: c.Subtlest,
+                    color: u.Subtlest,
                     textTransform: "uppercase",
-                    children: p.title
+                    children: c.title
                   }
                 ) }),
-                p.items.map((h) => {
+                c.items.map((h) => {
                   const m = !!r[h.id];
                   return /* @__PURE__ */ f(
                     ae,
@@ -3617,7 +3618,7 @@ const gr = () => /* @__PURE__ */ n("svg", { xmlns: "http://www.w3.org/2000/svg",
                       onClick: () => l(h.id, !m),
                       borderRadius: M.Medium,
                       backgroundColor: y.Transparent,
-                      color: c.Default,
+                      color: u.Default,
                       paddingBlock: i.Medium,
                       paddingInline: i.MediumLarge,
                       style: {
@@ -3638,7 +3639,7 @@ const gr = () => /* @__PURE__ */ n("svg", { xmlns: "http://www.w3.org/2000/svg",
                               borderRadius: M.Small,
                               border: m ? "none" : `2px solid ${T.Outline}`,
                               backgroundColor: m ? y.Brand : y.Transparent,
-                              color: c.Inverse,
+                              color: u.Inverse,
                               display: "flex",
                               alignItems: "center",
                               justifyContent: "center",
@@ -3677,13 +3678,13 @@ const fr = L(
     helperText: t,
     errorText: r,
     id: l,
-    labelColor: o = c.Default,
+    labelColor: o = u.Default,
     labelSize: a = w.XSmall,
     labelWeight: d = R.Medium,
     labelTextTransform: s,
-    labelLetterSpacing: u,
+    labelLetterSpacing: p,
     inputBackground: b = y.Subtle,
-    inputBorderColor: p,
+    inputBorderColor: c,
     inputBorderRadius: g = M.XXLarge,
     inputBorderSide: h = "all",
     inputPadding: m = i.MediumLarge,
@@ -3697,7 +3698,7 @@ const fr = L(
     onChange: z,
     onBlur: F
   }, O) => {
-    const k = ke(), I = l ?? k, N = `${I}-helper`, G = `${I}-error`, j = !!r, Y = j ? T.Error : p, U = h === "bottom", E = /* @__PURE__ */ n(
+    const k = ke(), I = l ?? k, N = `${I}-helper`, G = `${I}-error`, j = !!r, Y = j ? T.Error : c, U = h === "bottom", E = /* @__PURE__ */ n(
       Nn,
       {
         ref: O,
@@ -3716,7 +3717,7 @@ const fr = L(
         borderRadius: U ? void 0 : g,
         padding: m,
         fontSize: w.XSmall,
-        color: c.Default,
+        color: u.Default,
         style: { width: "100%" },
         "aria-describedby": j ? G : t ? N : void 0,
         "aria-invalid": j || void 0
@@ -3736,23 +3737,23 @@ const fr = L(
             fontWeight: d,
             color: o,
             textTransform: s,
-            letterSpacing: u
+            letterSpacing: p
           },
           children: e
         }
       ),
       V,
-      j && /* @__PURE__ */ n(D, { as: "span", size: w.XXSmall, color: c.Error, id: G, children: r }),
-      !j && t && /* @__PURE__ */ n(D, { as: "span", size: w.XXSmall, color: c.Subtle, id: N, children: t })
+      j && /* @__PURE__ */ n(D, { as: "span", size: w.XXSmall, color: u.Error, id: G, children: r }),
+      !j && t && /* @__PURE__ */ n(D, { as: "span", size: w.XXSmall, color: u.Subtle, id: N, children: t })
     ] });
   }
 );
 fr.displayName = "SelectField";
 const yr = {
-  info: { bg: y.Default, text: c.Info, accent: "#3b82f6" },
-  success: { bg: y.Default, text: c.Success, accent: "#22c55e" },
-  warning: { bg: y.Default, text: c.Warning, accent: "#f59e0b" },
-  error: { bg: y.Default, text: c.Error, accent: "#ba1a1a" }
+  info: { bg: y.Default, text: u.Info, accent: "#3b82f6" },
+  success: { bg: y.Default, text: u.Success, accent: "#22c55e" },
+  warning: { bg: y.Default, text: u.Warning, accent: "#f59e0b" },
+  error: { bg: y.Default, text: u.Error, accent: "#ba1a1a" }
 }, xr = () => /* @__PURE__ */ n(
   "svg",
   {
@@ -3766,8 +3767,8 @@ const yr = {
   ({ open: e, onClose: t, duration: r = 5e3, variant: l = "info", icon: o, children: a }, d) => {
     if (K(() => {
       if (!e || r === 0) return;
-      const u = setTimeout(t, r);
-      return () => clearTimeout(u);
+      const p = setTimeout(t, r);
+      return () => clearTimeout(p);
     }, [e, r, t]), !e) return null;
     const s = yr[l];
     return Xe(
@@ -3793,14 +3794,14 @@ const yr = {
           children: /* @__PURE__ */ f(W, { space: i.MediumLarge, alignBlock: "center", spread: "space-between", children: [
             /* @__PURE__ */ f(W, { space: i.MediumLarge, alignBlock: "center", grow: "fill", children: [
               o && /* @__PURE__ */ n(S, { style: { color: s.accent, flexShrink: 0 }, children: o }),
-              /* @__PURE__ */ n(D, { as: "span", size: w.XSmall, weight: R.Medium, color: c.Default, children: a })
+              /* @__PURE__ */ n(D, { as: "span", size: w.XSmall, weight: R.Medium, color: u.Default, children: a })
             ] }),
             /* @__PURE__ */ n(
               re,
               {
                 label: "Dismiss",
                 onClick: t,
-                color: c.Subtle,
+                color: u.Subtle,
                 padding: i.XXSmall,
                 children: /* @__PURE__ */ n(xr, {})
               }
@@ -3835,7 +3836,7 @@ const Sr = L(
         paddingBlock: i.Medium
       },
       children: e.map((a, d) => {
-        const s = a.id === t, u = Math.floor(e.length / 2), b = l && d === u;
+        const s = a.id === t, p = Math.floor(e.length / 2), b = l && d === p;
         return /* @__PURE__ */ f(te.Fragment, { children: [
           b && /* @__PURE__ */ n(S, { style: { marginTop: `-${i.XXXLarge}` }, children: l }),
           /* @__PURE__ */ f(
@@ -3852,7 +3853,7 @@ const Sr = L(
                 border: "none",
                 cursor: "pointer",
                 padding: i.XSmall,
-                color: s ? c.Brand : c.Disabled
+                color: s ? u.Brand : u.Disabled
               },
               children: [
                 /* @__PURE__ */ n(S, { style: { width: "24px", height: "24px", display: "flex", alignItems: "center", justifyContent: "center" }, children: a.icon }),
@@ -3862,7 +3863,7 @@ const Sr = L(
                     as: "span",
                     size: w.Micro,
                     weight: R.Bold,
-                    color: s ? c.Brand : c.Disabled,
+                    color: s ? u.Brand : u.Disabled,
                     textTransform: "uppercase",
                     children: a.label
                   }
@@ -3904,16 +3905,16 @@ const wr = () => /* @__PURE__ */ n(
         "aria-valuemax": e.length,
         "aria-valuenow": d,
         style: { display: "grid", gridTemplateColumns: `repeat(${e.length}, 1fr)`, gap: i.Medium, width: "100%" },
-        children: e.map((s, u) => {
-          const b = s.status === "visited", p = s.status === "current";
+        children: e.map((s, p) => {
+          const b = s.status === "visited", c = s.status === "current";
           return e.length - 1, /* @__PURE__ */ f("div", { style: { display: "flex", flexDirection: "column", gap: i.Medium }, children: [
             /* @__PURE__ */ n("div", { style: {
               height: 6,
               borderRadius: M.Full,
-              background: p ? xe.Brand : "none",
-              backgroundColor: p ? void 0 : b ? y.PrimaryContainer : y.NeutralBold,
+              background: c ? xe.Brand : "none",
+              backgroundColor: c ? void 0 : b ? y.PrimaryContainer : y.NeutralBold,
               opacity: b ? 0.4 : 1,
-              boxShadow: p ? "0 0 8px var(--bbui-color-primary), 0 0 20px var(--bbui-color-primary)" : "none",
+              boxShadow: c ? "0 0 8px var(--bbui-color-primary), 0 0 20px var(--bbui-color-primary)" : "none",
               transition: "all 400ms ease",
               cursor: s.onClick ? "pointer" : "default"
             }, onClick: s.onClick }),
@@ -3922,8 +3923,8 @@ const wr = () => /* @__PURE__ */ n(
               {
                 as: "p",
                 size: w.Micro,
-                weight: p ? R.Bold : R.Medium,
-                color: p ? c.Brand : b ? c.Subtle : c.Disabled,
+                weight: c ? R.Bold : R.Medium,
+                color: c ? u.Brand : b ? u.Subtle : u.Disabled,
                 textTransform: "uppercase",
                 letterSpacing: Tn.Widest,
                 style: {
@@ -3952,29 +3953,29 @@ const wr = () => /* @__PURE__ */ n(
             display: "flex",
             alignItems: "center",
             width: "100%"
-          }, children: e.map((s, u) => {
-            const b = u === e.length - 1, p = s.status === "visited", g = s.status === "current", h = s.status === "disabled", m = p ? xe.Brand : g ? "transparent" : y.NeutralBold, x = /* @__PURE__ */ n(
+          }, children: e.map((s, p) => {
+            const b = p === e.length - 1, c = s.status === "visited", g = s.status === "current", h = s.status === "disabled", m = c ? xe.Brand : g ? "transparent" : y.NeutralBold, x = /* @__PURE__ */ n(
               "div",
               {
                 style: {
                   width: a,
                   height: a,
                   borderRadius: M.Full,
-                  background: p ? xe.Brand : m,
-                  backgroundColor: p ? void 0 : m,
+                  background: c ? xe.Brand : m,
+                  backgroundColor: c ? void 0 : m,
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   flexShrink: 0,
-                  color: p ? c.OnBrand : g ? c.Brand : h ? c.Disabled : c.Subtle,
+                  color: c ? u.OnBrand : g ? u.Brand : h ? u.Disabled : u.Subtle,
                   fontSize: w.XSmall,
                   fontWeight: R.Bold,
-                  border: g ? `2px solid ${c.Brand}` : "none",
+                  border: g ? `2px solid ${u.Brand}` : "none",
                   cursor: s.onClick || s.href ? "pointer" : "default",
                   transition: "all 300ms ease"
                 },
                 onClick: s.onClick,
-                children: p ? /* @__PURE__ */ n(wr, {}) : u + 1
+                children: c ? /* @__PURE__ */ n(wr, {}) : p + 1
               }
             ), v = s.href ? /* @__PURE__ */ n("a", { href: s.href, style: { textDecoration: "none", color: "inherit" }, children: x }) : x;
             return /* @__PURE__ */ f(te.Fragment, { children: [
@@ -3992,7 +3993,7 @@ const wr = () => /* @__PURE__ */ n(
                 top: 0,
                 left: 0,
                 height: "100%",
-                width: `${p ? s.percentageComplete : 0}%`,
+                width: `${c ? s.percentageComplete : 0}%`,
                 background: xe.Brand,
                 borderRadius: M.Full,
                 transition: "width 400ms ease"
@@ -4004,8 +4005,8 @@ const wr = () => /* @__PURE__ */ n(
             alignItems: "flex-start",
             width: "100%",
             marginTop: i.Medium
-          }, children: e.map((s, u) => {
-            const b = u === e.length - 1, p = s.status === "visited", g = s.status === "current", h = s.status === "disabled", m = p ? c.Brand : g ? c.Default : h ? c.Disabled : c.Subtle;
+          }, children: e.map((s, p) => {
+            const b = p === e.length - 1, c = s.status === "visited", g = s.status === "current", h = s.status === "disabled", m = c ? u.Brand : g ? u.Default : h ? u.Disabled : u.Subtle;
             return /* @__PURE__ */ f(te.Fragment, { children: [
               /* @__PURE__ */ n("div", { style: {
                 width: a,
@@ -4043,7 +4044,7 @@ function Cr(e) {
       {
         size: w.XSmall,
         weight: R.Semibold,
-        color: c.Brand,
+        color: u.Brand,
         children: e.label
       }
     ),
@@ -4101,14 +4102,14 @@ const Lr = L(
     padding: a = i.XXLarge,
     borderRadius: d = M.XXLarge,
     blur: s = 20,
-    backgroundOpacity: u = 0.1,
+    backgroundOpacity: p = 0.1,
     borderOpacity: b = 0.12,
-    children: p
+    children: c
   }, g) => {
     const h = {
       position: "relative",
       overflow: "hidden",
-      background: `rgba(255, 255, 255, ${u})`,
+      background: `rgba(255, 255, 255, ${p})`,
       backdropFilter: `blur(${s}px)`,
       WebkitBackdropFilter: `blur(${s}px)`,
       border: `1px solid rgba(255, 255, 255, ${b})`,
@@ -4128,7 +4129,7 @@ const Lr = L(
           as: "h3",
           size: w.Large,
           weight: R.Bold,
-          color: c.Default,
+          color: u.Default,
           children: t
         }
       ),
@@ -4136,12 +4137,12 @@ const Lr = L(
         D,
         {
           size: w.XSmall,
-          color: c.OnSurfaceVariant,
+          color: u.OnSurfaceVariant,
           children: r
         }
       ),
       l && Cr(l),
-      p
+      c
     ] });
     return /* @__PURE__ */ f(S, { ref: g, padding: a, style: h, children: [
       /* @__PURE__ */ n("div", { style: m, "aria-hidden": "true" }),
@@ -4160,11 +4161,11 @@ const Mr = `
 }
 `, Dn = "36px", Ir = "18px", Dr = L(
   ({ items: e, onComplete: t, finishedLabel: r, maxHeight: l = "256px" }, o) => {
-    const [a, d] = P(() => /* @__PURE__ */ new Set()), s = oe(!1), u = oe(null), b = oe([]), p = a.size >= e.length;
+    const [a, d] = P(() => /* @__PURE__ */ new Set()), s = oe(!1), p = oe(null), b = oe([]), c = a.size >= e.length;
     return K(() => {
-      p && !s.current && (s.current = !0, t == null || t());
-    }, [p, t]), K(() => {
-      const g = u.current;
+      c && !s.current && (s.current = !0, t == null || t());
+    }, [c, t]), K(() => {
+      const g = p.current;
       if (!g) return;
       const h = new IntersectionObserver(
         (m) => {
@@ -4183,7 +4184,7 @@ const Mr = `
       return b.current.forEach((m) => m && h.observe(m)), () => h.disconnect();
     }, [e.length]), /* @__PURE__ */ f("div", { ref: o, style: { width: "100%", position: "relative" }, children: [
       /* @__PURE__ */ n("style", { children: Mr }),
-      /* @__PURE__ */ n("div", { ref: u, style: zr(l, p), children: /* @__PURE__ */ n(_, { space: i.MediumLarge, children: e.map((g, h) => {
+      /* @__PURE__ */ n("div", { ref: p, style: zr(l, c), children: /* @__PURE__ */ n(_, { space: i.MediumLarge, children: e.map((g, h) => {
         const m = a.has(h);
         return /* @__PURE__ */ f(
           "div",
@@ -4199,7 +4200,7 @@ const Mr = `
           g.id ?? h
         );
       }) }) }),
-      /* @__PURE__ */ n("div", { style: Or, children: p ? r : /* @__PURE__ */ n(Tr, {}) })
+      /* @__PURE__ */ n("div", { style: Or, children: c ? r : /* @__PURE__ */ n(Tr, {}) })
     ] });
   }
 );
@@ -4209,7 +4210,7 @@ function Er({ item: e }) {
     /* @__PURE__ */ n("span", { "aria-hidden": "true", style: Nr, children: e.icon }),
     /* @__PURE__ */ f("span", { style: $r, children: [
       /* @__PURE__ */ n(D, { as: "span", size: w.Small, weight: R.Medium, children: e.label }),
-      e.description && /* @__PURE__ */ n(D, { as: "span", size: w.XSmall, color: c.Subtle, children: e.description })
+      e.description && /* @__PURE__ */ n(D, { as: "span", size: w.XSmall, color: u.Subtle, children: e.description })
     ] }),
     e.meta && /* @__PURE__ */ n("span", { style: Wr, children: e.meta })
   ] });
@@ -4252,14 +4253,14 @@ const En = "linear-gradient(to bottom, black 0%, black calc(100% - 32px), transp
   background: y.Subtle,
   borderRadius: M.Large,
   border: `1px solid ${T.Default}`,
-  color: c.Default
+  color: u.Default
 }, Nr = {
   width: Dn,
   height: Dn,
   flexShrink: 0,
   borderRadius: M.Medium,
   background: y.Subtle,
-  color: c.Default,
+  color: u.Default,
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center"
@@ -4289,7 +4290,7 @@ const En = "linear-gradient(to bottom, black 0%, black calc(100% - 32px), transp
   justifyContent: "center",
   minHeight: "20px"
 }, Hr = {
-  color: c.Subtle,
+  color: u.Subtle,
   animation: "bbui-pulse-down 1500ms ease-in-out infinite",
   display: "inline-flex"
 }, jr = [
@@ -4326,9 +4327,9 @@ const En = "linear-gradient(to bottom, black 0%, black calc(100% - 32px), transp
             backgroundColor: y.Transparent,
             hover: y.BrandBold,
             pressed: y.BrandBold,
-            color: c.Default,
-            colorHover: c.OnBrand,
-            colorPressed: c.OnBrand,
+            color: u.Default,
+            colorHover: u.OnBrand,
+            colorPressed: u.OnBrand,
             size: w.Small,
             weight: R.Medium
           },
@@ -4387,17 +4388,17 @@ async function* Gr(e, t) {
       for (; (s = o.indexOf(`
 
 `)) !== -1; ) {
-        const u = o.slice(0, s);
+        const p = o.slice(0, s);
         o = o.slice(s + 2);
         const b = [];
-        for (const g of u.split(`
+        for (const g of p.split(`
 `))
           g.startsWith("data:") && b.push(g.slice(5).trimStart());
         if (b.length === 0) continue;
-        const p = b.join(`
+        const c = b.join(`
 `);
         try {
-          yield JSON.parse(p);
+          yield JSON.parse(c);
         } catch {
         }
       }
@@ -4420,7 +4421,7 @@ async function* _r(e, t = {}) {
   yield* Gr(r, t.signal);
 }
 function xl(e = {}) {
-  const { onEvent: t, onComplete: r, onError: l, retain: o = !0 } = e, [a, d] = P([]), [s, u] = P(null), [b, p] = P(!1), [g, h] = P(null), m = oe(null), x = oe(!0), v = oe(t), C = oe(r), B = oe(l);
+  const { onEvent: t, onComplete: r, onError: l, retain: o = !0 } = e, [a, d] = P([]), [s, p] = P(null), [b, c] = P(!1), [g, h] = P(null), m = oe(null), x = oe(!0), v = oe(t), C = oe(r), B = oe(l);
   K(() => {
     v.current = t, C.current = r, B.current = l;
   }), K(() => (x.current = !0, () => {
@@ -4431,20 +4432,20 @@ function xl(e = {}) {
     var z;
     (z = m.current) == null || z.abort(), m.current = null;
   }, []), X = Q(() => {
-    d([]), u(null), h(null);
+    d([]), p(null), h(null);
   }, []), A = Q(
     async (z, F = {}) => {
       var k, I, N, G;
       (k = m.current) == null || k.abort();
       const O = new AbortController();
-      m.current = O, x.current && (d([]), u(null), h(null), p(!0));
+      m.current = O, x.current && (d([]), p(null), h(null), c(!0));
       try {
         for await (const j of _r(z, {
           ...F,
           signal: O.signal
         })) {
           if (!x.current) return;
-          o && d((Y) => [...Y, j]), u(j), (I = v.current) == null || I.call(v, j);
+          o && d((Y) => [...Y, j]), p(j), (I = v.current) == null || I.call(v, j);
         }
         x.current && ((N = C.current) == null || N.call(C));
       } catch (j) {
@@ -4452,7 +4453,7 @@ function xl(e = {}) {
         const Y = j instanceof Error ? j : new Error(String(j));
         x.current && (h(Y), (G = B.current) == null || G.call(B, Y));
       } finally {
-        x.current && m.current === O && (p(!1), m.current = null);
+        x.current && m.current === O && (c(!1), m.current = null);
       }
     },
     [o]
@@ -4539,7 +4540,7 @@ export {
   Ht as Tabs,
   D as Text,
   wt as TextArea,
-  c as TextColor,
+  u as TextColor,
   $t as TextField,
   Ee as TextInput,
   Jr as TextTransform,

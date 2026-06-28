@@ -18,7 +18,7 @@ export interface IconButtonProps
 
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
   (
-    { label, size, color, backgroundColor, padding, style, children, ...rest },
+    { label, size, color, backgroundColor, padding, style, className, children, ...rest },
     ref
   ) => {
     const computedStyle: React.CSSProperties = {
@@ -39,6 +39,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
         ref={ref}
         type="button"
         aria-label={label}
+        className={className ? `bbui-button ${className}` : "bbui-button"}
         style={computedStyle}
         {...rest}
       >
