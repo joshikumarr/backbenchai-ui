@@ -16,10 +16,15 @@ import type { BadgeVariant } from "./Badge";
  * Visual treatment.
  *   filled    — solid Subtle background when unselected, Brand when selected.
  *   outlined  — transparent + Outline border when unselected, Brand when selected.
+ *   glass     — frosted surface (glass tokens); hover fills with brand and
+ *               flips inherited content to on-brand; selected = brand fill
+ *               with glow (the screen's one primary action). Colors come
+ *               from styles.css (.bbui-chip-glass), not inline styles, so
+ *               interactive states can live in CSS.
  *
  * Ignored when `variant` is set — variants paint their own colors.
  */
-export type ChipAppearance = "filled" | "outlined";
+export type ChipAppearance = "filled" | "outlined" | "glass";
 
 /**
  * Padding density.
@@ -114,6 +119,7 @@ export const Chip = forwardRef<HTMLElement, ChipProps>(
       onClick,
       disabled,
       style,
+      className,
       children,
       ...rest
     },
@@ -130,13 +136,15 @@ export const Chip = forwardRef<HTMLElement, ChipProps>(
       ? { block: Spacing.XXSmall, inline: Spacing.XSmall }
       : DENSITY_PADDING[density];
 
-    let backgroundColor: string;
-    let color: string;
+    const isGlass = !variant && appearance === "glass";
+
+    let backgroundColor: string | undefined;
+    let color: string | undefined;
     if (variant) {
       const v = VARIANT_STYLES[variant];
       backgroundColor = v.backgroundColor;
       color = v.color;
-    } else {
+    } else if (!isGlass) {
       backgroundColor = isSelected
         ? BackgroundColor.Brand
         : appearance === "outlined"
@@ -144,11 +152,14 @@ export const Chip = forwardRef<HTMLElement, ChipProps>(
           : BackgroundColor.Subtle;
       color = isSelected ? TextColor.OnBrand : TextColor.Default;
     }
+    // glass: background/color/border owned by .bbui-chip-glass in styles.css
+    // so hover/active states work; inline values would override them.
 
     // Reserve 1px of border so swapping between outlined/filled (or between
     // unselected/selected) doesn't shift adjacent chips in a row.
-    const border =
-      !variant && appearance === "outlined" && !isSelected
+    const border = isGlass
+      ? undefined
+      : !variant && appearance === "outlined" && !isSelected
         ? `1px solid ${BorderColor.Outline}`
         : "1px solid transparent";
 
@@ -159,9 +170,9 @@ export const Chip = forwardRef<HTMLElement, ChipProps>(
       paddingBlock: padding.block,
       paddingInline: padding.inline,
       borderRadius: BorderRadius.Full,
-      backgroundColor,
-      color,
-      border,
+      ...(backgroundColor !== undefined && { backgroundColor }),
+      ...(color !== undefined && { color }),
+      ...(border !== undefined && { border }),
       fontFamily: "inherit",
       fontWeight,
       fontSize,
@@ -177,6 +188,24 @@ export const Chip = forwardRef<HTMLElement, ChipProps>(
       alignSelf: "flex-start",
       ...style,
     };
+
+    const glassClass = isGlass
+      ? `bbui-chip-glass${isSelected ? " bbui-chip-glass--selected" : ""}`
+      : undefined;
+    const composedClassName =
+      [glassClass, className].filter(Boolean).join(" ") || undefined;
+
+    // Icons/avatars ride in .bbui-chip-icon so the glass hover-fill can flip
+    // their color along with the label (no-op for other appearances).
+    const leading = icon ? (
+      <span
+        className="bbui-chip-icon"
+        style={{ display: "inline-flex", alignItems: "center" }}
+        aria-hidden
+      >
+        {icon}
+      </span>
+    ) : null;
 
     const checkIcon = showCheckWhenSelected && isSelected ? (
       <span
@@ -197,9 +226,10 @@ export const Chip = forwardRef<HTMLElement, ChipProps>(
           disabled={disabled}
           onClick={onClick}
           style={computedStyle}
+          className={composedClassName}
           {...(rest as React.ButtonHTMLAttributes<HTMLButtonElement>)}
         >
-          {icon}
+          {leading}
           {checkIcon}
           {children}
         </button>
@@ -210,9 +240,10 @@ export const Chip = forwardRef<HTMLElement, ChipProps>(
       <span
         ref={ref as React.Ref<HTMLSpanElement>}
         style={computedStyle}
+        className={composedClassName}
         {...(rest as React.HTMLAttributes<HTMLSpanElement>)}
       >
-        {icon}
+        {leading}
         {children}
       </span>
     );

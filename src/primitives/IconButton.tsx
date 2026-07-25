@@ -13,33 +13,46 @@ export interface IconButtonProps
   color?: TextColorToken;
   backgroundColor?: BackgroundColorToken;
   padding?: SpaceToken;
+  /**
+   * "overlay" — frosted scrim circle for buttons floating over imagery
+   * (save-to-shortlist hearts, close buttons on photo strips). Styled by
+   * .bbui-icon-button-overlay in styles.css (--bbui-scrim token); position
+   * and size stay at the call site.
+   */
+  variant?: "plain" | "overlay";
   children?: React.ReactNode;
 }
 
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
   (
-    { label, size, color, backgroundColor, padding, style, className, children, ...rest },
+    { label, size, color, backgroundColor, padding, variant = "plain", style, className, children, ...rest },
     ref
   ) => {
+    const isOverlay = variant === "overlay";
     const computedStyle: React.CSSProperties = {
       display: "inline-flex",
       alignItems: "center",
       justifyContent: "center",
       border: "none",
       cursor: "pointer",
-      background: backgroundColor ?? "none",
+      // overlay: background/color come from .bbui-icon-button-overlay
+      ...(!isOverlay && { background: backgroundColor ?? "none" }),
       ...(size && { width: size, height: size }),
       ...(color && { color }),
       ...(padding && { padding }),
       ...style,
     };
 
+    const classes = ["bbui-button", isOverlay && "bbui-icon-button-overlay", className]
+      .filter(Boolean)
+      .join(" ");
+
     return (
       <button
         ref={ref}
         type="button"
         aria-label={label}
-        className={className ? `bbui-button ${className}` : "bbui-button"}
+        className={classes}
         style={computedStyle}
         {...rest}
       >
