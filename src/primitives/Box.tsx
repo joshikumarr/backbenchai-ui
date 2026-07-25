@@ -53,6 +53,8 @@ type AllowedElements =
  */
 type ShorthandSpace = SpaceToken | readonly SpaceToken[];
 
+export type SafeAreaEdge = "top" | "bottom" | "inline";
+
 export interface BoxProps extends React.HTMLAttributes<HTMLElement> {
   as?: AllowedElements;
   padding?: Responsive<ShorthandSpace>;
@@ -83,6 +85,16 @@ export interface BoxProps extends React.HTMLAttributes<HTMLElement> {
   borderSide?: "top" | "bottom" | "left" | "right" | "all";
   borderWidth?: BorderWidthToken;
   overflow?: "hidden" | "auto" | "scroll" | "visible";
+  /** overscroll-behavior — "contain" stops scroll chaining out of this box (iOS pull-to-refresh / rubber-band guard on scroll regions). */
+  overscrollBehavior?: "auto" | "contain" | "none";
+  /**
+   * Compose device safe-area insets (notch, home indicator) into this box's
+   * padding. "top"/"bottom" add env(safe-area-inset-top/bottom) to the axis
+   * padding; "inline" takes max(padding, inset) per side. Composes with the
+   * axis padding props (paddingBlockStart/End, paddingInline) — not the
+   * 4-side `padding` shorthand.
+   */
+  safeArea?: SafeAreaEdge | readonly SafeAreaEdge[];
   elevation?: ElevationToken;
 
   // ── Sizing ────────────────────────────────────────────────────────
@@ -199,6 +211,8 @@ export const Box = forwardRef<HTMLElement, BoxProps>(
       borderSide,
       borderWidth = "1px",
       overflow,
+      overscrollBehavior,
+      safeArea,
       elevation,
       width,
       maxWidth,
@@ -355,8 +369,27 @@ export const Box = forwardRef<HTMLElement, BoxProps>(
       ...(aspectRatio !== undefined && { aspectRatio }),
       ...(filter && { filter }),
       ...(backdropFilter && { backdropFilter }),
+      ...(overscrollBehavior && { overscrollBehavior }),
       ...style,
     };
+
+    // Safe-area composition — after assembly so it wraps whatever axis
+    // padding the props resolved to (base 0 when none).
+    if (safeArea) {
+      const edges = Array.isArray(safeArea) ? safeArea : [safeArea];
+      if (edges.includes("top")) {
+        computedStyle.paddingBlockStart = `calc(${computedStyle.paddingBlockStart ?? "0px"} + env(safe-area-inset-top))`;
+      }
+      if (edges.includes("bottom")) {
+        computedStyle.paddingBlockEnd = `calc(${computedStyle.paddingBlockEnd ?? "0px"} + env(safe-area-inset-bottom))`;
+      }
+      if (edges.includes("inline")) {
+        const base = (computedStyle.paddingInline as string) ?? "0px";
+        delete computedStyle.paddingInline;
+        computedStyle.paddingLeft = `max(${base}, env(safe-area-inset-left))`;
+        computedStyle.paddingRight = `max(${base}, env(safe-area-inset-right))`;
+      }
+    }
 
     return React.createElement(
       Component,

@@ -1,5 +1,5 @@
 export { Box } from "./Box";
-export type { BoxProps } from "./Box";
+export type { BoxProps, SafeAreaEdge } from "./Box";
 
 export { Show } from "./Show";
 export type { ShowProps } from "./Show";

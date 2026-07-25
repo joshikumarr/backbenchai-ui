@@ -29,6 +29,7 @@ export {
 } from "./primitives";
 export type {
   BoxProps,
+  SafeAreaEdge,
   StackProps,
   InlineProps,
   InsetProps,
