@@ -281,6 +281,16 @@ export declare interface BoxProps extends default_2.HTMLAttributes<HTMLElement> 
     borderSide?: "top" | "bottom" | "left" | "right" | "all";
     borderWidth?: BorderWidthToken;
     overflow?: "hidden" | "auto" | "scroll" | "visible";
+    /** overscroll-behavior — "contain" stops scroll chaining out of this box (iOS pull-to-refresh / rubber-band guard on scroll regions). */
+    overscrollBehavior?: "auto" | "contain" | "none";
+    /**
+     * Compose device safe-area insets (notch, home indicator) into this box's
+     * padding. "top"/"bottom" add env(safe-area-inset-top/bottom) to the axis
+     * padding; "inline" takes max(padding, inset) per side. Composes with the
+     * axis padding props (paddingBlockStart/End, paddingInline) — not the
+     * 4-side `padding` shorthand.
+     */
+    safeArea?: SafeAreaEdge | readonly SafeAreaEdge[];
     elevation?: ElevationToken;
     /** CSS width — accepts ContainerWidth token or raw "100%" / "640px". */
     width?: ContainerWidthToken | string | number;
@@ -1412,6 +1422,8 @@ export declare interface RevealStepsProps {
     /** Scroll-area max height (default 256px) */
     maxHeight?: string;
 }
+
+export declare type SafeAreaEdge = "top" | "bottom" | "inline";
 
 /** Convenience: 0–100 score → color token in one call. */
 export declare function scoreColor(score: number): BloomColorToken;
