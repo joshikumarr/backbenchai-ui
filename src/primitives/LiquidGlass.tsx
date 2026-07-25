@@ -155,7 +155,9 @@ export const LiquidGlass = forwardRef<HTMLDivElement, LiquidGlassProps>(
             }}
           />
         )}
-        <div style={{ position: "relative", zIndex: 4 }}>{children}</div>
+        {/* height:100% lets full-height panels (chat cards, drawers) run a
+            flex column inside; resolves to auto when the panel is unsized. */}
+        <div style={{ position: "relative", zIndex: 4, height: "100%" }}>{children}</div>
       </div>
     );
   }
