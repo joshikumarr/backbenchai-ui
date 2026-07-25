@@ -1207,7 +1207,7 @@ const bt = L(
           }
         }
       ),
-      /* @__PURE__ */ e("div", { style: { position: "relative", zIndex: 4 }, children: n })
+      /* @__PURE__ */ e("div", { style: { position: "relative", zIndex: 4, height: "100%" }, children: n })
     ] });
   }
 );
