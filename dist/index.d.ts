@@ -513,10 +513,15 @@ export declare const Chip: default_2.ForwardRefExoticComponent<ChipProps & defau
  * Visual treatment.
  *   filled    — solid Subtle background when unselected, Brand when selected.
  *   outlined  — transparent + Outline border when unselected, Brand when selected.
+ *   glass     — frosted surface (glass tokens); hover fills with brand and
+ *               flips inherited content to on-brand; selected = brand fill
+ *               with glow (the screen's one primary action). Colors come
+ *               from styles.css (.bbui-chip-glass), not inline styles, so
+ *               interactive states can live in CSS.
  *
  * Ignored when `variant` is set — variants paint their own colors.
  */
-export declare type ChipAppearance = "filled" | "outlined";
+export declare type ChipAppearance = "filled" | "outlined" | "glass";
 
 /**
  * Padding density.
@@ -975,6 +980,13 @@ export declare interface IconButtonProps extends default_2.ButtonHTMLAttributes<
     color?: TextColorToken;
     backgroundColor?: BackgroundColorToken;
     padding?: SpaceToken;
+    /**
+     * "overlay" — frosted scrim circle for buttons floating over imagery
+     * (save-to-shortlist hearts, close buttons on photo strips). Styled by
+     * .bbui-icon-button-overlay in styles.css (--bbui-scrim token); position
+     * and size stay at the call site.
+     */
+    variant?: "plain" | "overlay";
     children?: default_2.ReactNode;
 }
 
