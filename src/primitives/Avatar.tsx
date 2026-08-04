@@ -29,7 +29,7 @@ const sizeMap: Record<AvatarSize, number> = {
 };
 
 const fontSizeMap: Record<AvatarSize, string> = {
-  xsmall: "10px",
+  xsmall: "12px",
   small: "12px",
   medium: "14px",
   large: "16px",

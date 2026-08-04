@@ -129,7 +129,13 @@ export const FontFamily = {
 export type FontFamilyToken = (typeof FontFamily)[keyof typeof FontFamily];
 
 export const FontSize = {
+  /**
+   * @deprecated 10px is below the readable floor for UI text. No component
+   * defaults to it. Use XXSmall (12px) for labels, eyebrows and badges.
+   * Kept only so existing call sites keep compiling.
+   */
   Micro: "10px",
+  /** 12px — labels, eyebrows, badges. The smallest size for real UI text. */
   XXSmall: "12px",
   XSmall: "14px",
   Small: "16px",

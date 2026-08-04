@@ -81,7 +81,7 @@ export const MobileNav = forwardRef<HTMLElement, MobileNavProps>(
                 </Box>
                 <Text
                   as="span"
-                  size={FontSize.Micro}
+                  size={FontSize.XXSmall}
                   weight={FontWeight.Bold}
                   color={isActive ? TextColor.Brand : TextColor.Disabled}
                   textTransform="uppercase"

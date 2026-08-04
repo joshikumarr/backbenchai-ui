@@ -155,7 +155,7 @@ export declare const Badge: default_2.ForwardRefExoticComponent<BadgeProps & def
 
 export declare interface BadgeProps extends default_2.HTMLAttributes<HTMLSpanElement> {
     variant?: BadgeVariant;
-    /** When true, uses micro font (10px), uppercase, tracking-widest — matches NestOS mockups */
+    /** When true: uppercase, heavier weight, wide tracking. 12px like the default badge. */
     uppercase?: boolean;
     children?: default_2.ReactNode;
 }
@@ -736,7 +736,13 @@ export declare const FontFamily: {
 export declare type FontFamilyToken = (typeof FontFamily)[keyof typeof FontFamily];
 
 export declare const FontSize: {
+    /**
+     * @deprecated 10px is below the readable floor for UI text. No component
+     * defaults to it. Use XXSmall (12px) for labels, eyebrows and badges.
+     * Kept only so existing call sites keep compiling.
+     */
     readonly Micro: "10px";
+    /** 12px — labels, eyebrows, badges. The smallest size for real UI text. */
     readonly XXSmall: "12px";
     readonly XSmall: "14px";
     readonly Small: "16px";

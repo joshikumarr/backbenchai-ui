@@ -16,7 +16,7 @@ export type BadgeVariant =
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
   variant?: BadgeVariant;
-  /** When true, uses micro font (10px), uppercase, tracking-widest — matches NestOS mockups */
+  /** When true: uppercase, heavier weight, wide tracking. 12px like the default badge. */
   uppercase?: boolean;
   children?: React.ReactNode;
 }
@@ -47,7 +47,7 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
       paddingInline: uppercase ? Spacing.MediumLarge : Spacing.Medium,
       borderRadius: BorderRadius.Full,
       fontWeight: uppercase ? FontWeight.Black : FontWeight.Medium,
-      fontSize: uppercase ? FontSize.Micro : FontSize.XXSmall,
+      fontSize: FontSize.XXSmall,
       letterSpacing: uppercase ? LetterSpacing.Wider : undefined,
       textTransform: uppercase ? "uppercase" : undefined,
       ...colors,

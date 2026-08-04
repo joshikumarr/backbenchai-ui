@@ -129,17 +129,19 @@ button, a, input, select, textarea {
 /* ── Button hover/pressed state hookup ───────────────────────────── */
 
 .bbui-button {
-  background: var(--bbui-btn-bg, transparent);
+  /* No explicit background → subtle surface, never invisible text.
+     Pass BackgroundColor.Transparent for a deliberate ghost button. */
+  background: var(--bbui-btn-bg, var(--bbui-bg-subtle));
   color: var(--bbui-btn-color, inherit);
   border-color: var(--bbui-btn-border, currentColor);
 }
 .bbui-button:hover:not(:disabled) {
-  background: var(--bbui-btn-bg-hover, var(--bbui-btn-bg, transparent));
+  background: var(--bbui-btn-bg-hover, var(--bbui-btn-bg, var(--bbui-bg-default)));
   color: var(--bbui-btn-color-hover, var(--bbui-btn-color, inherit));
   border-color: var(--bbui-btn-border-hover, var(--bbui-btn-border, currentColor));
 }
 .bbui-button:active:not(:disabled) {
-  background: var(--bbui-btn-bg-pressed, var(--bbui-btn-bg-hover, var(--bbui-btn-bg, transparent)));
+  background: var(--bbui-btn-bg-pressed, var(--bbui-btn-bg-hover, var(--bbui-btn-bg, var(--bbui-bg-default))));
   color: var(--bbui-btn-color-pressed, var(--bbui-btn-color-hover, var(--bbui-btn-color, inherit)));
   border-color: var(--bbui-btn-border-pressed, var(--bbui-btn-border-hover, var(--bbui-btn-border, currentColor)));
 }

@@ -99,7 +99,13 @@ const i = {
   Display: "var(--bbui-font-display)",
   Body: "var(--bbui-font-body)"
 }, w = {
+  /**
+   * @deprecated 10px is below the readable floor for UI text. No component
+   * defaults to it. Use XXSmall (12px) for labels, eyebrows and badges.
+   * Kept only so existing call sites keep compiling.
+   */
   Micro: "10px",
+  /** 12px — labels, eyebrows, badges. The smallest size for real UI text. */
   XXSmall: "12px",
   XSmall: "14px",
   Small: "16px",
@@ -986,7 +992,7 @@ const ot = {
       paddingInline: t ? i.MediumLarge : i.Medium,
       borderRadius: M.Full,
       fontWeight: t ? N.Black : N.Medium,
-      fontSize: t ? w.Micro : w.XXSmall,
+      fontSize: w.XXSmall,
       letterSpacing: t ? $n.Wider : void 0,
       textTransform: t ? "uppercase" : void 0,
       ...d,
@@ -1325,7 +1331,7 @@ const yt = {
   large: 48,
   xlarge: 64
 }, xt = {
-  xsmall: "10px",
+  xsmall: "12px",
   small: "12px",
   medium: "14px",
   large: "16px",
@@ -3882,7 +3888,7 @@ const Cr = L(
                   D,
                   {
                     as: "span",
-                    size: w.Micro,
+                    size: w.XXSmall,
                     weight: N.Bold,
                     color: s ? u.Brand : u.Disabled,
                     textTransform: "uppercase",
@@ -3943,7 +3949,7 @@ const Br = () => /* @__PURE__ */ e(
               D,
               {
                 as: "p",
-                size: w.Micro,
+                size: w.XXSmall,
                 weight: c ? N.Bold : N.Medium,
                 color: c ? u.Brand : b ? u.Subtle : u.Disabled,
                 textTransform: "uppercase",

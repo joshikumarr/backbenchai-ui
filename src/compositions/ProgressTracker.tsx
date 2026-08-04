@@ -81,7 +81,7 @@ export const ProgressTracker = forwardRef<HTMLDivElement, ProgressTrackerProps>(
                 {/* Label — aligned to start for first, end for last, center for middle */}
                 {showLabels && (
                   <Text as="p"
-                        size={FontSize.Micro}
+                        size={FontSize.XXSmall}
                         weight={isCurrent ? FontWeight.Bold : FontWeight.Medium}
                         color={isCurrent ? TextColor.Brand : isVisited ? TextColor.Subtle : TextColor.Disabled}
                         textTransform="uppercase"
