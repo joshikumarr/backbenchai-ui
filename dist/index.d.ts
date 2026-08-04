@@ -1000,6 +1000,8 @@ export declare interface IconProps extends default_2.HTMLAttributes<HTMLSpanElem
     size?: IconSizeToken;
     color?: TextColorToken;
     label?: string;
+    /** Material Symbols glyph name — renders the icon font when set. */
+    name?: string;
     children?: default_2.ReactNode;
 }
 
@@ -1010,6 +1012,7 @@ export declare const IconSize: {
     readonly Large: "24px";
     readonly XLarge: "32px";
     readonly XXLarge: "40px";
+    readonly Huge: "48px";
 };
 
 export declare type IconSizeToken = (typeof IconSize)[keyof typeof IconSize];

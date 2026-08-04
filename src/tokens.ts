@@ -405,6 +405,7 @@ export const IconSize = {
   Large: "24px",
   XLarge: "32px",
   XXLarge: "40px",
+  Huge: "48px",
 } as const;
 
 export type IconSizeToken = (typeof IconSize)[keyof typeof IconSize];
