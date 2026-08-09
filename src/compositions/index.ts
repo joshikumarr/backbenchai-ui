@@ -74,7 +74,7 @@ export type { SelectFieldProps } from "./SelectField";
 export { Toast } from "./Toast";
 export type { ToastProps } from "./Toast";
 
-export { MobileNav } from "./MobileNav";
+export { MobileNav, MOBILE_NAV_HEIGHT } from "./MobileNav";
 export type { MobileNavProps, MobileNavItem } from "./MobileNav";
 
 export { ProgressTracker } from "./ProgressTracker";

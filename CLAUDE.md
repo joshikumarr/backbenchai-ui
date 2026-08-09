@@ -37,3 +37,16 @@ import "@backbench/ui/styles.css";
 - Polymorphic `as` prop
 - Token-based styling (no Tailwind)
 - Strict TypeScript
+
+## Capacitor, safe areas, breakpoints
+Read **CAPACITOR.md** before you touch safe-area CSS, a breakpoint, or fixed
+chrome. It states five rules and gives the sources. The short form:
+
+- Never write bare `env(safe-area-inset-*)`. Use `safeAreaInset()`,
+  `safeAreaBlock()`, or `safeAreaInline()` from `src/safeArea.ts`. Android
+  WebView below 140 returns wrong values from `env()`.
+- `calc(padding + inset)` on top and bottom. `max(padding, inset)` on left and
+  right. The two axes work differently.
+- Pick a breakpoint from `useWindowSizeClass()` (Material 3), not from a number
+  you chose.
+- `StatusBar.setOverlaysWebView` does nothing on Android 15+. Pad with insets.

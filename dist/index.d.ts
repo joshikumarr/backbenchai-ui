@@ -370,6 +370,13 @@ export declare interface Breadcrumb {
     href?: string;
 }
 
+/**
+ * The library's original three-step scale.
+ *
+ * Prefer WindowSizeClass below for new layout code. This scale stays because
+ * Layout, Show, Hide, and every responsive prop read it, and a change here
+ * moves the layout of every consumer app.
+ */
 export declare const Breakpoint: {
     /** 0–639px */
     readonly Mobile: 0;
@@ -1252,6 +1259,20 @@ export declare interface MenuSection {
     items: MenuItem[];
 }
 
+/**
+ * The height of the bar, WITHOUT the bottom safe-area inset.
+ *
+ * It is the sum of the item button (24px icon + 2px gap + ~14px label + 4px
+ * padding on each side = 48px) and the bar's own 8px block padding on each
+ * side. 48px also clears both published minimum touch targets: 44pt (Apple)
+ * and 48dp (Material).
+ *
+ * Layout reserves this plus the inset as bottom padding on the content area.
+ * Any other fixed element above the bar must do the same, or the last row of
+ * content hides behind the bar. See CAPACITOR.md.
+ */
+export declare const MOBILE_NAV_HEIGHT = "64px";
+
 export declare const MobileNav: default_2.ForwardRefExoticComponent<MobileNavProps & default_2.RefAttributes<HTMLElement>>;
 
 export declare interface MobileNavItem {
@@ -1444,7 +1465,82 @@ export declare interface RevealStepsProps {
     maxHeight?: string;
 }
 
+/**
+ * Padding for the block axis (top, bottom). The inset ADDS to the padding.
+ * Pass no padding to get the bare inset.
+ */
+export declare function safeAreaBlock(edge: "top" | "bottom", padding?: string): string;
+
+/** Axis names for Box's `safeArea` prop. "inline" covers left and right. */
 export declare type SafeAreaEdge = "top" | "bottom" | "inline";
+
+/**
+ * Padding for the inline axis (left, right). The inset REPLACES the padding
+ * when the inset is larger.
+ */
+export declare function safeAreaInline(edge: "left" | "right", padding: string): string;
+
+/**
+ * The CSS value of one safe-area inset.
+ *
+ * ```ts
+ * paddingBlockEnd: `calc(${Spacing.Medium} + ${safeAreaInset("bottom")})`
+ * ```
+ */
+export declare function safeAreaInset(edge: SafeAreaInsetEdge): string;
+
+/**
+ * Safe-area insets — one source of truth.
+ *
+ * READ THIS BEFORE YOU WRITE SAFE-AREA CSS ANYWHERE IN THIS LIBRARY.
+ * The long form, with sources, is in CAPACITOR.md at the repo root.
+ *
+ * A safe-area inset is the distance from a viewport edge to the first pixel
+ * the system does not cover. The notch, the Dynamic Island, the iOS home
+ * indicator, and the Android status and navigation bars all create one.
+ *
+ * ## Rule 1 — read the Capacitor variable first, then env()
+ *
+ * Android WebView before version 140 has a bug. It returns wrong values from
+ * env(safe-area-inset-*). Capacitor 8.3.0 and later inject the true native
+ * insets as --safe-area-inset-* custom properties, and 8.4.0 extends them to
+ * older API levels. So read the injected variable first. Fall back to env()
+ * for the web and for iOS. Fall back to 0px last.
+ *
+ *     var(--safe-area-inset-bottom, env(safe-area-inset-bottom, 0px))
+ *
+ * On the web the browser does not inject the variable and env() returns the
+ * real value, so one expression is correct on both targets.
+ *
+ * ## Rule 2 — calc() on the block axis, max() on the inline axis
+ *
+ * Both forms are correct. They do different jobs.
+ *
+ * - Top and bottom are ADDITIVE. The home indicator sits below your bar's own
+ *   padding, so you need both. Use calc(padding + inset).
+ * - Left and right are REPLACING. In landscape the notch eats the gutter you
+ *   already have, so you want the larger of the two. Use max(padding, inset).
+ *
+ * MDN documents the calc() form for a sticky footer. WebKit documents the
+ * max() form for page gutters. See CAPACITOR.md.
+ *
+ * ## Rule 3 — the consumer app must set viewport-fit=cover
+ *
+ * All insets are 0 without it. Put this in index.html:
+ *
+ *     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+ *
+ * ## Rule 4 — do not use StatusBar.setOverlaysWebView to make top space
+ *
+ * That call does nothing on Android 15 and later. Android 15 enforces
+ * edge-to-edge layout, and Android 16 removed the opt-out. Capacitor lists the
+ * option as unavailable on Android 15+. Pad with these insets instead.
+ */
+/**
+ * The four viewport edges that can carry a system inset. Box's `safeArea` prop
+ * uses a different, axis-based type — see SafeAreaEdge in Box.tsx.
+ */
+export declare type SafeAreaInsetEdge = "top" | "right" | "bottom" | "left";
 
 /** Convenience: 0–100 score → color token in one call. */
 export declare function scoreColor(score: number): BloomColorToken;
@@ -2045,6 +2141,16 @@ export declare function useTheme(): {
     readonly setTheme: (next: Theme) => void;
 };
 
+/**
+ * The current Material 3 window size class, for width and for height.
+ *
+ * ```tsx
+ * const { width, height } = useWindowSizeClass();
+ * const showRail = width !== "compact" && height !== "compact";
+ * ```
+ */
+export declare function useWindowSizeClass(): WindowSize;
+
 export declare const WhiteSpace: {
     readonly Normal: "normal";
     readonly NoWrap: "nowrap";
@@ -2055,6 +2161,62 @@ export declare const WhiteSpace: {
 };
 
 export declare type WhiteSpaceToken = (typeof WhiteSpace)[keyof typeof WhiteSpace];
+
+/**
+ * Material 3 HEIGHT classes. Use these to find a phone in landscape.
+ *
+ * | Class    | Height    | Covers                       |
+ * | -------- | --------- | ---------------------------- |
+ * | compact  | < 480     | 99.78% of phones, landscape  |
+ * | medium   | 480–899   | tablets landscape, phones portrait |
+ * | expanded | >= 900    | tablets portrait             |
+ *
+ * A landscape phone reads as EXPANDED on width and COMPACT on height. Width
+ * alone says "give it a sidebar", which is wrong — there is no vertical room.
+ * Check the height class before you show tall chrome.
+ */
+export declare const WindowHeightClass: {
+    readonly Compact: 0;
+    readonly Medium: 480;
+    readonly Expanded: 900;
+};
+
+export declare type WindowHeightClassName = "compact" | "medium" | "expanded";
+
+export declare interface WindowSize {
+    width: WindowSizeClassName;
+    height: WindowHeightClassName;
+}
+
+/**
+ * Material 3 window size classes — the published scale.
+ *
+ * Google measured real devices against these numbers and states the coverage,
+ * so use them instead of a number you picked. Source: Android developer docs,
+ * "Window size classes". CAPACITOR.md lists the URL.
+ *
+ * Width, with the column and margin the M3 grid pairs with each step:
+ *
+ * | Class       | Width         | Covers                        | Columns | Margin |
+ * | ----------- | ------------- | ----------------------------- | ------- | ------ |
+ * | compact     | < 600         | 99.96% of phones, portrait    | 4       | 16px   |
+ * | medium      | 600–839       | tablets portrait, unfolded    | 8       | 24px   |
+ * | expanded    | 840–1199      | tablets landscape             | 12      | 24px   |
+ * | large       | 1200–1599     | large tablets                 | 12      | 24px   |
+ * | extraLarge  | >= 1600       | desktop                       | 12      | 24px   |
+ *
+ * Design the phone case at 360px. That is the narrowest common Android phone
+ * (Galaxy S series). Every iPhone is wider, from 375px up.
+ */
+export declare const WindowSizeClass: {
+    readonly Compact: 0;
+    readonly Medium: 600;
+    readonly Expanded: 840;
+    readonly Large: 1200;
+    readonly ExtraLarge: 1600;
+};
+
+export declare type WindowSizeClassName = "compact" | "medium" | "expanded" | "large" | "extraLarge";
 
 export declare const ZIndex: {
     readonly Dropdown: 100;

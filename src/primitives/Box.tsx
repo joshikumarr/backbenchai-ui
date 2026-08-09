@@ -1,4 +1,5 @@
 import React, { forwardRef } from "react";
+import { safeAreaBlock, safeAreaInline } from "../safeArea";
 import type {
   SpaceToken,
   TextColorToken,
@@ -53,6 +54,7 @@ type AllowedElements =
  */
 type ShorthandSpace = SpaceToken | readonly SpaceToken[];
 
+/** Axis names for Box's `safeArea` prop. "inline" covers left and right. */
 export type SafeAreaEdge = "top" | "bottom" | "inline";
 
 export interface BoxProps extends React.HTMLAttributes<HTMLElement> {
@@ -375,19 +377,28 @@ export const Box = forwardRef<HTMLElement, BoxProps>(
 
     // Safe-area composition — after assembly so it wraps whatever axis
     // padding the props resolved to (base 0 when none).
+    // The block axis adds the inset; the inline axis takes the larger of the
+    // two. safeArea.ts explains why, and why env() alone is not enough on
+    // Android. Do not inline env() here — go through those helpers.
     if (safeArea) {
       const edges = Array.isArray(safeArea) ? safeArea : [safeArea];
       if (edges.includes("top")) {
-        computedStyle.paddingBlockStart = `calc(${computedStyle.paddingBlockStart ?? "0px"} + env(safe-area-inset-top))`;
+        computedStyle.paddingBlockStart = safeAreaBlock(
+          "top",
+          (computedStyle.paddingBlockStart as string) ?? "0px"
+        );
       }
       if (edges.includes("bottom")) {
-        computedStyle.paddingBlockEnd = `calc(${computedStyle.paddingBlockEnd ?? "0px"} + env(safe-area-inset-bottom))`;
+        computedStyle.paddingBlockEnd = safeAreaBlock(
+          "bottom",
+          (computedStyle.paddingBlockEnd as string) ?? "0px"
+        );
       }
       if (edges.includes("inline")) {
         const base = (computedStyle.paddingInline as string) ?? "0px";
         delete computedStyle.paddingInline;
-        computedStyle.paddingLeft = `max(${base}, env(safe-area-inset-left))`;
-        computedStyle.paddingRight = `max(${base}, env(safe-area-inset-right))`;
+        computedStyle.paddingLeft = safeAreaInline("left", base);
+        computedStyle.paddingRight = safeAreaInline("right", base);
       }
     }
 

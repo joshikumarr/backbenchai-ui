@@ -1,5 +1,16 @@
-export { useBreakpoint, Breakpoint } from "./useBreakpoint";
-export type { BreakpointName } from "./useBreakpoint";
+export {
+  useBreakpoint,
+  Breakpoint,
+  useWindowSizeClass,
+  WindowSizeClass,
+  WindowHeightClass,
+} from "./useBreakpoint";
+export type {
+  BreakpointName,
+  WindowSizeClassName,
+  WindowHeightClassName,
+  WindowSize,
+} from "./useBreakpoint";
 
 export { useMediaQuery } from "./useMediaQuery";
 

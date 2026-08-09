@@ -1,6 +1,7 @@
 import React, { forwardRef } from "react";
 import { Box } from "../primitives/Box";
 import { Text } from "../primitives/Text";
+import { safeAreaBlock, safeAreaInline } from "../safeArea";
 import {
   Spacing,
   FontSize,
@@ -25,6 +26,20 @@ export interface MobileNavProps {
   fab?: React.ReactNode;
 }
 
+/**
+ * The height of the bar, WITHOUT the bottom safe-area inset.
+ *
+ * It is the sum of the item button (24px icon + 2px gap + ~14px label + 4px
+ * padding on each side = 48px) and the bar's own 8px block padding on each
+ * side. 48px also clears both published minimum touch targets: 44pt (Apple)
+ * and 48dp (Material).
+ *
+ * Layout reserves this plus the inset as bottom padding on the content area.
+ * Any other fixed element above the bar must do the same, or the last row of
+ * content hides behind the bar. See CAPACITOR.md.
+ */
+export const MOBILE_NAV_HEIGHT = "64px";
+
 export const MobileNav = forwardRef<HTMLElement, MobileNavProps>(
   ({ items, activeId, onSelect, fab }, ref) => {
     return (
@@ -43,8 +58,15 @@ export const MobileNav = forwardRef<HTMLElement, MobileNavProps>(
           display: "flex",
           alignItems: "center",
           justifyContent: "space-around",
-          paddingInline: Spacing.Large,
-          paddingBlock: Spacing.Medium,
+          // The bar is fixed to the bottom edge, so the iOS home indicator and
+          // the Android gesture bar sit ON TOP of it. The bottom inset ADDS to
+          // the bar's own padding — it does not replace it. The inline insets
+          // REPLACE the gutter, for the notch in landscape. safeArea.ts states
+          // why, and why env() alone is wrong on Android.
+          paddingLeft: safeAreaInline("left", Spacing.Large),
+          paddingRight: safeAreaInline("right", Spacing.Large),
+          paddingBlockStart: Spacing.Medium,
+          paddingBlockEnd: safeAreaBlock("bottom", Spacing.Medium),
         }}
       >
         {items.map((item, idx) => {

@@ -22,6 +22,7 @@
   ],
   "scripts": {
     "prepare": "npm run build",
+    "check": "node scripts/check-layout-rules.mjs",
     "dev": "vite --config vite.demo.config.ts",
     "build": "tsc && vite build",
     "build:demo": "vite build --config vite.demo.config.ts",

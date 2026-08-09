@@ -169,6 +169,7 @@ export {
   SelectField,
   Toast,
   MobileNav,
+  MOBILE_NAV_HEIGHT,
   ProgressTracker,
   Sidebar,
   Panel,
@@ -239,9 +240,24 @@ export type {
   LikertScaleProps,
 } from "./compositions";
 
+// Safe areas — read CAPACITOR.md before you use these.
+export { safeAreaInset, safeAreaBlock, safeAreaInline } from "./safeArea";
+export type { SafeAreaInsetEdge } from "./safeArea";
+
 // Hooks
-export { useBreakpoint, Breakpoint } from "./hooks";
-export type { BreakpointName } from "./hooks";
+export {
+  useBreakpoint,
+  Breakpoint,
+  useWindowSizeClass,
+  WindowSizeClass,
+  WindowHeightClass,
+} from "./hooks";
+export type {
+  BreakpointName,
+  WindowSizeClassName,
+  WindowHeightClassName,
+  WindowSize,
+} from "./hooks";
 
 export { useMediaQuery } from "./hooks";
 
