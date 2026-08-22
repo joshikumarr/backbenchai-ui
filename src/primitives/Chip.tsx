@@ -112,7 +112,7 @@ export const Chip = forwardRef<HTMLElement, ChipProps>(
       appearance = "filled",
       density = "compact",
       variant,
-      fontWeight = FontWeight.Medium,
+      fontWeight = FontWeight.Semibold,
       fontSize: fontSizeProp,
       icon,
       showCheckWhenSelected = false,
@@ -128,12 +128,15 @@ export const Chip = forwardRef<HTMLElement, ChipProps>(
     const isInteractive = onClick !== undefined || selected !== undefined;
     const isSelected = selected === true;
 
-    // Variant chips are display tags (Badge replacement) — match Badge's
-    // tighter typography + padding so short labels like "Villa" hug the
-    // text. Interactive chips keep the larger, more tappable defaults.
-    const fontSize = fontSizeProp ?? (variant ? FontSize.XXSmall : FontSize.XSmall);
+    // One label size for the whole family. This used to flip to XSmall when no
+    // variant was passed, so two chips side by side rendered at different sizes
+    // depending on a styling prop — the single most visible reason labels and
+    // tags did not read as one set.
+    const fontSize = fontSizeProp ?? FontSize.XXSmall;
+    // Display tags match Badge exactly. Interactive chips keep the roomier
+    // density padding: that difference is a tap target, not a style choice.
     const padding = variant
-      ? { block: Spacing.XXSmall, inline: Spacing.XSmall }
+      ? { block: Spacing.XSmall, inline: Spacing.MediumLarge }
       : DENSITY_PADDING[density];
 
     const isGlass = !variant && appearance === "glass";

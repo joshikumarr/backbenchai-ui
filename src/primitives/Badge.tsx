@@ -43,10 +43,13 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
       display: "inline-flex",
       alignItems: "center",
       lineHeight: 1,
-      paddingBlock: Spacing.XXSmall,
-      paddingInline: uppercase ? Spacing.MediumLarge : Spacing.Medium,
+      // Same box and same weight as a variant Chip — see the note in Chip.tsx.
+      // Uppercase keeps its letter-spacing, which is a typographic need rather
+      // than a second weight.
+      paddingBlock: Spacing.XSmall,
+      paddingInline: Spacing.MediumLarge,
       borderRadius: BorderRadius.Full,
-      fontWeight: uppercase ? FontWeight.Black : FontWeight.Medium,
+      fontWeight: FontWeight.Semibold,
       fontSize: FontSize.XXSmall,
       letterSpacing: uppercase ? LetterSpacing.Wider : undefined,
       textTransform: uppercase ? "uppercase" : undefined,

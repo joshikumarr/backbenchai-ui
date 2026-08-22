@@ -1035,10 +1035,13 @@ const bt = {
       display: "inline-flex",
       alignItems: "center",
       lineHeight: 1,
-      paddingBlock: i.XXSmall,
-      paddingInline: t ? i.MediumLarge : i.Medium,
+      // Same box and same weight as a variant Chip — see the note in Chip.tsx.
+      // Uppercase keeps its letter-spacing, which is a typographic need rather
+      // than a second weight.
+      paddingBlock: i.XSmall,
+      paddingInline: i.MediumLarge,
       borderRadius: M.Full,
-      fontWeight: t ? N.Black : N.Medium,
+      fontWeight: N.Semibold,
       fontSize: w.XXSmall,
       letterSpacing: t ? jn.Wider : void 0,
       textTransform: t ? "uppercase" : void 0,
@@ -1070,7 +1073,7 @@ const ht = {
     appearance: t = "filled",
     density: r = "compact",
     variant: l,
-    fontWeight: o = N.Medium,
+    fontWeight: o = N.Semibold,
     fontSize: a,
     icon: d,
     showCheckWhenSelected: s = !1,
@@ -1081,7 +1084,7 @@ const ht = {
     children: h,
     ...m
   }, y) => {
-    const v = c !== void 0 || e !== void 0, C = e === !0, B = a ?? (l ? w.XXSmall : w.XSmall), j = l ? { block: i.XXSmall, inline: i.XSmall } : ht[r], X = !l && t === "glass";
+    const v = c !== void 0 || e !== void 0, C = e === !0, B = a ?? w.XXSmall, j = l ? { block: i.XSmall, inline: i.MediumLarge } : ht[r], X = !l && t === "glass";
     let A, R;
     if (l) {
       const F = gt[l];
