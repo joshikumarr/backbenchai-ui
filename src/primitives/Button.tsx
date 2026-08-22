@@ -13,6 +13,7 @@ import type {
   LetterSpacingToken,
   TextTransformToken,
 } from "../tokens";
+import { Spacing } from "../tokens";
 
 type ShorthandSpace = SpaceToken | readonly SpaceToken[];
 
@@ -45,7 +46,24 @@ export interface ButtonProps
   /** Which sides to apply the border to. Defaults to "all" when borderColor is set. */
   borderSide?: "top" | "bottom" | "left" | "right" | "all";
 
-  /** Typography. */
+  /**
+   * Size scale. Sets padding and a minimum height so buttons across an app are
+   * the same size instead of each call site inventing one.
+   *
+   *   sm  compact rows and dense tables      32px min
+   *   md  the default for almost everything  40px min
+   *   lg  primary calls to action            48px min
+   *
+   * Derived from what a real app was already doing: the three tiers below are
+   * its three most common padding pairs, so adopting the scale changes little
+   * visually. minHeight is what actually fixes the too-small ones.
+   *
+   * paddingBlock / paddingInline still win when passed, for the rare control
+   * that genuinely needs its own box.
+   */
+  scale?: ButtonScale;
+
+  /** Typography. NOTE: this is the FONT size, not the button size — see `scale`. */
   size?: FontSizeToken;
   weight?: FontWeightToken;
   letterSpacing?: LetterSpacingToken;
@@ -90,6 +108,14 @@ const ALIGN_MAP = {
   end: "flex-end",
 } as const;
 
+export type ButtonScale = "sm" | "md" | "lg";
+
+const SCALE: Record<ButtonScale, { block: string; inline: string; minHeight: string }> = {
+  sm: { block: Spacing.Small, inline: Spacing.Large, minHeight: "32px" },
+  md: { block: Spacing.Medium, inline: Spacing.XXLarge, minHeight: "40px" },
+  lg: { block: Spacing.Large, inline: Spacing.XXLarge, minHeight: "48px" },
+};
+
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
@@ -105,6 +131,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       borderColorPressed,
       borderWidth = "1px",
       borderSide = "all",
+      scale = "md",
       size,
       weight,
       letterSpacing,
@@ -167,12 +194,17 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const resolvedPadding = toCss(padding);
     const resolvedPaddingBlock = toCss(paddingBlock);
     const resolvedPaddingInline = toCss(paddingInline);
+    const box = SCALE[scale] ?? SCALE.md;
 
     const computedStyle: React.CSSProperties = {
       cursor: "pointer",
       display: "inline-flex",
       alignItems: "center",
       justifyContent: ALIGN_MAP[align],
+      // The scale first, so an explicit padding prop below still overrides it.
+      paddingBlock: box.block,
+      paddingInline: box.inline,
+      minHeight: box.minHeight,
       ...borderStyles,
       ...(width !== undefined && { width }),
       ...(gradient && { background: gradient }),

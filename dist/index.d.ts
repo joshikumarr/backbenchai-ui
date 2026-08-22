@@ -415,7 +415,23 @@ export declare interface ButtonProps extends default_2.ButtonHTMLAttributes<HTML
     borderWidth?: BorderWidthToken;
     /** Which sides to apply the border to. Defaults to "all" when borderColor is set. */
     borderSide?: "top" | "bottom" | "left" | "right" | "all";
-    /** Typography. */
+    /**
+     * Size scale. Sets padding and a minimum height so buttons across an app are
+     * the same size instead of each call site inventing one.
+     *
+     *   sm  compact rows and dense tables      32px min
+     *   md  the default for almost everything  40px min
+     *   lg  primary calls to action            48px min
+     *
+     * Derived from what a real app was already doing: the three tiers below are
+     * its three most common padding pairs, so adopting the scale changes little
+     * visually. minHeight is what actually fixes the too-small ones.
+     *
+     * paddingBlock / paddingInline still win when passed, for the rare control
+     * that genuinely needs its own box.
+     */
+    scale?: ButtonScale;
+    /** Typography. NOTE: this is the FONT size, not the button size — see `scale`. */
     size?: FontSizeToken;
     weight?: FontWeightToken;
     letterSpacing?: LetterSpacingToken;
@@ -443,6 +459,8 @@ export declare interface ButtonProps extends default_2.ButtonHTMLAttributes<HTML
     iconEnd?: default_2.ReactNode;
     children?: default_2.ReactNode;
 }
+
+declare type ButtonScale = "sm" | "md" | "lg";
 
 export declare const Calendar: default_2.ForwardRefExoticComponent<CalendarProps & default_2.RefAttributes<HTMLDivElement>>;
 

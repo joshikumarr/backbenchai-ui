@@ -29,6 +29,7 @@ export { Image } from "./Image";
 export type { ImageProps } from "./Image";
 
 export { Button } from "./Button";
+export type { ButtonScale } from "./Button";
 export type { ButtonProps } from "./Button";
 
 export { TextInput } from "./TextInput";
