@@ -129,6 +129,13 @@ button, a, input, select, textarea {
 /* ── Button hover/pressed state hookup ───────────────────────────── */
 
 .bbui-button {
+  /* Default padding. Without this a Button that passes no padding props falls
+     back to the browser default (about 1px 6px), which reads as a broken
+     control next to its siblings. Values match Spacing.MediumLarge and
+     Spacing.XLarge. The component writes padding as an INLINE style, so any
+     call site that sets paddingBlock/paddingInline still wins over this. */
+  padding-block: 12px;
+  padding-inline: 20px;
   /* No explicit background → subtle surface, never invisible text.
      Pass BackgroundColor.Transparent for a deliberate ghost button. */
   background: var(--bbui-btn-bg, var(--bbui-bg-subtle));
