@@ -30,14 +30,20 @@ export interface ToastProps {
   children?: React.ReactNode;
 }
 
+/**
+ * The accent is the 4px rail and the icon colour. It takes the `*Bold` fill of
+ * the same semantic family, so it follows the consumer's palette and flips with
+ * the theme. It used to be four literal hexes, which meant the rail stayed a
+ * light-theme colour in dark mode and ignored a themed palette entirely.
+ */
 const variantMap: Record<
   ToastVariant,
-  { bg: BackgroundColorToken; text: TextColorToken; accent: string }
+  { bg: BackgroundColorToken; text: TextColorToken; accent: BackgroundColorToken }
 > = {
-  info: { bg: BackgroundColor.Default, text: TextColor.Info, accent: "#3b82f6" },
-  success: { bg: BackgroundColor.Default, text: TextColor.Success, accent: "#22c55e" },
-  warning: { bg: BackgroundColor.Default, text: TextColor.Warning, accent: "#f59e0b" },
-  error: { bg: BackgroundColor.Default, text: TextColor.Error, accent: "#ba1a1a" },
+  info: { bg: BackgroundColor.Default, text: TextColor.Info, accent: BackgroundColor.InfoBold },
+  success: { bg: BackgroundColor.Default, text: TextColor.Success, accent: BackgroundColor.SuccessBold },
+  warning: { bg: BackgroundColor.Default, text: TextColor.Warning, accent: BackgroundColor.WarningBold },
+  error: { bg: BackgroundColor.Default, text: TextColor.Error, accent: BackgroundColor.ErrorBold },
 };
 
 const CloseIcon = () => (
